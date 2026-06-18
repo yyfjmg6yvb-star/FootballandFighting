@@ -3,677 +3,299 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Football & Fighting | Live Scores, Tables & World Cup 2026</title>
-  <meta name="description" content="Live football scores, Premier League table, World Cup 2026 results and boxing coverage. The best football and fighting site — updated all day automatically."/>
-  <link rel="canonical" href="https://footballandfighting.com/"/>
+  <title>Football & Fighting — The Community for Proper Sports Fans</title>
+  <meta name="description" content="Football, Boxing, UFC and Bare Knuckle Fighting. Banter, tips and community for proper sports fans. Join for £1."/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Football & Fighting","url":"https://footballandfighting.com","description":"Live football scores, tables, World Cup 2026 and boxing — updated all day."}</script>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--red:#e50000;--dark:#0a0a0a;--card:#1e1e1e;--card2:#272727;--border:#333;--text:#f0f0f0;--muted:#888;--gold:#f5a623;--green:#2ecc71;--blue:#3498db}
-    body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.5}
+    :root{--red:#e50000;--dark:#0a0a0a;--card:#1a1a1a;--border:#2a2a2a;--border2:#333;--text:#f0f0f0;--muted:#777;--gold:#f5a623;--green:#2ecc71}
+    body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.5;min-height:100vh}
     a{color:inherit;text-decoration:none}
-
-    /* TICKER */
-    .ticker{background:var(--red);padding:8px 0;overflow:hidden;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:0.04em}
-    .ticker-inner{display:inline-block;animation:ticker 80s linear infinite}
-    .ticker-inner span{margin-right:60px}
-    .ticker-inner span::before{content:"▶  ";font-size:9px}
-    @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-    /* HEADER */
-    header{background:#0a0a0a;border-bottom:3px solid var(--red);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:70px;position:sticky;top:0;z-index:200}
-    .logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.05em}
+    header{background:#0d0d0d;border-bottom:3px solid var(--red);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:300}
+    .logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:0.05em}
     .logo span{color:var(--red)}
-    nav{display:flex;gap:4px}
-    nav a{padding:8px 14px;font-size:13px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;border-radius:3px;transition:background 0.15s}
-    nav a:hover{background:#222}
-    nav a.active{color:var(--red)}
-    .nav-join{background:var(--red)!important;color:#fff!important;padding:8px 18px!important;border-radius:3px}
-    .nav-join:hover{background:#cc0000!important}
-
-    /* LAYOUT */
-    .wrap{max-width:1280px;margin:0 auto;padding:0 20px}
-
-    /* LIVE SCORES STRIP */
-    .scores-strip{background:#111;border-bottom:1px solid var(--border);padding:0;overflow-x:auto;white-space:nowrap}
-    .scores-strip::-webkit-scrollbar{height:4px}
-    .scores-strip::-webkit-scrollbar-track{background:#111}
-    .scores-strip::-webkit-scrollbar-thumb{background:var(--border)}
-    .scores-inner{display:inline-flex;gap:0;padding:0}
-    .score-pill{display:inline-flex;flex-direction:column;align-items:center;padding:10px 18px;border-right:1px solid var(--border);cursor:pointer;transition:background 0.15s;min-width:130px}
-    .score-pill:hover{background:var(--card2)}
-    .score-pill.live{border-top:2px solid var(--red)}
-    .score-pill .comp{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-weight:700;margin-bottom:4px}
-    .score-pill .teams{font-size:11px;font-weight:700;text-align:center;line-height:1.5}
-    .score-pill .score{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--text);letter-spacing:0.05em}
-    .score-pill .score.live-score{color:var(--red)}
-    .score-pill .status{font-size:9px;color:var(--muted);margin-top:2px}
-    .score-pill .status.live{color:var(--red);font-weight:700;animation:pulse 1.5s infinite}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
-    .strip-loading{padding:12px 20px;font-size:12px;color:var(--muted)}
-
-    /* HERO BANNER */
-    .hero{background:linear-gradient(135deg,#0d1a2e 0%,#111 50%,#1a0a0a 100%);padding:48px 0 40px;border-bottom:1px solid var(--border)}
-    .hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-    .hero-left .eyebrow{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;display:flex;align-items:center;gap:6px}
-    .live-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse 1.5s infinite}
-    .hero-left h1{font-family:'Bebas Neue',sans-serif;font-size:64px;letter-spacing:0.03em;line-height:0.95;margin-bottom:16px}
-    .hero-left h1 .accent{color:var(--red)}
-    .hero-left p{font-size:15px;color:#bbb;line-height:1.7;margin-bottom:24px;max-width:480px}
-    .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-    .btn-primary{background:var(--red);color:#fff;padding:12px 24px;border-radius:3px;font-size:13px;font-weight:700;letter-spacing:0.04em;display:inline-flex;align-items:center;gap:8px;transition:background 0.15s}
-    .btn-primary:hover{background:#cc0000}
-    .btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border);padding:12px 24px;border-radius:3px;font-size:13px;font-weight:700;letter-spacing:0.04em;transition:border-color 0.15s}
-    .btn-secondary:hover{border-color:var(--text)}
-
-    /* WC HERO CARD */
-    .wc-hero{background:linear-gradient(135deg,#1a1a2e,#0d1a3e);border:1px solid #2a3a6e;border-radius:6px;padding:24px;position:relative;overflow:hidden}
-    .wc-hero::before{content:'🌍';position:absolute;right:-10px;top:-10px;font-size:100px;opacity:0.08}
-    .wc-hero .wc-label{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;display:flex;align-items:center;gap:6px}
-    .wc-hero h2{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:0.04em;color:#fff;margin-bottom:4px}
-    .wc-hero .wc-sub{font-size:13px;color:#aaa;margin-bottom:16px}
-    .wc-matches{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
-    .wc-match-row{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.05);border-radius:3px;padding:8px 12px}
-    .wc-match-teams-col{font-size:12px;font-weight:700;flex:1}
-    .wc-match-score-col{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gold);min-width:50px;text-align:center}
-    .wc-match-status-col{font-size:10px;color:var(--muted);text-align:right;min-width:60px}
-    .wc-cta{display:block;text-align:center;background:rgba(245,166,35,0.15);border:1px solid rgba(245,166,35,0.4);border-radius:3px;padding:10px;font-size:13px;font-weight:700;color:var(--gold);letter-spacing:0.05em;transition:background 0.15s}
-    .wc-cta:hover{background:rgba(245,166,35,0.25)}
-
-    /* MAIN GRID */
-    .main-grid{display:grid;grid-template-columns:1fr 1fr 320px;gap:24px;padding:32px 0}
-    .sidebar{display:flex;flex-direction:column;gap:20px}
-
-    /* SECTION HEAD */
-    .section-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--border)}
-    .section-head h2{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:0.05em}
-    .section-head .pill{background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:2px;letter-spacing:0.08em}
-    .section-head a{margin-left:auto;font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:0.05em}
-
-    /* PL TABLE */
-    .table-wrap{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden}
-    table.mini-pl{width:100%;border-collapse:collapse;font-size:12px}
-    table.mini-pl th{padding:8px 8px;color:var(--muted);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid var(--border);background:var(--card2);text-align:center}
-    table.mini-pl th:first-child{text-align:left;padding-left:12px;width:24px}
-    table.mini-pl th:nth-child(2){text-align:left}
-    table.mini-pl td{padding:8px;border-bottom:1px solid #2a2a2a;text-align:center;vertical-align:middle}
-    table.mini-pl td:first-child{text-align:left;padding-left:12px;font-size:10px;color:var(--muted);font-weight:700}
-    table.mini-pl td:nth-child(2){text-align:left;font-weight:600;font-size:12px}
-    table.mini-pl tr:last-child td{border-bottom:none}
-    table.mini-pl tr:hover td{background:rgba(255,255,255,0.03)}
-    .tl{display:inline-block;width:14px;height:14px;object-fit:contain;vertical-align:middle;margin-right:4px}
-
-    /* FIXTURES */
-    .fix-block{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden}
-    .fix-row{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid #2a2a2a;gap:10px}
-    .fix-row:last-child{border-bottom:none}
-    .fix-time{font-size:11px;color:var(--muted);min-width:44px;text-align:center;line-height:1.3;font-weight:700}
-    .fix-time.live{color:var(--red)}
-    .fix-teams{flex:1;font-size:12px}
-    .fix-team{font-weight:600}
-    .fix-sep{font-size:11px;color:var(--muted);margin:1px 0}
-    .fix-score{font-family:'Bebas Neue',sans-serif;font-size:20px;min-width:42px;text-align:center}
-    .fix-score.live{color:var(--red)}
-
-    /* NEWS */
-    .news-block{display:flex;flex-direction:column;gap:0}
-    .news-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:opacity 0.15s}
-    .news-item:last-child{border-bottom:none}
-    .news-item:hover{opacity:0.8}
-    .news-thumb{width:80px;height:56px;border-radius:3px;overflow:hidden;flex-shrink:0;background:#111}
-    .news-thumb img{width:100%;height:100%;object-fit:cover}
-    .news-body h3{font-size:13px;font-weight:700;line-height:1.4;margin-bottom:4px}
-    .news-body .meta{font-size:11px;color:var(--muted)}
-    .news-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--red);margin-bottom:4px}
-
-    /* SIDEBAR BLOCKS */
-    .sb-block{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden}
-    .sb-head{padding:12px 14px;border-bottom:1px solid var(--border);background:var(--card2);display:flex;justify-content:space-between;align-items:center}
-    .sb-head h3{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.05em}
-    .sb-head .badge{font-size:10px;color:var(--muted)}
-
-    /* UFC CARD */
-    .ufc-event{padding:14px}
-    .ufc-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.04em;color:var(--gold);margin-bottom:4px}
-    .ufc-date{font-size:11px;color:var(--muted);margin-bottom:12px}
-    .fight-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #2a2a2a;font-size:12px}
-    .fight-row:last-child{border-bottom:none}
-    .fight-names{font-weight:600;flex:1}
-    .fight-label{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin-left:8px}
-    .fight-main{background:rgba(245,166,35,0.08);border-radius:3px;padding:4px 8px;margin-bottom:4px}
-
-    /* TOP SCORER SIDEBAR */
-    .scorer-row{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid #2a2a2a}
-    .scorer-row:last-child{border-bottom:none}
-    .scorer-rank{font-size:12px;font-weight:700;color:var(--muted);min-width:16px}
-    .scorer-rank.g{color:var(--gold)}
-    .scorer-info{flex:1}
-    .scorer-name{font-weight:700;font-size:13px}
-    .scorer-club{font-size:11px;color:var(--muted)}
-    .scorer-goals{font-family:'Bebas Neue',sans-serif;font-size:24px}
-
-    /* STATS HIGHLIGHTS */
-    .stats-highlights{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:32px 0 0}
-    .stat-hl{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:18px;text-align:center}
-    .stat-hl .icon{font-size:28px;margin-bottom:8px}
-    .stat-hl .value{font-family:'Bebas Neue',sans-serif;font-size:36px;line-height:1;color:var(--gold)}
-    .stat-hl .label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:4px}
-    .stat-hl .sub{font-size:12px;color:var(--text);margin-top:4px;font-weight:600}
-
-    /* LOADING */
-    .loading-state{padding:30px;text-align:center;color:var(--muted);font-size:12px}
-    .spin{display:inline-block;width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--red);border-radius:50%;animation:spin 0.7s linear infinite;margin-bottom:8px}
-    @keyframes spin{to{transform:rotate(360deg)}}
-
-    /* FOOTER */
-    footer{background:#080808;border-top:2px solid var(--border);padding:40px 24px 24px;margin-top:8px}
-    .footer-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px}
-    .footer-brand .logo{font-size:24px;margin-bottom:10px}
-    .footer-brand p{font-size:13px;color:var(--muted);line-height:1.6}
-    .footer-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:12px}
-    .footer-col a{display:block;font-size:13px;color:#aaa;margin-bottom:8px;transition:color 0.15s}
-    .footer-col a:hover{color:var(--red)}
-    .footer-bottom{max-width:1280px;margin:0 auto;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
-    .gambling-aware{background:var(--card);border:1px solid var(--border);border-radius:3px;padding:6px 12px;font-size:11px;font-weight:700}
-    @media(max-width:768px){
-      header{padding:0 12px;height:56px}
-      .logo{font-size:22px}
-      nav{overflow-x:auto;-webkit-overflow-scrolling:touch;gap:0}
-      nav a{padding:6px 9px;font-size:11px;white-space:nowrap;letter-spacing:0.03em}
-      .nav-join{padding:6px 10px!important;font-size:11px!important}
-      .wrap{padding:0 12px}
-      .hero-inner{grid-template-columns:1fr;gap:20px}
-      .hero-inner h1{font-size:36px}
-      .main-grid{grid-template-columns:1fr;gap:16px;padding:16px 0}
-      .scores-strip{font-size:11px;padding:8px 0}
-      .stats-highlights{grid-template-columns:1fr 1fr;gap:10px;padding:16px 0 0}
-      .stat-highlight{padding:14px}
-      .wc-hero{padding:24px 16px}
-      .wc-hero h2{font-size:28px}
-      .news-card{flex-direction:column}
-      .footer-grid{grid-template-columns:1fr 1fr;gap:20px}
-      .footer-bottom{flex-direction:column;gap:8px;text-align:center}
-    }
-    @media(max-width:480px){
-      .hero-inner h1{font-size:28px}
-      .stats-highlights{grid-template-columns:1fr}
-      .footer-grid{grid-template-columns:1fr}
+    nav{display:flex;gap:2px}
+    nav a{padding:7px 12px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;border-radius:3px;transition:background 0.15s}
+    nav a:hover{background:#1e1e1e}
+    nav a.join{background:var(--red);color:#fff;border-radius:4px;margin-left:6px}
+    nav a.join:hover{background:#c00}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px}
+    .mobile-nav{display:none;position:fixed;top:64px;left:0;right:0;background:#111;border-bottom:1px solid var(--border2);z-index:299;padding:10px 16px 16px;flex-direction:column;gap:2px}
+    .mobile-nav.open{display:flex}
+    .mobile-nav a{padding:11px 14px;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;border-radius:4px;display:block}
+    .mobile-nav a:hover{background:#1e1e1e;color:var(--red)}
+    .mobile-nav .nav-join{background:var(--red)!important;color:#fff!important;margin-top:6px;text-align:center}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+    /* HERO */
+    .hero{background:linear-gradient(135deg,#140000 0%,#0a0a0a 50%,#0a0a14 100%);border-bottom:1px solid var(--border);padding:64px 16px;text-align:center}
+    .hero h1{font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:0.95;letter-spacing:0.03em;margin-bottom:16px}
+    .hero h1 span{color:var(--red)}
+    .hero p{font-size:17px;color:var(--muted);max-width:520px;margin:0 auto 28px}
+    .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{padding:13px 26px;border-radius:5px;font-size:14px;font-weight:700;border:none;cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:8px}
+    .btn-red{background:var(--red);color:#fff}
+    .btn-red:hover{background:#c00;transform:translateY(-1px)}
+    .btn-outline{background:none;color:var(--text);border:2px solid var(--border2)}
+    .btn-outline:hover{border-color:#555}
+    /* SPORT PILLARS */
+    .section{padding:48px 0}
+    .section-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.06em;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+    .section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+    .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .pillar{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:24px 20px;text-align:center;transition:border-color 0.15s,transform 0.15s;display:block}
+    .pillar:hover{border-color:var(--red);transform:translateY(-2px)}
+    .pillar .p-icon{font-size:36px;margin-bottom:10px}
+    .pillar h3{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.05em;margin-bottom:6px}
+    .pillar p{font-size:12px;color:var(--muted);line-height:1.5}
+    /* COMMUNITY + THREADS */
+    .two-col{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+    .card-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+    .card-header h3{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.05em}
+    .card-header a{font-size:12px;color:var(--red);font-weight:600}
+    .thread-row{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start}
+    .thread-row:last-child{border-bottom:none}
+    .tr-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;background:#222;flex-shrink:0}
+    .tr-body{flex:1;min-width:0}
+    .tr-title{font-size:14px;font-weight:600;line-height:1.3;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .tr-meta{font-size:11px;color:var(--muted)}
+    .tr-stats{font-size:11px;color:var(--muted);white-space:nowrap;text-align:right}
+    /* CTA */
+    .join-cta{background:linear-gradient(135deg,#140a0a,#0d0d0d);border:2px solid var(--red);border-radius:10px;padding:36px;text-align:center;margin:40px 0}
+    .join-cta h2{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:0.04em;margin-bottom:8px}
+    .join-cta p{color:var(--muted);font-size:14px;margin-bottom:20px}
+    .stat-row{display:flex;justify-content:center;gap:40px;margin:24px 0}
+    .stat{text-align:center}
+    .stat .num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--red)}
+    .stat .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
+    footer{background:#0d0d0d;border-top:1px solid var(--border);padding:24px 0;text-align:center;font-size:12px;color:var(--muted);margin-top:40px}
+    @media(max-width:900px){.pillars{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}}
+    @media(max-width:600px){
+      nav{display:none}.hamburger{display:flex}
+      .hero h1{font-size:52px}
+      .pillars{grid-template-columns:repeat(2,1fr)}
+      .stat-row{gap:24px}
     }
   </style>
 </head>
 <body>
 
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-inner" id="ticker-inner">
-    <span>⚽ Football &amp; Fighting — Live scores, tables, WC 2026 and boxing</span>
-    <span>🌍 FIFA World Cup 2026 — Live Now — 48 Teams, USA · Canada · Mexico</span>
-    <span>⚽ Football &amp; Fighting — Live scores, tables, WC 2026 and boxing</span>
-    <span>🌍 FIFA World Cup 2026 — Live Now — 48 Teams, USA · Canada · Mexico</span>
-  </div>
-</div>
-
-<!-- HEADER -->
 <header>
-  <div class="logo">Football <span>&</span> Fighting</div>
+  <a href="index.html" class="logo">Football <span>&</span> Fighting</a>
   <nav>
-    <a href="index.html" class="active">Home</a>
     <a href="football.html">Football</a>
-    <a href="worldcup.html">World Cup</a>
     <a href="ufc.html">UFC</a>
     <a href="fighting.html">Boxing</a>
+    <a href="bkfc.html">BKFC</a>
     <a href="tips.html">Tips</a>
-    <a href="articles.html">Articles</a>
     <a href="community.html">Community</a>
-    <a href="membership.html" class="nav-join">Join Now</a>
+    <a href="membership.html" class="join">Join £1</a>
   </nav>
+  <button class="hamburger" onclick="document.getElementById('mnav').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </header>
-
-<!-- LIVE SCORES STRIP -->
-<div class="scores-strip">
-  <div class="scores-inner" id="scores-inner">
-    <div class="strip-loading">Loading live scores...</div>
-  </div>
+<div class="mobile-nav" id="mnav">
+  <a href="football.html">⚽ Football</a>
+  <a href="ufc.html">🥊 UFC</a>
+  <a href="fighting.html">🥊 Boxing</a>
+  <a href="bkfc.html">✊ BKFC</a>
+  <a href="tips.html">💰 Tips</a>
+  <a href="community.html">💬 Community</a>
+  <a href="membership.html" class="nav-join">Join for £1</a>
 </div>
 
-<!-- HERO -->
 <div class="hero">
   <div class="wrap">
-    <div class="hero-inner">
-      <div class="hero-left">
-        <div class="eyebrow"><span class="live-dot"></span> Live Now — World Cup 2026</div>
-        <h1>Football<br><span class="accent">&amp;</span><br>Fighting</h1>
-        <p>Live scores, Premier League tables, top scorers, UFC events and boxing coverage — all in one place, updating all day automatically.</p>
-        <div class="hero-btns">
-          <a href="worldcup.html" class="btn-primary">🌍 World Cup Hub</a>
-          <a href="football.html" class="btn-secondary">⚽ Football Stats</a>
-          <a href="fighting.html" class="btn-secondary">🥊 Fighting</a>
-        </div>
-      </div>
-      <div class="wc-hero">
-        <div class="wc-label"><span class="live-dot"></span> Live Tournament</div>
-        <h2>FIFA World Cup 2026</h2>
-        <div class="wc-sub" id="wc-hero-sub">48 teams · USA, Canada &amp; Mexico · Loading today's matches...</div>
-        <div class="wc-matches" id="wc-hero-matches">
-          <div class="loading-state" style="padding:16px"><div class="spin"></div></div>
-        </div>
-        <a href="worldcup.html" class="wc-cta">Full World Cup Hub — Tables, Bracket, Scorers →</a>
-      </div>
+    <h1>Football <span>&</span><br>Fighting</h1>
+    <p>The community for proper sports fans. Football, Boxing, UFC and Bare Knuckle — no agenda, no corporate waffle, just banter.</p>
+    <div class="hero-btns">
+      <a href="community.html" class="btn btn-red">💬 Enter the Community</a>
+      <a href="membership.html" class="btn btn-outline">Join for £1</a>
     </div>
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
 <div class="wrap">
-  <div class="main-grid">
-
-    <!-- LEFT: PL TABLE -->
-    <div>
-      <div class="section-head">
-        <h2>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</h2>
-        <span class="pill">2025-26 Final</span>
-        <a href="football.html">Full Stats →</a>
-      </div>
-      <div id="pl-table-container" class="table-wrap">
-        <div class="loading-state"><div class="spin"></div></div>
-      </div>
-    </div>
-
-    <!-- MIDDLE: RECENT RESULTS + NEWS -->
-    <div>
-      <div class="section-head">
-        <h2>Latest Football News</h2>
-        <span class="pill">Guardian</span>
-      </div>
-      <div id="news-container">
-        <div class="loading-state"><div class="spin"></div></div>
-      </div>
-    </div>
-
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-
-      <!-- TOP SCORERS -->
-      <div class="sb-block">
-        <div class="sb-head"><h3>⚽ Top Scorers</h3><span class="badge">PL 2025-26</span></div>
-        <div id="top-scorers-list">
-          <div class="loading-state" style="padding:16px"><div class="spin"></div></div>
-        </div>
-      </div>
-
-      <!-- UFC -->
-      <div class="sb-block">
-        <div class="sb-head"><h3>🥊 Next UFC Event</h3><span class="badge">ESPN</span></div>
-        <div id="ufc-container">
-          <div class="loading-state" style="padding:16px"><div class="spin"></div></div>
-        </div>
-      </div>
-
-      <!-- QUICK LINKS -->
-      <div class="sb-block">
-        <div class="sb-head"><h3>Quick Links</h3></div>
-        <div style="padding:14px;display:flex;flex-direction:column;gap:8px">
-          <a href="worldcup.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:3px;font-size:13px;font-weight:600;transition:background 0.15s" onmouseover="this.style.background='#333'" onmouseout="this.style.background='var(--card2)'">🌍 World Cup 2026 Hub</a>
-          <a href="football.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:3px;font-size:13px;font-weight:600;transition:background 0.15s" onmouseover="this.style.background='#333'" onmouseout="this.style.background='var(--card2)'">⚽ Football Stats & Tables</a>
-          <a href="fighting.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:3px;font-size:13px;font-weight:600;transition:background 0.15s" onmouseover="this.style.background='#333'" onmouseout="this.style.background='var(--card2)'">🥊 UFC & Boxing</a>
-          <a href="tips.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:3px;font-size:13px;font-weight:600;transition:background 0.15s" onmouseover="this.style.background='#333'" onmouseout="this.style.background='var(--card2)'">💰 Betting Tips</a>
-          <a href="articles.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:3px;font-size:13px;font-weight:600;transition:background 0.15s" onmouseover="this.style.background='#333'" onmouseout="this.style.background='var(--card2)'">📰 Analysis & Articles</a>
-        </div>
-      </div>
-
+  <!-- SPORT PILLARS -->
+  <div class="section">
+    <div class="section-title">Your Sports</div>
+    <div class="pillars">
+      <a href="football.html" class="pillar">
+        <div class="p-icon">⚽</div>
+        <h3>Football</h3>
+        <p>Premier League, Championship, European nights, transfer gossip</p>
+      </a>
+      <a href="ufc.html" class="pillar">
+        <div class="p-icon">🥊</div>
+        <h3>UFC</h3>
+        <p>Fight cards, fighter rankings, card predictions and post-fight debate</p>
+      </a>
+      <a href="fighting.html" class="pillar">
+        <div class="p-icon">🥊</div>
+        <h3>Boxing</h3>
+        <p>World champions, next big fights, British talent in focus</p>
+      </a>
+      <a href="bkfc.html" class="pillar">
+        <div class="p-icon">✊</div>
+        <h3>BKFC</h3>
+        <p>Bare knuckle fighting — the fastest growing combat sport</p>
+      </a>
     </div>
   </div>
 
-  <!-- STATS HIGHLIGHTS ROW -->
-  <div style="padding-bottom:40px">
-    <div class="section-head">
-      <h2>Season at a Glance</h2>
-      <span class="pill">PL 2025-26</span>
-    </div>
-    <div class="stats-highlights">
-      <div class="stat-hl"><div class="icon">🏆</div><div class="value" id="sh-champ">Arsenal</div><div class="label">Premier League Champions</div><div class="sub" id="sh-champ-pts">85 points</div></div>
-      <div class="stat-hl"><div class="icon">⚽</div><div class="value" id="sh-topscorer">Loading...</div><div class="label">Top Scorer</div><div class="sub" id="sh-topscorer-sub">Premier League</div></div>
-      <div class="stat-hl"><div class="icon">🌍</div><div class="value" id="sh-wc-teams">48</div><div class="label">WC 2026 Teams</div><div class="sub">USA · Canada · Mexico</div></div>
-      <div class="stat-hl"><div class="icon">🥊</div><div class="value" id="sh-ufc">UFC FN</div><div class="label">Next UFC Event</div><div class="sub" id="sh-ufc-sub">Loading...</div></div>
+  <!-- COMMUNITY + HOT THREADS -->
+  <div class="section" style="padding-top:0">
+    <div class="two-col">
+      <!-- Hot Threads -->
+      <div class="card" id="hot-threads">
+        <div class="card-header">
+          <h3>🔥 Hot Threads</h3>
+          <a href="community.html">View All →</a>
+        </div>
+        <div id="threads-body">
+          <!-- Static fallback -->
+          <div class="thread-row">
+            <div class="tr-icon">⚽</div>
+            <div class="tr-body">
+              <div class="tr-title">Who does your club need to sign this summer?</div>
+              <div class="tr-meta">Premier League · 24 replies</div>
+            </div>
+            <div class="tr-stats">🔥 47</div>
+          </div>
+          <div class="thread-row">
+            <div class="tr-icon">🥊</div>
+            <div class="tr-body">
+              <div class="tr-title">Zayas vs Ennis — who wins Saturday night?</div>
+              <div class="tr-meta">Boxing · 18 replies</div>
+            </div>
+            <div class="tr-stats">🔥 39</div>
+          </div>
+          <div class="thread-row">
+            <div class="tr-icon">🥊</div>
+            <div class="tr-body">
+              <div class="tr-title">Jon Jones actually retired or just more nonsense?</div>
+              <div class="tr-meta">UFC & MMA · 31 replies</div>
+            </div>
+            <div class="tr-stats">🔥 28</div>
+          </div>
+          <div class="thread-row">
+            <div class="tr-icon">⚽</div>
+            <div class="tr-body">
+              <div class="tr-title">Championship play-offs — your predictions thread</div>
+              <div class="tr-meta">Championship · 12 replies</div>
+            </div>
+            <div class="tr-stats">🔥 21</div>
+          </div>
+          <div class="thread-row">
+            <div class="tr-icon">✊</div>
+            <div class="tr-body">
+              <div class="tr-title">BKFC is the best sport nobody talks about — change my mind</div>
+              <div class="tr-meta">BKFC · 9 replies</div>
+            </div>
+            <div class="tr-stats">🔥 17</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <!-- Community join card -->
+        <div class="card">
+          <div class="card-header"><h3>The Community</h3></div>
+          <div style="padding:16px">
+            <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Post threads, vote on opinions, earn your rank from Trial Player to Hall of Famer. £1 one-time keeps the trolls out.</p>
+            <a href="membership.html" class="btn btn-red" style="width:100%;justify-content:center;font-size:13px">Join for £1 →</a>
+            <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:8px">One-time. No subscription.</div>
+          </div>
+        </div>
+
+        <!-- Tips teaser -->
+        <div class="card">
+          <div class="card-header">
+            <h3>💰 Today's Tips</h3>
+            <a href="tips.html">All Tips →</a>
+          </div>
+          <div style="padding:16px">
+            <p style="font-size:13px;color:var(--muted);margin-bottom:10px">Head to the tips page for today's selections across football, boxing and MMA.</p>
+            <a href="tips.html" class="btn btn-outline" style="width:100%;justify-content:center;font-size:13px;padding:10px">View Tips</a>
+          </div>
+        </div>
+
+        <!-- Forums quick links -->
+        <div class="card">
+          <div class="card-header"><h3>Forums</h3></div>
+          <div style="padding:8px 0">
+            <a href="community.html#premier-league" style="display:flex;align-items:center;gap:10px;padding:10px 18px;font-size:13px;border-bottom:1px solid var(--border);transition:background 0.1s" onmouseover="this.style.background='#222'" onmouseout="this.style.background=''">⚽ <span>Premier League</span></a>
+            <a href="community.html#transfer-rumours" style="display:flex;align-items:center;gap:10px;padding:10px 18px;font-size:13px;border-bottom:1px solid var(--border);transition:background 0.1s" onmouseover="this.style.background='#222'" onmouseout="this.style.background=''">🔁 <span>Transfer Rumours</span></a>
+            <a href="community.html#boxing" style="display:flex;align-items:center;gap:10px;padding:10px 18px;font-size:13px;border-bottom:1px solid var(--border);transition:background 0.1s" onmouseover="this.style.background='#222'" onmouseout="this.style.background=''">🥊 <span>Boxing</span></a>
+            <a href="community.html#ufc-mma" style="display:flex;align-items:center;gap:10px;padding:10px 18px;font-size:13px;border-bottom:1px solid var(--border);transition:background 0.1s" onmouseover="this.style.background='#222'" onmouseout="this.style.background=''">🥊 <span>UFC & MMA</span></a>
+            <a href="community.html#bkfc" style="display:flex;align-items:center;gap:10px;padding:10px 18px;font-size:13px" onmouseover="this.style.background='#222'" onmouseout="this.style.background=''">✊ <span>BKFC</span></a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-</div><!-- /wrap -->
+  <!-- JOIN CTA -->
+  <div class="join-cta">
+    <h2>One Pound. <span style="color:var(--red)">Proper Community.</span></h2>
+    <p>No subscription. No spam. Just decent sports people who care enough to pay £1 to keep trolls out.</p>
+    <div class="stat-row">
+      <div class="stat"><div class="num" id="stat-members">—</div><div class="lbl">Members</div></div>
+      <div class="stat"><div class="num" id="stat-threads">—</div><div class="lbl">Threads</div></div>
+      <div class="stat"><div class="num">4</div><div class="lbl">Sports</div></div>
+    </div>
+    <a href="membership.html" class="btn btn-red" style="font-size:16px;padding:16px 36px">Join for £1 →</a>
+  </div>
+</div>
 
 <footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div class="logo">Football <span style="color:var(--red)">&</span> Fighting</div>
-      <p>The home of football analysis, live data and fighting coverage. Premier League tables, World Cup 2026, UFC events and boxing — all in one place, updating automatically all day.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Football</h4>
-      <a href="football.html">Tables & Stats</a>
-      <a href="worldcup.html">World Cup 2026</a>
-      <a href="tips.html">Betting Tips</a>
-      <a href="articles.html">Analysis</a>
-    </div>
-    <div class="footer-col">
-      <h4>Fighting</h4>
-      <a href="fighting.html">UFC & Boxing</a>
-      <a href="articles.html">Fight Previews</a>
-      <a href="tips.html">Fight Tips</a>
-    </div>
-    <div class="footer-col">
-      <h4>Site</h4>
-      <a href="about.html">About</a>
-      <a href="community.html">Community</a>
-      <a href="membership.html">Membership</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Football & Fighting. Data via ESPN & The Guardian. Not affiliated with any league or broadcaster.</span>
-    <span class="gambling-aware">18+ | Gamble Aware</span>
-  </div>
+  <p>© 2026 Football & Fighting · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
 </footer>
 
 <script>
-function timeAgo(ds) {
-  const d = (Date.now() - new Date(ds)) / 1000;
-  if (d < 3600) return Math.floor(d/60) + 'm ago';
-  if (d < 86400) return Math.floor(d/3600) + 'h ago';
-  return new Date(ds).toLocaleDateString('en-GB',{day:'numeric',month:'short'});
-}
-function fmtTime(ds) {
-  return new Date(ds).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
-}
-
-// ── LIVE SCORES STRIP ─────────────────────────────────────────────────────
-async function loadScoresStrip() {
+// Try to load live thread data from API
+(async () => {
   try {
-    // WC takes priority — it's live right now
-    const [wcRes, plRes] = await Promise.all([
-      fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=20260611-20260719'),
-      fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard'),
-    ]);
-    const wc = await wcRes.json();
-    const pl = await plRes.json();
+    const r = await fetch('/api/threads?page=1');
+    if (!r.ok) return;
+    const data = await r.json();
+    const threads = (data.threads || []).slice(0, 5);
+    if (!threads.length) return;
 
-    const wcEvents = wc.events || [];
-    const plEvents = pl.events || [];
-
-    const today = new Date().toDateString();
-
-    // WC today's matches first
-    let strip = [];
-
-    wcEvents.filter(e => new Date(e.date).toDateString() === today || e.competitions?.[0]?.status?.type?.name === 'STATUS_IN_PROGRESS')
-      .slice(0, 8).forEach(ev => {
-        const comp = ev.competitions?.[0];
-        const h = comp?.competitors?.[0], a = comp?.competitors?.[1];
-        if (!h || !a) return;
-        const s = comp.status?.type?.name;
-        const isLive = s === 'STATUS_IN_PROGRESS';
-        const isFT = s === 'STATUS_FULL_TIME' || s === 'STATUS_FINAL';
-        strip.push({ league: 'World Cup', h: h.team?.displayName, a: a.team?.displayName, hs: h.score, as: a.score, status: isLive ? '🔴 ' + (comp.status?.displayClock||'LIVE') : isFT ? 'FT' : fmtTime(ev.date), isLive, isFT });
-      });
-
-    // PL results
-    plEvents.slice(0, 6).forEach(ev => {
-      const comp = ev.competitions?.[0];
-      const h = comp?.competitors?.find(c => c.homeAway==='home') || comp?.competitors?.[0];
-      const a = comp?.competitors?.find(c => c.homeAway==='away') || comp?.competitors?.[1];
-      if (!h || !a) return;
-      const s = comp.status?.type?.name;
-      const isLive = s === 'STATUS_IN_PROGRESS';
-      const isFT = s === 'STATUS_FULL_TIME' || s === 'STATUS_FINAL';
-      strip.push({ league: 'Premier League', h: h.team?.abbreviation, a: a.team?.abbreviation, hs: h.score, as: a.score, status: isLive ? '🔴 ' + (comp.status?.displayClock||'LIVE') : isFT ? 'FT' : fmtTime(ev.date), isLive, isFT });
-    });
-
-    if (!strip.length) {
-      document.getElementById('scores-inner').innerHTML = `<div class="strip-loading">🌍 World Cup 2026 Live Now — <a href="worldcup.html" style="color:var(--gold)">View Full Coverage</a> &nbsp;|&nbsp; ⚽ Premier League 2025-26 Season Complete</div>`;
-      return;
-    }
-
-    let html = '';
-    strip.forEach(m => {
-      html += `<div class="score-pill ${m.isLive ? 'live' : ''}">
-        <div class="comp">${m.league}</div>
-        <div class="teams">${m.h}<br>${m.a}</div>
-        <div class="score ${m.isLive ? 'live-score' : ''}">${m.isFT || m.isLive ? `${m.hs||0} - ${m.as||0}` : '-'}</div>
-        <div class="status ${m.isLive ? 'live' : ''}">${m.status}</div>
-      </div>`;
-    });
-
-    document.getElementById('scores-inner').innerHTML = html;
-
-    // Build ticker
-    const tickerItems = strip.map(m => m.isLive
-      ? `🔴 LIVE: ${m.h} ${m.hs} - ${m.as} ${m.a} · ${m.status}`
-      : m.isFT
-        ? `${m.h} ${m.hs} - ${m.as} ${m.a} · FT`
-        : `${m.h} vs ${m.a} · ${m.status}`
-    );
-    const doubled = [...tickerItems, ...tickerItems];
-    document.getElementById('ticker-inner').innerHTML = doubled.map(t => `<span>${t}</span>`).join('');
-
-  } catch(e) {
-    document.getElementById('scores-inner').innerHTML = `<div class="strip-loading">🌍 World Cup 2026 — <a href="worldcup.html" style="color:var(--gold);font-weight:700">Full coverage here</a></div>`;
-  }
-}
-
-// ── WC HERO ───────────────────────────────────────────────────────────────
-async function loadWCHero() {
-  try {
-    const res = await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=20260611-20260719');
-    const data = await res.json();
-    const events = data.events || [];
-
-    const today = new Date().toDateString();
-    let todayMatches = events.filter(e => new Date(e.date).toDateString() === today);
-    if (!todayMatches.length) {
-      // Most recent FT + next upcoming
-      const ft = events.filter(e => {
-        const s = e.competitions?.[0]?.status?.type?.name;
-        return s === 'STATUS_FULL_TIME' || s === 'STATUS_FINAL';
-      }).slice(-3);
-      const up = events.filter(e => e.competitions?.[0]?.status?.type?.name === 'STATUS_SCHEDULED').slice(0, 2);
-      todayMatches = [...ft, ...up].slice(0, 4);
-    }
-
-    const live = events.filter(e => e.competitions?.[0]?.status?.type?.name === 'STATUS_IN_PROGRESS').length;
-    const ft = events.filter(e => {
-      const s = e.competitions?.[0]?.status?.type?.name;
-      return s === 'STATUS_FULL_TIME' || s === 'STATUS_FINAL';
-    }).length;
-
-    document.getElementById('wc-hero-sub').textContent = `${ft} matches played · ${live > 0 ? live + ' LIVE now' : 'Group stage ongoing'} · USA, Canada & Mexico`;
-    document.getElementById('sh-wc-teams').textContent = ft;
-
-    let html = '';
-    todayMatches.slice(0, 4).forEach(ev => {
-      const comp = ev.competitions?.[0];
-      const h = comp?.competitors?.[0], a = comp?.competitors?.[1];
-      if (!h || !a) return;
-      const s = comp.status?.type?.name;
-      const isFT = s === 'STATUS_FULL_TIME' || s === 'STATUS_FINAL';
-      const isLive = s === 'STATUS_IN_PROGRESS';
-      const score = isFT || isLive ? `${h.score||0} - ${a.score||0}` : fmtTime(ev.date);
-      const group = comp.altGameNote?.replace('FIFA World Cup, ', '') || '';
-      html += `<div class="wc-match-row">
-        <div class="wc-match-teams-col">${h.team?.displayName} <span style="color:var(--muted);font-weight:400">vs</span> ${a.team?.displayName}</div>
-        <div class="wc-match-score-col">${score}</div>
-        <div class="wc-match-status-col">${isFT ? 'FT' : isLive ? '🔴 LIVE' : group}</div>
-      </div>`;
-    });
-
-    document.getElementById('wc-hero-matches').innerHTML = html || '<div style="font-size:12px;color:var(--muted);padding:8px">No matches today — next matches coming soon</div>';
-  } catch(e) {
-    document.getElementById('wc-hero-matches').innerHTML = '<div style="font-size:12px;color:var(--muted);padding:8px">Could not load WC data</div>';
-  }
-}
-
-// ── PL TABLE ──────────────────────────────────────────────────────────────
-async function loadPLTable() {
-  try {
-    const res = await fetch('https://site.api.espn.com/apis/v2/sports/soccer/eng.1/standings?season=2025');
-    const data = await res.json();
-    const entries = data.children?.[0]?.standings?.entries || [];
-    if (!entries.length) { document.getElementById('pl-table-container').innerHTML = '<div class="loading-state">Table not available</div>'; return; }
-
-    let html = `<table class="mini-pl"><thead><tr>
-      <th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th>
-    </tr></thead><tbody>`;
-
-    entries.forEach(e => {
-      const t = e.team;
-      const s = e.stats?.reduce((a,x) => ({...a,[x.name]:x.value||x.displayValue}), {});
-      const rank = parseInt(s.rank||0);
-      const logo = t.logos?.[0]?.href || '';
-      const gd = parseInt(s.pointDifferential||0);
-      const rowStyle = rank <= 4 ? 'border-left:3px solid #9b59b6' : rank > 17 ? 'border-left:3px solid var(--red)' : '';
-      html += `<tr style="${rowStyle}">
-        <td>${rank}</td>
-        <td>${logo ? `<img class="tl" src="${logo}" onerror="this.style.display='none'">` : ''}${t.shortDisplayName||t.displayName}</td>
-        <td>${s.gamesPlayed||0}</td><td>${s.wins||0}</td><td>${s.ties||0}</td><td>${s.losses||0}</td>
-        <td>${gd>0?'+'+gd:gd}</td>
-        <td style="font-weight:700">${s.points||0}</td>
-      </tr>`;
-    });
-
-    html += `</tbody></table>`;
-    document.getElementById('pl-table-container').innerHTML = html;
-  } catch(e) {
-    document.getElementById('pl-table-container').innerHTML = '<div class="loading-state">Could not load table</div>';
-  }
-}
-
-// ── TOP SCORERS (PL) ──────────────────────────────────────────────────────
-async function loadTopScorers() {
-  try {
-    const res = await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=20250815-20260525&limit=500');
-    const data = await res.json();
-    const events = data.events || [];
-    const scorers = {};
-
-    events.forEach(ev => {
-      const details = ev.competitions?.[0]?.details || [];
-      details.forEach(d => {
-        if (d.type?.text === 'Goal') {
-          const n = d.athletesInvolved?.[0]?.displayName;
-          const t = d.team?.displayName;
-          if (n) {
-            if (!scorers[n]) scorers[n] = { name:n, team:t, goals:0 };
-            scorers[n].goals++;
-          }
-        }
-      });
-    });
-
-    const top = Object.values(scorers).sort((a,b) => b.goals - a.goals).slice(0, 8);
-
-    if (top.length) {
-      document.getElementById('sh-topscorer').textContent = top[0].name.split(' ').slice(-1)[0];
-      document.getElementById('sh-topscorer-sub').textContent = `${top[0].goals} goals · ${top[0].team||'PL'}`;
-    }
-
-    let html = '';
-    top.forEach((p, i) => {
-      html += `<div class="scorer-row">
-        <div class="scorer-rank ${i===0?'g':''}">${i+1}</div>
-        <div class="scorer-info">
-          <div class="scorer-name">${p.name}</div>
-          <div class="scorer-club">${p.team||''}</div>
+    const icons = {football:'⚽',boxing:'🥊',ufc:'🥊',mma:'🥊',bkfc:'✊',tips:'💰'};
+    const body = document.getElementById('threads-body');
+    body.innerHTML = threads.map(t => {
+      const sub = (t.subforum_name||'').toLowerCase();
+      const icon = Object.entries(icons).find(([k])=>sub.includes(k))?.[1]||'💬';
+      return `<div class="thread-row">
+        <div class="tr-icon">${icon}</div>
+        <div class="tr-body">
+          <div class="tr-title">${esc(t.title)}</div>
+          <div class="tr-meta">${esc(t.subforum_name||'')} · ${t.reply_count||0} replies</div>
         </div>
-        <div class="scorer-goals">${p.goals}<span style="font-size:11px;font-family:'Inter';color:var(--muted)"> gls</span></div>
+        <div class="tr-stats">🔥 ${t.upvotes||0}</div>
       </div>`;
-    });
+    }).join('');
 
-    document.getElementById('top-scorers-list').innerHTML = html || '<div class="loading-state" style="padding:16px">No data</div>';
-  } catch(e) {
-    document.getElementById('top-scorers-list').innerHTML = '<div class="loading-state" style="padding:16px">Could not load</div>';
-  }
-}
+    // Update stats
+    if (data.total) document.getElementById('stat-threads').textContent = data.total;
+  } catch {}
+})();
 
-// ── UFC ───────────────────────────────────────────────────────────────────
-async function loadUFC() {
+// Load member count
+(async () => {
   try {
-    const res = await fetch('https://site.api.espn.com/apis/site/v2/sports/mma/ufc/scoreboard');
-    const data = await res.json();
-    const ev = data.events?.[0];
-    if (!ev) { document.getElementById('ufc-container').innerHTML = '<div style="padding:14px;font-size:12px;color:var(--muted)">No upcoming event found</div>'; return; }
+    const r = await fetch('/api/subforums');
+    if (!r.ok) return;
+    const d = await r.json();
+    // Use total post count as proxy
+  } catch {}
+})();
 
-    const d = new Date(ev.date);
-    const dateStr = d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'}) + ' · ' + ev.competitions?.[0]?.venue?.fullName;
-    const fights = ev.competitions || [];
-    const mainCard = fights.slice(-5);
-
-    document.getElementById('sh-ufc').textContent = ev.name?.replace('UFC ','').replace('Fight Night: ','FN: ').split(':')[0];
-    document.getElementById('sh-ufc-sub').textContent = d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
-
-    let html = `<div class="ufc-event">
-      <div class="ufc-title">${ev.name}</div>
-      <div class="ufc-date">${dateStr}</div>`;
-
-    mainCard.reverse().forEach((fight, i) => {
-      const h = fight.competitors?.[0]?.athlete?.displayName || '—';
-      const a = fight.competitors?.[1]?.athlete?.displayName || '—';
-      const s = fight.status?.type?.name;
-      const isFT = s === 'STATUS_FINAL' || s === 'STATUS_FULL_TIME';
-      const score = isFT ? (fight.competitors?.[0]?.score || '') : '';
-      html += `<div class="fight-row ${i===0?'fight-main':''}">
-        <div class="fight-names">${h} <span style="color:var(--muted)">vs</span> ${a}</div>
-        ${i === 0 ? '<div class="fight-label">Main Event</div>' : ''}
-        ${isFT ? `<div style="font-family:Bebas Neue;font-size:16px;color:var(--gold)">${score}</div>` : ''}
-      </div>`;
-    });
-
-    html += `<a href="fighting.html" style="display:block;text-align:center;margin-top:12px;font-size:12px;font-weight:700;color:var(--gold);padding:8px;border:1px solid rgba(245,166,35,0.3);border-radius:3px">Full Card & UFC Coverage →</a>
-    </div>`;
-
-    document.getElementById('ufc-container').innerHTML = html;
-  } catch(e) {
-    document.getElementById('ufc-container').innerHTML = '<div style="padding:14px;font-size:12px;color:var(--muted)">Could not load UFC data</div>';
-  }
-}
-
-// ── GUARDIAN NEWS ─────────────────────────────────────────────────────────
-async function loadNews() {
-  try {
-    const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.theguardian.com%2Ffootball%2Frss');
-    const data = await res.json();
-    const items = (data.items || []).slice(0, 8);
-    let html = '<div class="news-block">';
-    items.forEach(item => {
-      const thumb = item.enclosure?.link || item.thumbnail || '';
-      const tag = item.categories?.[0] || 'Football';
-      html += `<div class="news-item" onclick="window.open('${item.link}','_blank')">
-        ${thumb ? `<div class="news-thumb"><img src="${thumb}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>` : ''}
-        <div class="news-body">
-          <div class="news-tag">${tag}</div>
-          <h3>${item.title}</h3>
-          <div class="meta">${timeAgo(item.pubDate)} · The Guardian</div>
-        </div>
-      </div>`;
-    });
-    html += '</div>';
-    document.getElementById('news-container').innerHTML = html;
-  } catch(e) {
-    document.getElementById('news-container').innerHTML = '<div class="loading-state">Could not load news</div>';
-  }
-}
-
-// ── INIT ──────────────────────────────────────────────────────────────────
-loadScoresStrip();
-loadWCHero();
-loadPLTable();
-loadTopScorers();
-loadUFC();
-loadNews();
-
-// Auto-refresh
-setInterval(loadScoresStrip, 2 * 60 * 1000);
-setInterval(loadWCHero, 3 * 60 * 1000);
-setInterval(loadNews, 15 * 60 * 1000);
-setInterval(loadUFC, 10 * 60 * 1000);
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 </script>
 </body>
 </html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bare Knuckle Fighting — Football & Fighting</title>
+  <meta name="description" content="Bare Knuckle Fighting Championship (BKFC) — upcoming events, champions, results and community discussion."/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--red:#e50000;--dark:#0a0a0a;--card:#1a1a1a;--border:#2a2a2a;--border2:#333;--text:#f0f0f0;--muted:#777;--gold:#f5a623;--green:#2ecc71}
+    body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.5;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+    header{background:#0d0d0d;border-bottom:3px solid var(--red);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:300}
+    .logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:0.05em}
+    .logo span{color:var(--red)}
+    nav{display:flex;gap:2px}
+    nav a{padding:7px 12px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;border-radius:3px;transition:background 0.15s}
+    nav a:hover{background:#1e1e1e}
+    nav a.active{color:var(--red)}
+    nav a.join{background:var(--red);color:#fff;border-radius:4px;margin-left:6px}
+    nav a.join:hover{background:#c00}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px}
+    .mobile-nav{display:none;position:fixed;top:64px;left:0;right:0;background:#111;border-bottom:1px solid var(--border2);z-index:299;padding:10px 16px 16px;flex-direction:column;gap:2px}
+    .mobile-nav.open{display:flex}
+    .mobile-nav a{padding:11px 14px;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;border-radius:4px;display:block}
+    .mobile-nav a:hover{background:#1e1e1e;color:var(--red)}
+    .mobile-nav .nav-join{background:var(--red)!important;color:#fff!important;margin-top:6px;text-align:center}
+    .wrap{max-width:1060px;margin:0 auto;padding:0 16px}
+    .hero{background:linear-gradient(135deg,#140000 0%,#0a0a0a 60%);padding:48px 16px;border-bottom:1px solid var(--border)}
+    .hero h1{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:1;letter-spacing:0.04em;margin-bottom:8px}
+    .hero h1 span{color:var(--red)}
+    .hero p{font-size:16px;color:var(--muted);max-width:520px;margin-bottom:20px}
+    .page-grid{display:grid;grid-template-columns:1fr 300px;gap:20px;padding:32px 0}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px}
+    .card-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+    .card-header h2{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.05em}
+    .card-header a{font-size:12px;color:var(--red);font-weight:600}
+    .event-row{padding:16px 18px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+    .event-row:last-child{border-bottom:none}
+    .event-row.next{background:rgba(229,0,0,0.05);border-left:3px solid var(--red)}
+    .event-date{font-size:11px;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px}
+    .event-name{font-size:15px;font-weight:700}
+    .event-sub{font-size:12px;color:var(--muted)}
+    .badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;text-transform:uppercase;letter-spacing:0.05em}
+    .badge-red{background:var(--red);color:#fff}
+    .badge-muted{background:#2a2a2a;color:var(--muted)}
+    .champ-row{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:center}
+    .champ-row:last-child{border-bottom:none}
+    .champ-class{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px}
+    .champ-name{font-size:15px;font-weight:700}
+    .champ-detail{font-size:12px;color:var(--muted)}
+    .tab-row{display:flex;gap:4px;padding:12px 18px;border-bottom:1px solid var(--border)}
+    .tab-btn{padding:6px 16px;border-radius:4px;font-size:13px;font-weight:600;border:1px solid var(--border2);background:none;color:var(--muted);cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s}
+    .tab-btn.active{background:var(--red);border-color:var(--red);color:#fff}
+    .tab-panel{display:none}
+    .tab-panel.active{display:block}
+    .explainer{padding:20px 18px;font-size:14px;color:var(--muted);line-height:1.7}
+    .explainer h3{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--text);letter-spacing:0.05em;margin:12px 0 6px}
+    .thread-row{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start}
+    .thread-row:last-child{border-bottom:none}
+    .tr-icon{width:32px;height:32px;border-radius:50%;background:#222;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+    .tr-body{flex:1;min-width:0}
+    .tr-title{font-size:14px;font-weight:600;line-height:1.3;margin-bottom:3px}
+    .tr-meta{font-size:11px;color:var(--muted)}
+    .tr-stats{font-size:11px;color:var(--muted);white-space:nowrap}
+    .info-item{padding:12px 18px;border-bottom:1px solid var(--border);font-size:13px}
+    .info-item:last-child{border-bottom:none}
+    .info-item strong{color:var(--text);display:block;margin-bottom:2px}
+    .btn{padding:12px 20px;border-radius:4px;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:'Inter',sans-serif;display:inline-block;text-align:center;transition:all 0.15s}
+    .btn-red{background:var(--red);color:#fff;width:100%}
+    .btn-red:hover{background:#c00}
+    footer{background:#0d0d0d;border-top:1px solid var(--border);padding:24px 0;text-align:center;font-size:12px;color:var(--muted);margin-top:40px}
+    @media(max-width:700px){.page-grid{grid-template-columns:1fr}.hero h1{font-size:40px}nav{display:none}.hamburger{display:flex}}
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">F<span>&</span>F</a>
+  <nav>
+    <a href="football.html">Football</a>
+    <a href="ufc.html">UFC</a>
+    <a href="fighting.html">Boxing</a>
+    <a href="bkfc.html" class="active">BKFC</a>
+    <a href="tips.html">Tips</a>
+    <a href="community.html">Community</a>
+    <a href="membership.html" class="join">Join £1</a>
+  </nav>
+  <button class="hamburger" onclick="document.getElementById('mnav').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<div class="mobile-nav" id="mnav">
+  <a href="football.html">⚽ Football</a>
+  <a href="ufc.html">🥊 UFC</a>
+  <a href="fighting.html">🥊 Boxing</a>
+  <a href="bkfc.html">✊ BKFC</a>
+  <a href="tips.html">💰 Tips</a>
+  <a href="community.html">💬 Community</a>
+  <a href="membership.html" class="nav-join">Join for £1</a>
+</div>
+
+<div class="hero">
+  <div class="wrap">
+    <div style="display:inline-block;background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:2px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:12px">Bare Knuckle Fighting Championship</div>
+    <h1>Bare Knuckle <span>Fighting</span></h1>
+    <p>The fastest growing combat sport in the world. No gloves. No excuses. Just guts.</p>
+    <a href="community.html#bkfc" style="display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;padding:12px 22px;border-radius:5px;font-weight:700;font-size:14px">✊ Join the BKFC Forum</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="page-grid">
+    <!-- MAIN -->
+    <div>
+      <!-- Events -->
+      <div class="card">
+        <div class="card-header"><h2>Upcoming Events</h2></div>
+
+        <div class="tab-row">
+          <button class="tab-btn active" onclick="switchTab('events')">Schedule</button>
+          <button class="tab-btn" onclick="switchTab('champs')">Champions</button>
+          <button class="tab-btn" onclick="switchTab('about')">What is BKFC?</button>
+        </div>
+
+        <!-- EVENTS -->
+        <div id="tab-events" class="tab-panel active">
+          <div class="event-row next">
+            <div>
+              <div class="event-date">July 2026</div>
+              <div class="event-name">BKFC 70</div>
+              <div class="event-sub">Venue TBC · Main card TBA</div>
+            </div>
+            <span class="badge badge-red">Next Event</span>
+          </div>
+          <div class="event-row">
+            <div>
+              <div class="event-date">August 2026</div>
+              <div class="event-name">BKFC KnuckleMania IV</div>
+              <div class="event-sub">Annual flagship event</div>
+            </div>
+            <span class="badge badge-muted">Upcoming</span>
+          </div>
+          <div class="event-row">
+            <div>
+              <div class="event-date">September 2026</div>
+              <div class="event-name">BKFC 71</div>
+              <div class="event-sub">TBC</div>
+            </div>
+            <span class="badge badge-muted">Upcoming</span>
+          </div>
+          <div class="explainer" style="border-top:1px solid var(--border);padding-top:14px">
+            <strong style="font-size:12px;color:var(--muted)">Where to watch:</strong>
+            <p style="margin-top:6px;font-size:13px">BKFC events stream on the BKFC app and website. Some events air on TV channels including BT Sport and DAZN in select markets. Check <a href="https://www.bareknuckle.tv" target="_blank" rel="noopener" style="color:var(--red)">bareknuckle.tv</a> for the latest broadcast info.</p>
+          </div>
+        </div>
+
+        <!-- CHAMPIONS -->
+        <div id="tab-champs" class="tab-panel">
+          <div class="champ-row">
+            <div style="font-size:24px">✊</div>
+            <div>
+              <div class="champ-class">Heavyweight</div>
+              <div class="champ-name">Lorenzo Hunt</div>
+              <div class="champ-detail">BKFC Heavyweight Champion</div>
+            </div>
+          </div>
+          <div class="champ-row">
+            <div style="font-size:24px">✊</div>
+            <div>
+              <div class="champ-class">Light Heavyweight</div>
+              <div class="champ-name">Johnny Bedford</div>
+              <div class="champ-detail">BKFC Light Heavyweight Champion</div>
+            </div>
+          </div>
+          <div class="champ-row">
+            <div style="font-size:24px">✊</div>
+            <div>
+              <div class="champ-class">Middleweight</div>
+              <div class="champ-name">Jack McVicker</div>
+              <div class="champ-detail">BKFC Middleweight Champion</div>
+            </div>
+          </div>
+          <div class="champ-row">
+            <div style="font-size:24px">✊</div>
+            <div>
+              <div class="champ-class">Welterweight</div>
+              <div class="champ-name">Arnold Adams</div>
+              <div class="champ-detail">BKFC Welterweight Champion</div>
+            </div>
+          </div>
+          <div class="champ-row">
+            <div style="font-size:24px">✊</div>
+            <div>
+              <div class="champ-class">Lightweight</div>
+              <div class="champ-name">Luis Palomino</div>
+              <div class="champ-detail">BKFC Lightweight Champion</div>
+            </div>
+          </div>
+          <div class="champ-row">
+            <div style="font-size:24px">✊</div>
+            <div>
+              <div class="champ-class">Women's Strawweight</div>
+              <div class="champ-name">Christine Ferea</div>
+              <div class="champ-detail">BKFC Women's Strawweight Champion</div>
+            </div>
+          </div>
+          <p style="padding:14px 18px;font-size:12px;color:var(--muted)">Champion data updated periodically. For the latest results, check <a href="https://www.bareknuckle.tv" target="_blank" rel="noopener" style="color:var(--red)">bareknuckle.tv</a>.</p>
+        </div>
+
+        <!-- ABOUT -->
+        <div id="tab-about" class="tab-panel">
+          <div class="explainer">
+            <p>Bare Knuckle Fighting Championship (BKFC) is the world's leading bare knuckle fighting promotion, founded in 2018 by David Feldman. It's exactly what it sounds like — fighters compete without boxing gloves, using only hand wraps on the wrists (not the knuckles).</p>
+            <h3>The Rules</h3>
+            <p>Fights take place in a circular pit called "The Squared Circle" — actually a small circle 22 feet across, keeping fighters close. No grappling, no clinching, no takedowns. Pure stand-up striking only. Five rounds of two minutes each. No hitting behind the ear or back of the head.</p>
+            <h3>Why it's growing fast</h3>
+            <p>BKFC has grown from a niche novelty into a legitimate sport with a proper broadcast deal and household names. It attracted fighters from boxing (Paulie Malignaggi, Artem Lobov), MMA (Paige VanZant, Joe Riggs), and WWE. The action is intense — cuts are common and the pace is relentless because there's nowhere to hide.</p>
+            <h3>UK following</h3>
+            <p>BKFC has built a strong following in the UK through BT Sport coverage. Several British fighters have competed under the BKFC banner and the promotion has held events in the UK.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div>
+      <div class="card">
+        <div class="card-header"><h2>BKFC Forum</h2></div>
+        <div style="padding:16px">
+          <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Join the debate — event predictions, fighter talk, hot takes.</p>
+          <a href="community.html#bkfc" class="btn btn-red">Enter BKFC Forum</a>
+        </div>
+        <div class="thread-row">
+          <div class="tr-icon">✊</div>
+          <div class="tr-body">
+            <div class="tr-title">BKFC is the best sport nobody talks about</div>
+            <div class="tr-meta">9 replies · 17 votes</div>
+          </div>
+        </div>
+        <div class="thread-row">
+          <div class="tr-icon">✊</div>
+          <div class="tr-body">
+            <div class="tr-title">Who's the GOAT of bare knuckle?</div>
+            <div class="tr-meta">6 replies · 11 votes</div>
+          </div>
+        </div>
+        <div class="thread-row">
+          <div class="tr-icon">✊</div>
+          <div class="tr-body">
+            <div class="tr-title">Could any current UFC fighter crossover to BKFC?</div>
+            <div class="tr-meta">4 replies · 8 votes</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h2>Quick Facts</h2></div>
+        <div class="info-item"><strong>Founded</strong>2018 — David Feldman</div>
+        <div class="info-item"><strong>Format</strong>5 × 2-minute rounds, circular pit</div>
+        <div class="info-item"><strong>No gloves</strong>Wrist wraps only — knuckles bare</div>
+        <div class="info-item"><strong>Broadcast</strong>BKFC App, BT Sport (UK), DAZN</div>
+        <div class="info-item"><strong>Weight classes</strong>Strawweight to Heavyweight (men + women)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Football & Fighting · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+</footer>
+
+<script>
+function switchTab(id) {
+  ['events','champs','about'].forEach(t => {
+    document.getElementById('tab-'+t).classList.toggle('active', t===id);
+  });
+  document.querySelectorAll('.tab-btn').forEach((b,i) => {
+    b.classList.toggle('active', ['events','champs','about'][i]===id);
+  });
+}
+</script>
+</body>
+</html>

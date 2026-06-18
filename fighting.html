@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Boxing – World Champions, Upcoming Fights & News | Football & Fighting</title>
-  <meta name="description" content="Current boxing world champions across all divisions, upcoming fights schedule, live news from WBC, WBA, IBF and WBO. Updated daily."/>
+  <title>Boxing – Champions, Upcoming Fights, Rankings & News | Football & Fighting</title>
+  <meta name="description" content="Current boxing world champions across all weight divisions, upcoming fights schedule, rankings and news. WBC, WBA, IBF, WBO. Updated daily."/>
   <link rel="canonical" href="https://footballandfighting.com/fighting.html"/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
@@ -28,6 +28,14 @@
     nav a.active{color:var(--red)}
     .nav-join{background:var(--red)!important;color:#fff!important;padding:8px 18px!important;border-radius:3px}
     .nav-join:hover{background:#cc0000!important}
+    /* HAMBURGER */
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+    .hamburger span{display:block;width:24px;height:2px;background:var(--text);border-radius:2px;transition:transform 0.2s}
+    .mobile-nav{display:none;position:fixed;top:70px;left:0;right:0;background:#111;border-bottom:2px solid var(--border);z-index:199;padding:12px 20px;flex-direction:column;gap:4px}
+    .mobile-nav a{padding:10px 14px;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;border-radius:3px;display:block}
+    .mobile-nav a:hover{background:#222}
+    .mobile-nav a.active{color:var(--red)}
+    .mobile-nav .nav-join{background:var(--red)!important;color:#fff!important;margin-top:4px}
     /* LAYOUT */
     .wrap{max-width:1280px;margin:0 auto;padding:0 20px}
     .page-hero{background:linear-gradient(135deg,#0a1a05 0%,#0d0d0d 60%,#0a0505 100%);border-bottom:1px solid var(--border);padding:32px 0 0}
@@ -35,11 +43,21 @@
     .live-badge{background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:2px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;display:inline-block}
     .hero-inner h1{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:0.04em}
     .hero-inner p{font-size:14px;color:var(--muted);margin-top:4px}
+    /* PAGE TABS */
     .page-tabs{display:flex;border-top:1px solid var(--border);overflow-x:auto}
     .page-tabs::-webkit-scrollbar{display:none}
     .ptab{padding:13px 22px;font-size:13px;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;font-family:'Inter',sans-serif;transition:color 0.15s}
     .ptab:hover{color:var(--text)}
     .ptab.active{color:var(--text);border-bottom-color:var(--red)}
+    .tab-panel{display:none}
+    .tab-panel.active{display:block}
+    /* WEIGHT CLASS TABS */
+    .wt-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+    .wtab{padding:6px 14px;font-size:12px;font-weight:700;color:var(--muted);border:1px solid var(--border);border-radius:3px;cursor:pointer;background:none;font-family:'Inter',sans-serif;text-transform:uppercase;letter-spacing:0.05em;transition:all 0.15s}
+    .wtab:hover{color:var(--text);border-color:#555}
+    .wtab.active{color:#fff;background:var(--red);border-color:var(--red)}
+    .wt-panel{display:none}
+    .wt-panel.active{display:block}
     /* STATS STRIP */
     .stats-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
     .stat-card{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--red);border-radius:4px;padding:18px 16px}
@@ -47,7 +65,7 @@
     .stat-card .value{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;margin-bottom:4px}
     .stat-card .sub{font-size:12px;color:var(--muted)}
     /* GRID */
-    .main-grid{display:grid;grid-template-columns:1fr 320px;gap:28px;margin-bottom:40px}
+    .main-grid{display:grid;grid-template-columns:1fr 300px;gap:28px;margin-bottom:40px}
     .main-content{display:flex;flex-direction:column;gap:24px}
     .sidebar{display:flex;flex-direction:column;gap:22px}
     /* SECTION */
@@ -55,714 +73,1054 @@
     .section-head h2{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.05em}
     .section-head .pill{background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:2px;letter-spacing:0.08em}
     .section-block{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:20px}
+    /* NEXT FIGHT HERO */
+    .next-fight-hero{background:linear-gradient(135deg,#0a1a05,#111);border:1px solid var(--green);border-radius:8px;padding:24px;margin-bottom:22px;position:relative;overflow:hidden}
+    .next-fight-hero::before{content:'NEXT BIG FIGHT';position:absolute;top:16px;left:16px;font-size:10px;font-weight:700;color:var(--green);letter-spacing:0.15em;text-transform:uppercase}
+    .nfh-countdown{position:absolute;top:12px;right:16px;font-size:11px;font-weight:700;color:var(--green);background:#001a0a;padding:4px 10px;border-radius:2px;border:1px solid var(--green)}
+    .nfh-matchup{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:28px}
+    .nfh-fighter{flex:1;text-align:center}
+    .nfh-fighter .fname{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:0.03em;line-height:1}
+    .nfh-fighter .frecord{font-size:12px;color:var(--muted);margin-top:3px}
+    .nfh-fighter .ftitles{font-size:11px;color:var(--gold);margin-top:3px;font-weight:600}
+    .nfh-vs{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--muted);flex-shrink:0}
+    .nfh-meta{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;padding-top:14px;border-top:1px solid #1a2a1a;font-size:12px;color:var(--muted)}
+    .nfh-meta strong{color:var(--text)}
     /* FIGHT CARD */
-    .fight-card{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:20px;margin-bottom:14px;position:relative;overflow:hidden}
+    .fight-card{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:18px 20px;margin-bottom:12px;position:relative;overflow:hidden}
     .fight-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--red)}
     .fight-card .fc-badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
-    .fight-card .badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:2px;text-transform:uppercase;letter-spacing:0.08em}
+    .badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:2px;text-transform:uppercase;letter-spacing:0.08em}
     .badge-upcoming{background:#1a3a1a;color:var(--green);border:1px solid var(--green)}
     .badge-title{background:#3a1a00;color:var(--gold);border:1px solid var(--gold)}
     .badge-ppv{background:#1a001a;color:#cc88ff;border:1px solid #cc88ff}
-    .fight-matchup{display:flex;align-items:center;gap:12px;margin:12px 0}
+    .badge-tuneup{background:#1a1a3a;color:var(--blue);border:1px solid var(--blue)}
+    .fight-matchup{display:flex;align-items:center;gap:12px;margin:10px 0}
     .fighter-block{flex:1}
-    .fighter-block .fname{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.03em;line-height:1}
+    .fighter-block .fname{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.03em;line-height:1}
     .fighter-block .frecord{font-size:12px;color:var(--muted);margin-top:2px}
-    .fighter-block .fcountry{font-size:11px;color:var(--muted)}
-    .vs-circle{background:#111;border:2px solid var(--border);border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;flex-shrink:0}
+    .vs-circle{background:#111;border:2px solid var(--border);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:14px;flex-shrink:0}
     .fight-meta{font-size:12px;color:var(--muted);padding-top:10px;border-top:1px solid var(--border)}
     .fight-meta span{margin-right:16px}
-    /* CHAMPIONS */
-    .weight-section{margin-bottom:28px}
-    .weight-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.05em;color:var(--text);margin-bottom:12px;padding:8px 14px;background:var(--card2);border-left:4px solid var(--red);border-radius:0 4px 4px 0}
-    .belt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    .belt-card{background:#111;border:1px solid var(--border);border-radius:6px;padding:14px;display:flex;gap:12px;align-items:flex-start}
-    .belt-org{width:40px;height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:13px;flex-shrink:0;font-weight:700}
-    .belt-org.wbc{background:#006600;color:#fff}
-    .belt-org.wba{background:#003399;color:#fff}
-    .belt-org.ibf{background:#8B0000;color:#fff}
-    .belt-org.wbo{background:#4B0082;color:#fff}
-    .belt-info .b-champ{font-weight:700;font-size:14px;margin-bottom:2px}
-    .belt-info .b-record{font-size:11px;color:var(--gold)}
-    .belt-info .b-since{font-size:11px;color:var(--muted)}
-    .undisputed-card{background:linear-gradient(135deg,#1a1200,#0a0a0a);border:1px solid var(--gold);border-radius:6px;padding:16px;margin-bottom:10px}
-    .undisputed-card .u-label{font-size:10px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px}
-    .undisputed-card .u-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.03em}
-    .undisputed-card .u-record{font-size:13px;color:var(--gold);font-weight:600}
-    .undisputed-card .u-org{font-size:12px;color:var(--muted)}
+    /* BELT CHAMPIONS TABLE */
+    .belt-table{width:100%;border-collapse:collapse;font-size:13px}
+    .belt-table thead tr{border-bottom:2px solid var(--border)}
+    .belt-table thead th{padding:8px 10px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);font-weight:700}
+    .belt-table tbody tr{border-bottom:1px solid #222;transition:background 0.1s}
+    .belt-table tbody tr:hover{background:#222}
+    .belt-table td{padding:10px 10px;vertical-align:middle}
+    .org-badge{display:inline-block;padding:3px 8px;border-radius:3px;font-size:11px;font-weight:700;min-width:38px;text-align:center}
+    .org-wbc{background:#006600;color:#fff}
+    .org-wba{background:#cc0000;color:#fff}
+    .org-ibf{background:#00339a;color:#fff}
+    .org-wbo{background:#333;color:#fff;border:1px solid #555}
+    .org-ring{background:#8B0000;color:#fff}
+    .champ-name{font-weight:700;font-size:14px}
+    .champ-record{font-size:12px;color:var(--muted)}
+    .champ-country{font-size:12px;color:var(--muted)}
+    .undisputed-row td{background:#1a1a00!important}
+    .undisputed-row:hover td{background:#222200!important}
+    /* RANKINGS TABLE */
+    .rank-table{width:100%;border-collapse:collapse;font-size:13px}
+    .rank-table tr{border-bottom:1px solid #222;transition:background 0.1s}
+    .rank-table tr:hover{background:#222}
+    .rank-table td{padding:9px 10px;vertical-align:middle}
+    .rank-table th{padding:8px 10px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);font-weight:700;border-bottom:2px solid var(--border)}
+    .rank-num{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--muted);width:36px}
+    .rank-num.top3{color:var(--gold)}
+    .rank-name{font-weight:700}
+    .rank-record{font-size:12px;color:var(--muted)}
+    .rank-notes{font-size:11px;color:var(--muted);font-style:italic}
     /* NEWS */
-    .news-item{padding:14px 0;border-bottom:1px solid var(--border)}
+    .news-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #1e1e1e}
     .news-item:last-child{border-bottom:none}
-    .news-item .news-source{font-size:10px;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px}
-    .news-item a{font-weight:600;font-size:14px;line-height:1.4;display:block;margin-bottom:4px}
-    .news-item a:hover{color:var(--red)}
-    .news-item .news-time{font-size:11px;color:var(--muted)}
+    .news-content{flex:1}
+    .news-source{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;font-weight:700}
+    .news-title{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:4px;color:var(--text)}
+    .news-title:hover{color:var(--red)}
+    .news-date{font-size:11px;color:var(--muted)}
+    #news-loading{text-align:center;padding:20px;color:var(--muted);font-size:13px}
     /* SIDEBAR */
-    .sidebar-block{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:16px}
-    .sidebar-block h3{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.05em;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
-    .upcoming-fight{padding:10px 0;border-bottom:1px solid #2a2a2a}
-    .upcoming-fight:last-child{border-bottom:none}
-    .upcoming-fight .uf-date{font-size:11px;color:var(--red);font-weight:700;margin-bottom:3px}
-    .upcoming-fight .uf-matchup{font-weight:700;font-size:13px;margin-bottom:2px}
-    .upcoming-fight .uf-detail{font-size:11px;color:var(--muted)}
-    .ranking-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #2a2a2a}
-    .ranking-item:last-child{border-bottom:none}
-    .rank-num{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--muted);width:24px;flex-shrink:0}
-    .rank-name{font-weight:600;font-size:13px;flex:1}
-    .rank-record{font-size:11px;color:var(--muted)}
-    .loading{color:var(--muted);font-size:13px;font-style:italic;padding:16px 0}
-    /* TAB PANELS */
-    .tab-panel{display:none}
-    .tab-panel.active{display:block}
-    /* BOXING WARNING */
-    .gambling-warning{background:#1a0000;border:1px solid var(--red);border-radius:6px;padding:12px 16px;margin-bottom:20px;font-size:12px;color:var(--muted)}
-    .gambling-warning strong{color:var(--text)}
+    .sb-block{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:16px}
+    .sb-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.05em;margin-bottom:12px;color:var(--text);border-bottom:2px solid var(--border);padding-bottom:8px}
+    .sb-fight{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #1e1e1e;font-size:13px}
+    .sb-fight:last-child{border-bottom:none}
+    .sb-fight .matchup{font-weight:600}
+    .sb-fight .date{font-size:11px;color:var(--muted)}
+    .sb-fight .belt{font-size:10px;color:var(--gold);font-weight:700}
+    .p4p-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #1e1e1e;font-size:13px}
+    .p4p-row:last-child{border-bottom:none}
+    .p4p-num{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--muted);width:24px;flex-shrink:0}
+    .p4p-num.gold{color:var(--gold)}
+    .p4p-name{font-weight:700}
+    .p4p-div{font-size:11px;color:var(--muted)}
+    .boxrec-link{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #1e1e1e;font-size:13px}
+    .boxrec-link:last-child{border-bottom:none}
+    .boxrec-link a{color:var(--blue);font-weight:600;font-size:11px}
+    .boxrec-link a:hover{color:#5ab9ff}
     /* FOOTER */
-    footer{background:#0a0a0a;border-top:1px solid var(--border);padding:40px 0 20px;margin-top:40px}
-    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:32px}
-    .footer-brand .logo{display:block;margin-bottom:12px}
+    footer{background:#0d0d0d;border-top:1px solid var(--border);padding:32px 0;margin-top:40px}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:24px}
+    .footer-brand .logo{font-size:22px;margin-bottom:8px}
     .footer-brand p{font-size:13px;color:var(--muted);line-height:1.6}
     .footer-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:12px}
-    .footer-col a{display:block;font-size:13px;color:var(--muted);margin-bottom:8px}
+    .footer-col a{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;transition:color 0.15s}
     .footer-col a:hover{color:var(--text)}
-    .footer-bottom{max-width:1280px;margin:0 auto;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
-    .gambling-aware{background:var(--card);border:1px solid var(--border);border-radius:3px;padding:6px 12px;font-size:11px;font-weight:700}
+    .footer-bottom{border-top:1px solid var(--border);padding-top:16px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
     /* MOBILE */
     @media(max-width:768px){
-      header{padding:0 12px;height:56px}
-      .logo{font-size:22px}
-      nav{overflow-x:auto;-webkit-overflow-scrolling:touch;gap:0}
-      nav a{padding:6px 9px;font-size:11px;white-space:nowrap;letter-spacing:0.03em}
-      .nav-join{padding:6px 10px!important;font-size:11px!important}
-      .wrap{padding:0 12px}
-      .hero-inner{flex-direction:column;align-items:flex-start;gap:8px;margin-bottom:12px}
+      .hamburger{display:flex}
+      nav{display:none}
+      .mobile-nav.open{display:flex}
       .hero-inner h1{font-size:34px}
-      .stats-strip{grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-      .main-grid{grid-template-columns:1fr;gap:16px}
-      .sidebar{order:2}
-      .belt-grid{grid-template-columns:1fr!important}
-      .footer-grid{grid-template-columns:1fr 1fr;gap:20px}
-      .footer-bottom{flex-direction:column;gap:8px;text-align:center}
+      .stats-strip{grid-template-columns:repeat(2,1fr)}
+      .main-grid{grid-template-columns:1fr}
+      .sidebar{display:none}
+      .nfh-fighter .fname{font-size:22px}
+      .nfh-vs{font-size:20px}
+      .belt-table thead th:nth-child(3),.belt-table td:nth-child(3){display:none}
+      .wt-tabs{gap:4px}
+      .wtab{padding:5px 10px;font-size:11px}
+      .footer-grid{grid-template-columns:1fr}
     }
     @media(max-width:480px){
-      .hero-inner h1{font-size:26px}
-      .fight-matchup{flex-direction:column;gap:4px}
-      .vs-circle{display:none}
-      .footer-grid{grid-template-columns:1fr}
+      .stats-strip{grid-template-columns:1fr 1fr}
+      .nfh-matchup{flex-direction:column;gap:8px}
+      .nfh-vs{transform:rotate(90deg)}
     }
   </style>
 </head>
 <body>
 
 <!-- TICKER -->
-<div class="ticker" id="ticker">
-  <div class="ticker-inner" id="ticker-inner">
-    <span>Usyk Undisputed HW Champion · Naoya Inoue Undisputed Bantamweight · Dmitry Bivol LHW WBA/IBF/WBO · Benavidez WBC LHW · Canelo vs Mbilli Sept 2026</span>
-    <span>Usyk Undisputed HW Champion · Naoya Inoue Undisputed Bantamweight · Dmitry Bivol LHW WBA/IBF/WBO · Benavidez WBC LHW · Canelo vs Mbilli Sept 2026</span>
+<div class="ticker">
+  <div class="ticker-inner" id="boxing-ticker">
+    <span>NEXT: Zayas vs Ennis — June 27, Barclays Center, DAZN PPV</span>
+    <span>Joshua vs Prenga — July 25, Riyadh</span>
+    <span>Spence vs Tszyu — July 25, Australia</span>
+    <span>Fury vs TBA — Aug 1, Dublin (warm-up)</span>
+    <span>Canelo vs M'billi — Sept 12, Riyadh — WBC SMW Title</span>
+    <span>Fury vs Joshua — November 2026 — HW Mega Fight</span>
+    <span>UNDISPUTED HW: Oleksandr Usyk (WBA/WBC/IBF)</span>
+    <span>UNDISPUTED BW: Naoya Inoue (WBA/WBC/IBF/WBO)</span>
+    <span>Zayas vs Ennis — June 27, Barclays Center, DAZN PPV</span>
+    <span>Joshua vs Prenga — July 25, Riyadh</span>
+    <span>Spence vs Tszyu — July 25, Australia</span>
+    <span>Fury vs TBA — Aug 1, Dublin (warm-up)</span>
+    <span>Canelo vs M'billi — Sept 12, Riyadh — WBC SMW Title</span>
+    <span>Fury vs Joshua — November 2026 — HW Mega Fight</span>
+    <span>UNDISPUTED HW: Oleksandr Usyk (WBA/WBC/IBF)</span>
+    <span>UNDISPUTED BW: Naoya Inoue (WBA/WBC/IBF/WBO)</span>
   </div>
 </div>
 
 <!-- HEADER -->
 <header>
-  <a href="index.html" class="logo">Football <span>&</span> Fighting</a>
+  <div class="logo">Football<span>&</span>Fighting</div>
   <nav>
     <a href="index.html">Home</a>
     <a href="football.html">Football</a>
-    <a href="worldcup.html">World Cup</a>
     <a href="ufc.html">UFC</a>
     <a href="fighting.html" class="active">Boxing</a>
     <a href="tips.html">Tips</a>
-    <a href="articles.html">Articles</a>
+    <a href="articles.html">Analysis</a>
     <a href="community.html">Community</a>
-    <a href="membership.html" class="nav-join">Join Now</a>
+    <a href="membership.html" class="nav-join">Join</a>
   </nav>
+  <div class="hamburger" id="hamburger" onclick="toggleMobileNav()">
+    <span></span><span></span><span></span>
+  </div>
 </header>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="football.html">Football</a>
+  <a href="ufc.html">UFC</a>
+  <a href="fighting.html" class="active">Boxing</a>
+  <a href="tips.html">Tips</a>
+  <a href="articles.html">Analysis</a>
+  <a href="community.html">Community</a>
+  <a href="membership.html" class="nav-join">Join</a>
+</div>
 
 <!-- HERO -->
-<section class="page-hero">
+<div class="page-hero">
   <div class="wrap">
     <div class="hero-inner">
       <div>
-        <span class="live-badge">World Boxing</span>
-        <h1>Boxing</h1>
-        <p>Champions · Upcoming Fights · World Rankings · News</p>
+        <div class="live-badge">Boxing</div>
+        <h1>World Boxing</h1>
+        <p>Champions · Fights · Rankings · News — Updated Daily</p>
       </div>
     </div>
-    <div class="page-tabs" id="page-tabs">
-      <button class="ptab active" data-tab="upcoming">Upcoming Fights</button>
-      <button class="ptab" data-tab="champions">World Champions</button>
-      <button class="ptab" data-tab="news">News</button>
+    <div class="page-tabs">
+      <button class="ptab active" onclick="switchTab('fights')">Upcoming Fights</button>
+      <button class="ptab" onclick="switchTab('champions')">Champions</button>
+      <button class="ptab" onclick="switchTab('rankings')">Rankings</button>
+      <button class="ptab" onclick="switchTab('news')">News</button>
     </div>
   </div>
-</section>
+</div>
 
-<main>
-  <div class="wrap" style="padding-top:28px">
-
-    <!-- STATS STRIP -->
-    <div class="stats-strip">
-      <div class="stat-card">
-        <div class="label">Undisputed HW</div>
-        <div class="value" style="font-size:20px;line-height:1.2">Oleksandr Usyk</div>
-        <div class="sub">25–0 · WBA/WBC/IBF/The Ring</div>
-      </div>
-      <div class="stat-card">
-        <div class="label">Undisputed BW</div>
-        <div class="value" style="font-size:20px;line-height:1.2">Naoya Inoue</div>
-        <div class="sub">33–0 · All 4 major belts</div>
-      </div>
-      <div class="stat-card">
-        <div class="label">Next Big Fight</div>
-        <div class="value" style="font-size:18px;line-height:1.2">Spence vs Tszyu</div>
-        <div class="sub">25 Jul 2026 · Australia</div>
-      </div>
-      <div class="stat-card">
-        <div class="label">P4P #1 (The Ring)</div>
-        <div class="value" style="font-size:20px;line-height:1.2">Naoya Inoue</div>
-        <div class="sub">The Monster · Undisputed</div>
-      </div>
+<!-- MAIN -->
+<div class="wrap" style="padding-top:28px">
+  <div class="stats-strip">
+    <div class="stat-card">
+      <div class="label">Next Big Fight</div>
+      <div class="value" style="font-size:18px;line-height:1.2">Zayas vs Ennis</div>
+      <div class="sub">June 27 · DAZN PPV</div>
     </div>
-
-    <div class="main-grid">
-      <div class="main-content">
-
-        <!-- UPCOMING FIGHTS TAB -->
-        <div class="tab-panel active" id="tab-upcoming">
-          <div class="section-block">
-            <div class="section-head">
-              <h2>Upcoming Fights</h2>
-              <span class="pill">2026 Schedule</span>
-            </div>
-            <div class="gambling-warning">
-              <strong>18+ · Gambling Warning</strong> — Betting on boxing involves risk of financial loss. Please gamble responsibly. <a href="https://www.begambleaware.org" target="_blank" style="color:var(--red)">BeGambleAware.org</a> · <a href="https://www.gamcare.org.uk" target="_blank" style="color:var(--red)">GamCare.org.uk</a>
-            </div>
-
-            <!-- CONFIRMED FIGHTS -->
-            <div class="fight-card">
-              <div class="fc-badges">
-                <span class="badge badge-upcoming">Jul 25 2026</span>
-                <span class="badge badge-ppv">PPV · Australia</span>
-              </div>
-              <div class="fight-matchup">
-                <div class="fighter-block">
-                  <div class="fname">Errol Spence Jr.</div>
-                  <div class="frecord">29–2 (22 KO)</div>
-                  <div class="fcountry">🇺🇸 USA</div>
-                </div>
-                <div class="vs-circle">VS</div>
-                <div class="fighter-block" style="text-align:right">
-                  <div class="fname">Tim Tszyu</div>
-                  <div class="frecord">24–2 (17 KO)</div>
-                  <div class="fcountry">🇦🇺 Australia</div>
-                </div>
-              </div>
-              <div class="fight-meta">
-                <span>📍 Australia</span>
-                <span>⚖️ Super Welterweight · 10 rounds</span>
-              </div>
-            </div>
-
-            <div class="fight-card">
-              <div class="fc-badges">
-                <span class="badge badge-upcoming">Jul 2026</span>
-                <span class="badge" style="background:#1a1a3a;color:#88aaff;border:1px solid #88aaff">Return Fight</span>
-              </div>
-              <div class="fight-matchup">
-                <div class="fighter-block">
-                  <div class="fname">Anthony Joshua</div>
-                  <div class="frecord">27–4 (24 KO)</div>
-                  <div class="fcountry">🇬🇧 England</div>
-                </div>
-                <div class="vs-circle">VS</div>
-                <div class="fighter-block" style="text-align:right">
-                  <div class="fname">Kristian Prenga</div>
-                  <div class="frecord">TBC</div>
-                  <div class="fcountry">🇦🇱 Albania</div>
-                </div>
-              </div>
-              <div class="fight-meta">
-                <span>⚖️ Heavyweight · Tuneup</span>
-                <span>📺 DAZN</span>
-              </div>
-            </div>
-
-            <div class="fight-card">
-              <div class="fc-badges">
-                <span class="badge badge-upcoming">Sep 2026</span>
-                <span class="badge badge-title">WBC Super Middleweight Title</span>
-              </div>
-              <div class="fight-matchup">
-                <div class="fighter-block">
-                  <div class="fname">Canelo Alvarez</div>
-                  <div class="frecord">61–2–2 (39 KO)</div>
-                  <div class="fcountry">🇲🇽 Mexico</div>
-                </div>
-                <div class="vs-circle">VS</div>
-                <div class="fighter-block" style="text-align:right">
-                  <div class="fname">Christian M'billi</div>
-                  <div class="frecord">29–0–1 (24 KO)</div>
-                  <div class="fcountry">🇨🇦 Canada</div>
-                </div>
-              </div>
-              <div class="fight-meta">
-                <span>⚖️ Super Middleweight · WBC Title</span>
-                <span>📍 TBC</span>
-              </div>
-            </div>
-
-            <div class="fight-card" style="opacity:0.8">
-              <div class="fc-badges">
-                <span class="badge badge-upcoming">TBC 2026</span>
-                <span class="badge badge-title">Unification</span>
-              </div>
-              <div class="fight-matchup">
-                <div class="fighter-block">
-                  <div class="fname">Xander Zayas</div>
-                  <div class="frecord">23–0 (13 KO)</div>
-                  <div class="fcountry">🇵🇷 Puerto Rico · WBA/WBO JMW</div>
-                </div>
-                <div class="vs-circle">VS</div>
-                <div class="fighter-block" style="text-align:right">
-                  <div class="fname">Jaron Ennis</div>
-                  <div class="frecord">35–0–0–1 (31 KO)</div>
-                  <div class="fcountry">🇺🇸 USA · WBA Interim WW</div>
-                </div>
-              </div>
-              <div class="fight-meta">
-                <span>⚖️ Junior Middleweight unification</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- BOXREC LINK -->
-          <div class="section-block" style="margin-top:20px">
-            <div class="section-head">
-              <h2>Fighter Records</h2>
-              <span class="pill">BoxRec</span>
-            </div>
-            <p style="font-size:14px;color:var(--muted);margin-bottom:14px">For full professional records, full fight histories, and rankings, visit BoxRec — the official record keeping organisation for professional boxing.</p>
-            <a href="https://boxrec.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:var(--card2);border:1px solid var(--border);border-radius:4px;padding:10px 18px;font-weight:700;font-size:14px;transition:border-color 0.15s" onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='var(--border)'">
-              🥊 Search BoxRec Records →
-            </a>
-            <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
-              <p style="font-size:13px;color:var(--muted);margin-bottom:10px">Quick links — Top fighters:</p>
-              <div style="display:flex;flex-wrap:wrap;gap:8px">
-                <a href="https://boxrec.com/en/proboxer/3084" target="_blank" rel="noopener" style="background:var(--card2);border:1px solid var(--border);border-radius:3px;padding:5px 10px;font-size:12px;font-weight:600">Oleksandr Usyk</a>
-                <a href="https://boxrec.com/en/proboxer/659461" target="_blank" rel="noopener" style="background:var(--card2);border:1px solid var(--border);border-radius:3px;padding:5px 10px;font-size:12px;font-weight:600">Naoya Inoue</a>
-                <a href="https://boxrec.com/en/proboxer/348759" target="_blank" rel="noopener" style="background:var(--card2);border:1px solid var(--border);border-radius:3px;padding:5px 10px;font-size:12px;font-weight:600">Canelo Alvarez</a>
-                <a href="https://boxrec.com/en/proboxer/659771" target="_blank" rel="noopener" style="background:var(--card2);border:1px solid var(--border);border-radius:3px;padding:5px 10px;font-size:12px;font-weight:600">Dmitry Bivol</a>
-                <a href="https://boxrec.com/en/proboxer/853520" target="_blank" rel="noopener" style="background:var(--card2);border:1px solid var(--border);border-radius:3px;padding:5px 10px;font-size:12px;font-weight:600">Errol Spence Jr.</a>
-                <a href="https://boxrec.com/en/proboxer/629465" target="_blank" rel="noopener" style="background:var(--card2);border:1px solid var(--border);border-radius:3px;padding:5px 10px;font-size:12px;font-weight:600">Gervonta Davis</a>
-                <a href="https://boxrec.com/en/proboxer/852978" target="_blank" rel="noopener" style="background:var(--card2);border:1px solid var(--border);border-radius:3px;padding:5px 10px;font-size:12px;font-weight:600">Ryan Garcia</a>
-                <a href="https://boxrec.com/en/proboxer/765765" target="_blank" rel="noopener" style="background:var(--card2);border:1px solid var(--border);border-radius:3px;padding:5px 10px;font-size:12px;font-weight:600">Shakur Stevenson</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CHAMPIONS TAB -->
-        <div class="tab-panel" id="tab-champions">
-          <div class="section-block">
-            <div class="section-head">
-              <h2>World Champions</h2>
-              <span class="pill">June 2026</span>
-            </div>
-            <p style="font-size:12px;color:var(--muted);margin-bottom:20px">WBC · WBA · IBF · WBO. Verified June 2026. Interim and regular distinctions omitted for clarity.</p>
-
-            <!-- HEAVYWEIGHT -->
-            <div class="weight-section">
-              <div class="weight-title">Heavyweight · 200+ lbs</div>
-              <div class="undisputed-card">
-                <div class="u-label">WBA (Super) · WBC · IBF · The Ring</div>
-                <div class="u-name">Oleksandr Usyk</div>
-                <div class="u-record">25–0 (16 KO) 🇺🇦 Ukraine</div>
-              </div>
-              <div class="belt-grid">
-                <div class="belt-card">
-                  <div class="belt-org wbo">WBO</div>
-                  <div class="belt-info">
-                    <div class="b-champ">Daniel Dubois</div>
-                    <div class="b-record">23–3 (22 KO)</div>
-                    <div class="b-since">🇬🇧 England · Since May 2026</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- LIGHT HEAVYWEIGHT -->
-            <div class="weight-section">
-              <div class="weight-title">Light Heavyweight · 175 lbs</div>
-              <div class="undisputed-card" style="background:linear-gradient(135deg,#0a1520,#0a0a0a);border-color:var(--blue)">
-                <div class="u-label" style="color:var(--blue)">WBA (Super) · IBF · WBO · The Ring</div>
-                <div class="u-name">Dmitry Bivol</div>
-                <div class="u-record">25–1 (12 KO) 🇷🇺 Russia</div>
-              </div>
-              <div class="belt-grid">
-                <div class="belt-card">
-                  <div class="belt-org wbc">WBC</div>
-                  <div class="belt-info">
-                    <div class="b-champ">David Benavidez</div>
-                    <div class="b-record">32–0 (27 KO)</div>
-                    <div class="b-since">🇺🇸 USA</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- SUPER MIDDLEWEIGHT -->
-            <div class="weight-section">
-              <div class="weight-title">Super Middleweight · 168 lbs</div>
-              <div class="belt-grid">
-                <div class="belt-card">
-                  <div class="belt-org wba">WBA</div>
-                  <div class="belt-info">
-                    <div class="b-champ">David Benavidez</div>
-                    <div class="b-record">32–0 (27 KO)</div>
-                    <div class="b-since">🇺🇸 USA · Also holds WBO</div>
-                  </div>
-                </div>
-                <div class="belt-card">
-                  <div class="belt-org wbc">WBC</div>
-                  <div class="belt-info">
-                    <div class="b-champ">Christian M'billi</div>
-                    <div class="b-record">29–0–1 (24 KO)</div>
-                    <div class="b-since">🇨🇦 Canada · vs Canelo Sep 2026</div>
-                  </div>
-                </div>
-                <div class="belt-card">
-                  <div class="belt-org ibf">IBF</div>
-                  <div class="belt-info">
-                    <div class="b-champ">Osleys Iglesias</div>
-                    <div class="b-record">15–0 (14 KO)</div>
-                    <div class="b-since">🇨🇺 Cuba</div>
-                  </div>
-                </div>
-                <div class="belt-card">
-                  <div class="belt-org wbo">WBO</div>
-                  <div class="belt-info">
-                    <div class="b-champ">Hamzah Sheeraz</div>
-                    <div class="b-record">23–0–1 (19 KO)</div>
-                    <div class="b-since">🇬🇧 England · May 2026</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- MIDDLEWEIGHT -->
-            <div class="weight-section">
-              <div class="weight-title">Middleweight · 160 lbs</div>
-              <div class="belt-grid">
-                <div class="belt-card">
-                  <div class="belt-org wba">WBA</div>
-                  <div class="belt-info">
-                    <div class="b-champ">Jaime Munguia</div>
-                    <div class="b-record">46–2 (35 KO)</div>
-                    <div class="b-since">🇲🇽 Mexico · May 2026</div>
-                  </div>
-                </div>
-                <div class="belt-card">
-                  <div class="belt-org wbc">WBC</div>
-                  <div class="belt-info">
-                    <div class="b-champ">Carlos Adames</div>
-                    <div class="b-record">25–1–1 (18 KO)</div>
-                    <div class="b-since">🇩🇴 Dominican Republic</div>
-                  </div>
-                </div>
-                <div class="belt-card">
-                  <div class="belt-org wbo">WBO</div>
-                  <div class="belt-info">
-                    <div class="b-champ">Janibek Alimkhanuly</div>
-                    <div class="b-record">17–0 (12 KO)</div>
-                    <div class="b-since">🇰🇿 Kazakhstan</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- JR MIDDLEWEIGHT -->
-            <div class="weight-section">
-              <div class="weight-title">Junior Middleweight · 154 lbs</div>
-              <div class="belt-grid">
-                <div class="belt-card">
-                  <div class="belt-org wba">WBA</div>
-                  <div class="belt-info">
-                    <div class="b-champ">Xander Zayas</div>
-                    <div class="b-record">23–0 (13 KO)</div>
-                    <div class="b-since">🇵🇷 Puerto Rico · Also holds WBO</div>
-                  </div>
-                </div>
-                <div class="belt-card">
-                  <div class="belt-org wbc">WBC</div>
-                  <div class="belt-info">
-                    <div class="b-champ">Sebastian Fundora</div>
-                    <div class="b-record">24–1–1 (16 KO)</div>
-                    <div class="b-since">🇺🇸 USA</div>
-                  </div>
-                </div>
-                <div class="belt-card">
-                  <div class="belt-org ibf">IBF</div>
-                  <div class="belt-info">
-                    <div class="b-champ">Josh Kelly</div>
-                    <div class="b-record">18–1–1 (9 KO)</div>
-                    <div class="b-since">🇬🇧 England · Jan 2026</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- SUPER LIGHTWEIGHT -->
-            <div class="weight-section">
-              <div class="weight-title">Super Lightweight · 140 lbs</div>
-              <div class="belt-grid">
-                <div class="belt-card">
-                  <div class="belt-org wba">WBA</div>
-                  <div class="belt-info">
-                    <div class="b-champ">Rolando Romero</div>
-                    <div class="b-record">17–2 (13 KO)</div>
-                    <div class="b-since">🇺🇸 USA</div>
-                  </div>
-                </div>
-                <div class="belt-card">
-                  <div class="belt-org wbc">WBC</div>
-                  <div class="belt-info">
-                    <div class="b-champ">Ryan Garcia</div>
-                    <div class="b-record">25–2–0–1 (20 KO)</div>
-                    <div class="b-since">🇺🇸 USA · Feb 2026</div>
-                  </div>
-                </div>
-                <div class="belt-card">
-                  <div class="belt-org ibf">IBF</div>
-                  <div class="belt-info">
-                    <div class="b-champ">Lewis Crocker</div>
-                    <div class="b-record">22–0 (11 KO)</div>
-                    <div class="b-since">🇬🇧 Northern Ireland</div>
-                  </div>
-                </div>
-                <div class="belt-card">
-                  <div class="belt-org wbo">WBO</div>
-                  <div class="belt-info">
-                    <div class="b-champ">Devin Haney</div>
-                    <div class="b-record">33–0–0–1 (15 KO)</div>
-                    <div class="b-since">🇺🇸 USA · Nov 2025</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- LIGHTWEIGHT -->
-            <div class="weight-section">
-              <div class="weight-title">Lightweight · 135 lbs</div>
-              <div class="belt-grid">
-                <div class="belt-card">
-                  <div class="belt-org wba">WBA</div>
-                  <div class="belt-info">
-                    <div class="b-champ">Gervonta Davis</div>
-                    <div class="b-record">30–0–1 (28 KO)</div>
-                    <div class="b-since">🇺🇸 USA · Mar 2026</div>
-                  </div>
-                </div>
-                <div class="belt-card">
-                  <div class="belt-org wbo">WBO</div>
-                  <div class="belt-info">
-                    <div class="b-champ">Abdullah Mason</div>
-                    <div class="b-record">20–0 (17 KO)</div>
-                    <div class="b-since">🇺🇸 USA · Nov 2025</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- BANTAMWEIGHT -->
-            <div class="weight-section">
-              <div class="weight-title">Bantamweight · 118 lbs</div>
-              <div class="undisputed-card">
-                <div class="u-label">WBA (Super) · WBC · IBF · WBO · The Ring — UNDISPUTED</div>
-                <div class="u-name">Naoya Inoue</div>
-                <div class="u-record">33–0 (27 KO) 🇯🇵 Japan — The Monster</div>
-              </div>
-            </div>
-
-            <!-- SUPER FLYWEIGHT -->
-            <div class="weight-section">
-              <div class="weight-title">Super Flyweight · 115 lbs</div>
-              <div class="undisputed-card" style="background:linear-gradient(135deg,#1a1200,#0a0a0a);border-color:var(--gold)">
-                <div class="u-label" style="color:var(--gold)">WBA · WBC · IBF · WBO · The Ring</div>
-                <div class="u-name">Jesse Rodriguez</div>
-                <div class="u-record">23–0 (16 KO) 🇺🇸 USA — Bam</div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- NEWS TAB -->
-        <div class="tab-panel" id="tab-news">
-          <div class="section-block">
-            <div class="section-head">
-              <h2>Boxing News</h2>
-              <span class="pill">Latest</span>
-            </div>
-            <div id="boxing-news-list"><div class="loading">Loading boxing news...</div></div>
-          </div>
-        </div>
-
-      </div><!-- /main-content -->
-
-      <!-- SIDEBAR -->
-      <aside class="sidebar">
-
-        <div class="sidebar-block">
-          <h3>Upcoming Fights</h3>
-          <div class="upcoming-fight">
-            <div class="uf-date">Jul 25 2026</div>
-            <div class="uf-matchup">Errol Spence Jr. vs Tim Tszyu</div>
-            <div class="uf-detail">Super Welterweight · Australia</div>
-          </div>
-          <div class="upcoming-fight">
-            <div class="uf-date">Jul 2026</div>
-            <div class="uf-matchup">Anthony Joshua vs Kristian Prenga</div>
-            <div class="uf-detail">Heavyweight · Tuneup</div>
-          </div>
-          <div class="upcoming-fight">
-            <div class="uf-date">Sep 2026</div>
-            <div class="uf-matchup">Canelo Alvarez vs Christian M'billi</div>
-            <div class="uf-detail">WBC Super Middleweight Title</div>
-          </div>
-          <div class="upcoming-fight">
-            <div class="uf-date">TBC 2026</div>
-            <div class="uf-matchup">Xander Zayas vs Jaron Ennis</div>
-            <div class="uf-detail">Junior Middleweight Unification</div>
-          </div>
-        </div>
-
-        <div class="sidebar-block">
-          <h3>P4P Rankings (The Ring)</h3>
-          <div class="ranking-item"><span class="rank-num">1</span><div><div class="rank-name">Naoya Inoue</div><div class="rank-record">33–0 · Undisputed BW</div></div></div>
-          <div class="ranking-item"><span class="rank-num">2</span><div><div class="rank-name">Oleksandr Usyk</div><div class="rank-record">25–0 · Undisputed HW</div></div></div>
-          <div class="ranking-item"><span class="rank-num">3</span><div><div class="rank-name">Dmitry Bivol</div><div class="rank-record">25–1 · LHW WBA/IBF/WBO</div></div></div>
-          <div class="ranking-item"><span class="rank-num">4</span><div><div class="rank-name">Canelo Alvarez</div><div class="rank-record">61–2–2 · SMW legend</div></div></div>
-          <div class="ranking-item"><span class="rank-num">5</span><div><div class="rank-name">David Benavidez</div><div class="rank-record">32–0 · LHW WBC &amp; SMW</div></div></div>
-          <div class="ranking-item"><span class="rank-num">6</span><div><div class="rank-name">Gervonta Davis</div><div class="rank-record">30–0–1 · LW WBA</div></div></div>
-          <div class="ranking-item"><span class="rank-num">7</span><div><div class="rank-name">Jesse Rodriguez</div><div class="rank-record">23–0 · Undisputed SFW</div></div></div>
-          <div class="ranking-item"><span class="rank-num">8</span><div><div class="rank-name">Ryan Garcia</div><div class="rank-record">25–2–0–1 · SL WBC</div></div></div>
-        </div>
-
-        <div class="sidebar-block">
-          <h3>British Champions</h3>
-          <div class="ranking-item"><div><div class="rank-name">Daniel Dubois</div><div class="rank-record">23–3 · WBO Heavyweight</div></div></div>
-          <div class="ranking-item"><div><div class="rank-name">Hamzah Sheeraz</div><div class="rank-record">23–0–1 · WBO S-Middle</div></div></div>
-          <div class="ranking-item"><div><div class="rank-name">Josh Kelly</div><div class="rank-record">18–1–1 · IBF Jr-Middle</div></div></div>
-          <div class="ranking-item"><div><div class="rank-name">Lewis Crocker</div><div class="rank-record">22–0 · IBF S-Lightweight</div></div></div>
-          <div class="ranking-item"><div><div class="rank-name">Anthony Cacace</div><div class="rank-record">26–1 · WBA S-Feather</div></div></div>
-          <div class="ranking-item"><div><div class="rank-name">Jack Catterall</div><div class="rank-record">33–2 · WBA SL Regular</div></div></div>
-        </div>
-
-        <div class="sidebar-block">
-          <h3>Links</h3>
-          <a href="https://boxrec.com" target="_blank" rel="noopener" style="display:block;padding:8px 0;border-bottom:1px solid #2a2a2a;font-size:13px;font-weight:600">🥊 BoxRec Records</a>
-          <a href="https://www.wbcboxing.com" target="_blank" rel="noopener" style="display:block;padding:8px 0;border-bottom:1px solid #2a2a2a;font-size:13px;font-weight:600">🟢 WBC</a>
-          <a href="https://www.wbaboxing.com" target="_blank" rel="noopener" style="display:block;padding:8px 0;border-bottom:1px solid #2a2a2a;font-size:13px;font-weight:600">🔵 WBA</a>
-          <a href="https://www.ibf-usba-boxing.com" target="_blank" rel="noopener" style="display:block;padding:8px 0;border-bottom:1px solid #2a2a2a;font-size:13px;font-weight:600">🔴 IBF</a>
-          <a href="https://www.wboboxing.com" target="_blank" rel="noopener" style="display:block;padding:8px 0;font-size:13px;font-weight:600">🟣 WBO</a>
-        </div>
-
-      </aside>
-    </div><!-- /main-grid -->
+    <div class="stat-card">
+      <div class="label">Undisputed HW</div>
+      <div class="value" style="font-size:20px">Usyk</div>
+      <div class="sub">WBA · WBC · IBF</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Undisputed BW</div>
+      <div class="value" style="font-size:20px">Inoue</div>
+      <div class="sub">All 4 Belts + Ring</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Mega Fight</div>
+      <div class="value" style="font-size:18px;line-height:1.2">Fury vs Joshua</div>
+      <div class="sub">November 2026</div>
+    </div>
   </div>
-</main>
 
+  <div class="main-grid">
+    <div class="main-content">
+
+      <!-- ===== TAB: UPCOMING FIGHTS ===== -->
+      <div id="tab-fights" class="tab-panel active">
+
+        <!-- NEXT BIG FIGHT HERO -->
+        <div class="next-fight-hero">
+          <div class="nfh-countdown" id="nfh-countdown">Loading…</div>
+          <div class="nfh-matchup">
+            <div class="nfh-fighter">
+              <div class="fname">Xander Zayas</div>
+              <div class="frecord">23–0 (13 KOs)</div>
+              <div class="ftitles">WBA + WBO Junior Middleweight</div>
+            </div>
+            <div class="nfh-vs">VS</div>
+            <div class="nfh-fighter">
+              <div class="fname">Jaron "Boots" Ennis</div>
+              <div class="frecord">35–0 (31 KOs, 1 NC)</div>
+              <div class="ftitles">IBF Interim JMW Champion</div>
+            </div>
+          </div>
+          <div class="nfh-meta">
+            <span>📅 <strong>June 27, 2026</strong></span>
+            <span>📍 <strong>Barclays Center, Brooklyn, NY</strong></span>
+            <span>📺 <strong>DAZN PPV</strong></span>
+            <span>🏆 <strong>WBA + WBO + IBF Junior Middleweight Titles</strong></span>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-head">
+            <h2>Full Fight Schedule</h2>
+            <span class="pill">2026</span>
+          </div>
+
+          <!-- Fight 1: Zayas vs Ennis -->
+          <div class="fight-card">
+            <div class="fc-badges">
+              <span class="badge badge-upcoming">June 27</span>
+              <span class="badge badge-title">WBA + WBO + IBF Title</span>
+              <span class="badge badge-ppv">DAZN PPV</span>
+            </div>
+            <div class="fight-matchup">
+              <div class="fighter-block">
+                <div class="fname">Xander Zayas</div>
+                <div class="frecord">23–0 (13 KOs) · Puerto Rico</div>
+              </div>
+              <div class="vs-circle">VS</div>
+              <div class="fighter-block" style="text-align:right">
+                <div class="fname">Jaron "Boots" Ennis</div>
+                <div class="frecord">35–0 (31 KOs, 1 NC) · USA</div>
+              </div>
+            </div>
+            <div class="fight-meta">
+              <span>📍 Barclays Center, Brooklyn, NY</span>
+              <span>⚖️ Junior Middleweight (154 lbs)</span>
+              <span>🏆 WBA + WBO + IBF Titles</span>
+            </div>
+          </div>
+
+          <!-- Fight 2: Joshua vs Prenga -->
+          <div class="fight-card">
+            <div class="fc-badges">
+              <span class="badge badge-upcoming">July 25</span>
+              <span class="badge badge-tuneup">Tune-Up</span>
+            </div>
+            <div class="fight-matchup">
+              <div class="fighter-block">
+                <div class="fname">Anthony Joshua</div>
+                <div class="frecord">29–4 (26 KOs) · Great Britain</div>
+              </div>
+              <div class="vs-circle">VS</div>
+              <div class="fighter-block" style="text-align:right">
+                <div class="fname">Kristian Prenga</div>
+                <div class="frecord">20–1 (20 KOs) · Albania</div>
+              </div>
+            </div>
+            <div class="fight-meta">
+              <span>📍 Riyadh, Saudi Arabia</span>
+              <span>⚖️ Heavyweight (12 rounds)</span>
+              <span>📺 DAZN</span>
+            </div>
+          </div>
+
+          <!-- Fight 3: Spence vs Tszyu -->
+          <div class="fight-card">
+            <div class="fc-badges">
+              <span class="badge badge-upcoming">July 25</span>
+            </div>
+            <div class="fight-matchup">
+              <div class="fighter-block">
+                <div class="fname">Errol Spence Jr.</div>
+                <div class="frecord">28–1 (22 KOs) · USA</div>
+              </div>
+              <div class="vs-circle">VS</div>
+              <div class="fighter-block" style="text-align:right">
+                <div class="fname">Tim Tszyu</div>
+                <div class="frecord">23–2 (17 KOs) · Australia</div>
+              </div>
+            </div>
+            <div class="fight-meta">
+              <span>📍 Australia</span>
+              <span>⚖️ Junior Middleweight (10 rounds)</span>
+              <span>📺 PBC PPV · Prime Video</span>
+            </div>
+          </div>
+
+          <!-- Fight 4: Fury vs TBA -->
+          <div class="fight-card">
+            <div class="fc-badges">
+              <span class="badge badge-upcoming">Aug 1</span>
+              <span class="badge badge-tuneup">Tune-Up</span>
+            </div>
+            <div class="fight-matchup">
+              <div class="fighter-block">
+                <div class="fname">Tyson Fury</div>
+                <div class="frecord">34–1–1 (24 KOs) · Great Britain</div>
+              </div>
+              <div class="vs-circle">VS</div>
+              <div class="fighter-block" style="text-align:right">
+                <div class="fname">TBA</div>
+                <div class="frecord">Warm-up opponent</div>
+              </div>
+            </div>
+            <div class="fight-meta">
+              <span>📍 3Arena, Dublin, Ireland</span>
+              <span>⚖️ Heavyweight</span>
+              <span>💬 Warm-up before Fury vs Joshua (Nov)</span>
+            </div>
+          </div>
+
+          <!-- Fight 5: Canelo vs M'billi -->
+          <div class="fight-card">
+            <div class="fc-badges">
+              <span class="badge badge-upcoming">Sept 12</span>
+              <span class="badge badge-title">WBC Super Middleweight Title</span>
+              <span class="badge badge-ppv">PPV</span>
+            </div>
+            <div class="fight-matchup">
+              <div class="fighter-block">
+                <div class="fname">Canelo Alvarez</div>
+                <div class="frecord">62–2–2 · Mexico</div>
+              </div>
+              <div class="vs-circle">VS</div>
+              <div class="fighter-block" style="text-align:right">
+                <div class="fname">Christian M'billi</div>
+                <div class="frecord">29–0–1 (24 KOs) · Cameroon</div>
+              </div>
+            </div>
+            <div class="fight-meta">
+              <span>📍 Riyadh, Saudi Arabia</span>
+              <span>⚖️ Super Middleweight (168 lbs)</span>
+              <span>🏆 WBC Title · "Mexico vs The World"</span>
+            </div>
+          </div>
+
+          <!-- Fight 6: Fury vs Joshua -->
+          <div class="fight-card" style="border-left-color:var(--gold)">
+            <div class="fc-badges">
+              <span class="badge badge-upcoming">Nov 2026</span>
+              <span class="badge badge-title">Heavyweight Mega Fight</span>
+              <span class="badge badge-ppv">PPV</span>
+            </div>
+            <div class="fight-matchup">
+              <div class="fighter-block">
+                <div class="fname">Tyson Fury</div>
+                <div class="frecord">34–1–1 (24 KOs) · Great Britain</div>
+              </div>
+              <div class="vs-circle">VS</div>
+              <div class="fighter-block" style="text-align:right">
+                <div class="fname">Anthony Joshua</div>
+                <div class="frecord">29–4 (26 KOs) · Great Britain</div>
+              </div>
+            </div>
+            <div class="fight-meta">
+              <span>📍 TBA</span>
+              <span>⚖️ Heavyweight</span>
+              <span>✅ Contracts signed — pending tune-up wins</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TAB: CHAMPIONS ===== -->
+      <div id="tab-champions" class="tab-panel">
+        <div class="section-block">
+          <div class="section-head">
+            <h2>World Champions</h2>
+            <span class="pill">June 2026</span>
+          </div>
+
+          <!-- Weight class selector -->
+          <div class="wt-tabs">
+            <button class="wtab active" onclick="switchWeight('champ','hw')">Heavyweight</button>
+            <button class="wtab" onclick="switchWeight('champ','lhw')">Light Heavy</button>
+            <button class="wtab" onclick="switchWeight('champ','smw')">Super Middle</button>
+            <button class="wtab" onclick="switchWeight('champ','mw')">Middle</button>
+            <button class="wtab" onclick="switchWeight('champ','jmw')">Jr Middle</button>
+            <button class="wtab" onclick="switchWeight('champ','ww')">Welter</button>
+            <button class="wtab" onclick="switchWeight('champ','jww')">Jr Welter</button>
+            <button class="wtab" onclick="switchWeight('champ','lw')">Light</button>
+            <button class="wtab" onclick="switchWeight('champ','sfw')">Super Feather</button>
+            <button class="wtab" onclick="switchWeight('champ','fw')">Feather</button>
+            <button class="wtab" onclick="switchWeight('champ','bw')">Bantam</button>
+            <button class="wtab" onclick="switchWeight('champ','sfw2')">Flyweight</button>
+          </div>
+
+          <!-- HW -->
+          <div id="champ-hw" class="wt-panel active">
+            <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Heavyweight · Max 200 lbs</p>
+            <table class="belt-table">
+              <thead><tr><th>Org</th><th>Champion</th><th>Record</th><th>Country</th><th>Since</th></tr></thead>
+              <tbody>
+                <tr class="undisputed-row"><td><span class="org-badge org-wba">WBA</span></td><td><span class="champ-name">Oleksandr Usyk</span> <span style="font-size:10px;color:var(--gold)">SUPER</span></td><td class="champ-record">25–0 (16 KOs)</td><td class="champ-country">🇺🇦 Ukraine</td><td class="champ-record">Sep 2021</td></tr>
+                <tr class="undisputed-row"><td><span class="org-badge org-wbc">WBC</span></td><td><span class="champ-name">Oleksandr Usyk</span></td><td class="champ-record">25–0 (16 KOs)</td><td class="champ-country">🇺🇦 Ukraine</td><td class="champ-record">May 2024</td></tr>
+                <tr class="undisputed-row"><td><span class="org-badge org-ibf">IBF</span></td><td><span class="champ-name">Oleksandr Usyk</span></td><td class="champ-record">25–0 (16 KOs)</td><td class="champ-country">🇺🇦 Ukraine</td><td class="champ-record">Jul 2025</td></tr>
+                <tr><td><span class="org-badge org-wbo">WBO</span></td><td><span class="champ-name">Daniel Dubois</span></td><td class="champ-record">23–3 (22 KOs)</td><td class="champ-country">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</td><td class="champ-record">May 2026</td></tr>
+                <tr><td><span class="org-badge org-wba" style="background:#880000">WBA-R</span></td><td><span class="champ-name">Murat Gassiev</span></td><td class="champ-record">33–2 (26 KOs)</td><td class="champ-country">🇷🇺 Russia</td><td class="champ-record">Dec 2025</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:11px;color:var(--gold);margin-top:12px">★ Usyk holds WBA/WBC/IBF — effectively undisputed. Dubois WBO champion.</p>
+          </div>
+
+          <!-- LHW -->
+          <div id="champ-lhw" class="wt-panel">
+            <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Light Heavyweight · Max 175 lbs</p>
+            <table class="belt-table">
+              <thead><tr><th>Org</th><th>Champion</th><th>Record</th><th>Country</th><th>Since</th></tr></thead>
+              <tbody>
+                <tr><td><span class="org-badge org-wba">WBA</span></td><td><span class="champ-name">Dmitry Bivol</span> <span style="font-size:10px;color:var(--gold)">SUPER</span></td><td class="champ-record">25–1 (12 KOs)</td><td class="champ-country">🇷🇺 Russia</td><td class="champ-record">Feb 2025</td></tr>
+                <tr><td><span class="org-badge org-wbc">WBC</span></td><td><span class="champ-name">David Benavidez</span></td><td class="champ-record">31–0 (25 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">Apr 2025</td></tr>
+                <tr><td><span class="org-badge org-ibf">IBF</span></td><td><span class="champ-name">Dmitry Bivol</span></td><td class="champ-record">25–1 (12 KOs)</td><td class="champ-country">🇷🇺 Russia</td><td class="champ-record">Feb 2025</td></tr>
+                <tr><td><span class="org-badge org-wbo">WBO</span></td><td><span class="champ-name">Dmitry Bivol</span></td><td class="champ-record">25–1 (12 KOs)</td><td class="champ-country">🇷🇺 Russia</td><td class="champ-record">Feb 2025</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:11px;color:var(--gold);margin-top:12px">★ Bivol holds WBA/IBF/WBO. Benavidez WBC. Division needs unification.</p>
+          </div>
+
+          <!-- SMW -->
+          <div id="champ-smw" class="wt-panel">
+            <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Super Middleweight · Max 168 lbs</p>
+            <table class="belt-table">
+              <thead><tr><th>Org</th><th>Champion</th><th>Record</th><th>Country</th><th>Since</th></tr></thead>
+              <tbody>
+                <tr><td><span class="org-badge org-wba">WBA</span></td><td><span class="champ-name">Jaime Munguia</span></td><td class="champ-record">46–2 (35 KOs)</td><td class="champ-country">🇲🇽 Mexico</td><td class="champ-record">May 2026</td></tr>
+                <tr><td><span class="org-badge org-wbc">WBC</span></td><td><span class="champ-name">Christian M'billi</span></td><td class="champ-record">29–0–1 (24 KOs)</td><td class="champ-country">🇨🇲 Cameroon</td><td class="champ-record">Jan 2026</td></tr>
+                <tr><td><span class="org-badge org-ibf">IBF</span></td><td><span class="champ-name">Osleys Iglesias</span></td><td class="champ-record">15–0 (14 KOs)</td><td class="champ-country">🇨🇺 Cuba</td><td class="champ-record">Apr 2026</td></tr>
+                <tr><td><span class="org-badge org-wbo">WBO</span></td><td><span class="champ-name">Hamzah Sheeraz</span></td><td class="champ-record">23–0–1 (19 KOs)</td><td class="champ-country">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</td><td class="champ-record">May 2026</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:11px;color:var(--gold);margin-top:12px">★ M'billi defends vs Canelo on Sept 12. Sheeraz (British) holds WBO.</p>
+          </div>
+
+          <!-- MW -->
+          <div id="champ-mw" class="wt-panel">
+            <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Middleweight · Max 160 lbs</p>
+            <table class="belt-table">
+              <thead><tr><th>Org</th><th>Champion</th><th>Record</th><th>Country</th><th>Since</th></tr></thead>
+              <tbody>
+                <tr><td><span class="org-badge org-wba">WBA</span></td><td><span class="champ-name">Erislandy Lara</span></td><td class="champ-record">32–3–3 (19 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">May 2021</td></tr>
+                <tr><td><span class="org-badge org-wbc">WBC</span></td><td><span class="champ-name">Carlos Adames</span></td><td class="champ-record">25–1–1 (18 KOs)</td><td class="champ-country">🇩🇴 Dominican Republic</td><td class="champ-record">May 2024</td></tr>
+                <tr><td><span class="org-badge org-ibf">IBF</span></td><td><span class="champ-name">Vacant</span></td><td class="champ-record">—</td><td class="champ-country">—</td><td class="champ-record">—</td></tr>
+                <tr><td><span class="org-badge org-wbo">WBO</span></td><td><span class="champ-name">Janibek Alimkhanuly</span></td><td class="champ-record">17–0 (12 KOs)</td><td class="champ-country">🇰🇿 Kazakhstan</td><td class="champ-record">Aug 2022</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- JMW -->
+          <div id="champ-jmw" class="wt-panel">
+            <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Junior Middleweight (Super Welterweight) · Max 154 lbs</p>
+            <table class="belt-table">
+              <thead><tr><th>Org</th><th>Champion</th><th>Record</th><th>Country</th><th>Since</th></tr></thead>
+              <tbody>
+                <tr><td><span class="org-badge org-wba">WBA</span></td><td><span class="champ-name">Xander Zayas</span></td><td class="champ-record">23–0 (13 KOs)</td><td class="champ-country">🇵🇷 Puerto Rico</td><td class="champ-record">Jan 2026</td></tr>
+                <tr><td><span class="org-badge org-wbc">WBC</span></td><td><span class="champ-name">Sebastian Fundora</span></td><td class="champ-record">24–1–1 (16 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">Mar 2024</td></tr>
+                <tr><td><span class="org-badge org-ibf">IBF</span></td><td><span class="champ-name">Josh Kelly</span></td><td class="champ-record">18–1–1 (9 KOs)</td><td class="champ-country">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</td><td class="champ-record">Jan 2026</td></tr>
+                <tr><td><span class="org-badge org-wbo">WBO</span></td><td><span class="champ-name">Xander Zayas</span></td><td class="champ-record">23–0 (13 KOs)</td><td class="champ-country">🇵🇷 Puerto Rico</td><td class="champ-record">Jul 2025</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:11px;color:var(--gold);margin-top:12px">★ Zayas (WBA+WBO) vs Ennis (IBF Interim) on June 27 — massive unification fight.</p>
+          </div>
+
+          <!-- WW -->
+          <div id="champ-ww" class="wt-panel">
+            <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Welterweight · Max 147 lbs</p>
+            <table class="belt-table">
+              <thead><tr><th>Org</th><th>Champion</th><th>Record</th><th>Country</th><th>Since</th></tr></thead>
+              <tbody>
+                <tr><td><span class="org-badge org-wba">WBA</span></td><td><span class="champ-name">Rolando Romero</span> <span style="font-size:10px;color:var(--gold)">SUPER</span></td><td class="champ-record">17–2 (13 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">Aug 2025</td></tr>
+                <tr><td><span class="org-badge org-wbc">WBC</span></td><td><span class="champ-name">Ryan Garcia</span></td><td class="champ-record">25–2 (20 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">Feb 2026</td></tr>
+                <tr><td><span class="org-badge org-ibf">IBF</span></td><td><span class="champ-name">Lewis Crocker</span></td><td class="champ-record">22–0 (11 KOs)</td><td class="champ-country">🏴󠁧󠁢󠁮󠁩󠁲󠁿 N. Ireland</td><td class="champ-record">Sep 2025</td></tr>
+                <tr><td><span class="org-badge org-wbo">WBO</span></td><td><span class="champ-name">Devin Haney</span></td><td class="champ-record">33–0 (15 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">Nov 2025</td></tr>
+                <tr><td><span class="org-badge org-wba" style="background:#880000">WBA-R</span></td><td><span class="champ-name">Jack Catterall</span></td><td class="champ-record">33–2 (14 KOs)</td><td class="champ-country">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</td><td class="champ-record">May 2026</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:11px;color:var(--gold);margin-top:12px">★ Crocker (British, IBF) and Catterall (British, WBA-R) both hold world titles.</p>
+          </div>
+
+          <!-- JWW -->
+          <div id="champ-jww" class="wt-panel">
+            <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Junior Welterweight (Super Lightweight) · Max 140 lbs</p>
+            <table class="belt-table">
+              <thead><tr><th>Org</th><th>Champion</th><th>Record</th><th>Country</th><th>Since</th></tr></thead>
+              <tbody>
+                <tr><td><span class="org-badge org-wba">WBA</span></td><td><span class="champ-name">Gary Antuanne Russell</span></td><td class="champ-record">19–1 (17 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">Mar 2025</td></tr>
+                <tr><td><span class="org-badge org-wbc">WBC</span></td><td><span class="champ-name">Dalton Smith</span></td><td class="champ-record">19–0 (14 KOs)</td><td class="champ-country">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</td><td class="champ-record">Jan 2026</td></tr>
+                <tr><td><span class="org-badge org-ibf">IBF</span></td><td><span class="champ-name">Vacant</span></td><td class="champ-record">—</td><td class="champ-country">—</td><td class="champ-record">—</td></tr>
+                <tr><td><span class="org-badge org-wbo">WBO</span></td><td><span class="champ-name">Shakur Stevenson</span></td><td class="champ-record">25–0 (11 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">Jan 2026</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:11px;color:var(--gold);margin-top:12px">★ Dalton Smith (British) holds the WBC belt.</p>
+          </div>
+
+          <!-- LW -->
+          <div id="champ-lw" class="wt-panel">
+            <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Lightweight · Max 135 lbs</p>
+            <table class="belt-table">
+              <thead><tr><th>Org</th><th>Champion</th><th>Record</th><th>Country</th><th>Since</th></tr></thead>
+              <tbody>
+                <tr><td><span class="org-badge org-wba">WBA</span></td><td><span class="champ-name">Gervonta Davis</span></td><td class="champ-record">30–0–1 (28 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">Mar 2026</td></tr>
+                <tr><td><span class="org-badge org-wbc">WBC</span></td><td><span class="champ-name">Vacant</span></td><td class="champ-record">—</td><td class="champ-country">—</td><td class="champ-record">—</td></tr>
+                <tr><td><span class="org-badge org-ibf">IBF</span></td><td><span class="champ-name">Raymond Muratalla</span></td><td class="champ-record">24–0 (17 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">Jun 2025</td></tr>
+                <tr><td><span class="org-badge org-wbo">WBO</span></td><td><span class="champ-name">Abdullah Mason</span></td><td class="champ-record">20–0 (17 KOs)</td><td class="champ-country">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</td><td class="champ-record">Nov 2025</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:11px;color:var(--gold);margin-top:12px">★ Abdullah Mason (British, Leeds) holds WBO Lightweight title.</p>
+          </div>
+
+          <!-- SFW (Super Featherweight) -->
+          <div id="champ-sfw" class="wt-panel">
+            <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Super Featherweight (Junior Lightweight) · Max 130 lbs</p>
+            <table class="belt-table">
+              <thead><tr><th>Org</th><th>Champion</th><th>Record</th><th>Country</th><th>Since</th></tr></thead>
+              <tbody>
+                <tr><td><span class="org-badge org-wba">WBA</span></td><td><span class="champ-name">Anthony Cacace</span></td><td class="champ-record">26–1 (9 KOs)</td><td class="champ-country">🏴󠁧󠁢󠁮󠁩󠁲󠁿 N. Ireland</td><td class="champ-record">Mar 2026</td></tr>
+                <tr><td><span class="org-badge org-wbc">WBC</span></td><td><span class="champ-name">O'Shaquie Foster</span></td><td class="champ-record">25–3 (12 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">Nov 2024</td></tr>
+                <tr><td><span class="org-badge org-ibf">IBF</span></td><td><span class="champ-name">Emanuel Navarrete</span></td><td class="champ-record">40–2–1 (33 KOs)</td><td class="champ-country">🇲🇽 Mexico</td><td class="champ-record">Feb 2026</td></tr>
+                <tr><td><span class="org-badge org-wbo">WBO</span></td><td><span class="champ-name">Emanuel Navarrete</span></td><td class="champ-record">40–2–1 (33 KOs)</td><td class="champ-country">🇲🇽 Mexico</td><td class="champ-record">Aug 2023</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:11px;color:var(--gold);margin-top:12px">★ Cacace (Northern Ireland) holds WBA. Navarrete unified IBF+WBO.</p>
+          </div>
+
+          <!-- FW -->
+          <div id="champ-fw" class="wt-panel">
+            <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Featherweight · Max 126 lbs</p>
+            <table class="belt-table">
+              <thead><tr><th>Org</th><th>Champion</th><th>Record</th><th>Country</th><th>Since</th></tr></thead>
+              <tbody>
+                <tr><td><span class="org-badge org-wba">WBA</span></td><td><span class="champ-name">Brandon Figueroa</span></td><td class="champ-record">27–2–1 (20 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">Feb 2026</td></tr>
+                <tr><td><span class="org-badge org-wbc">WBC</span></td><td><span class="champ-name">Bruce Carrington</span></td><td class="champ-record">17–0 (10 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">Jan 2026</td></tr>
+                <tr><td><span class="org-badge org-ibf">IBF</span></td><td><span class="champ-name">Angelo Leo</span></td><td class="champ-record">26–1 (12 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">Aug 2024</td></tr>
+                <tr><td><span class="org-badge org-wbo">WBO</span></td><td><span class="champ-name">Rafael Espinoza</span></td><td class="champ-record">28–0 (24 KOs)</td><td class="champ-country">🇲🇽 Mexico</td><td class="champ-record">Dec 2023</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- BW -->
+          <div id="champ-bw" class="wt-panel">
+            <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Bantamweight · Max 118 lbs</p>
+            <table class="belt-table">
+              <thead><tr><th>Org</th><th>Champion</th><th>Record</th><th>Country</th><th>Since</th></tr></thead>
+              <tbody>
+                <tr class="undisputed-row"><td><span class="org-badge org-wba">WBA</span></td><td><span class="champ-name">Naoya Inoue</span> <span style="font-size:10px;color:var(--gold)">SUPER</span></td><td class="champ-record">33–0 (27 KOs)</td><td class="champ-country">🇯🇵 Japan</td><td class="champ-record">Dec 2023</td></tr>
+                <tr class="undisputed-row"><td><span class="org-badge org-wbc">WBC</span></td><td><span class="champ-name">Naoya Inoue</span></td><td class="champ-record">33–0 (27 KOs)</td><td class="champ-country">🇯🇵 Japan</td><td class="champ-record">Jul 2023</td></tr>
+                <tr class="undisputed-row"><td><span class="org-badge org-ibf">IBF</span></td><td><span class="champ-name">Naoya Inoue</span></td><td class="champ-record">33–0 (27 KOs)</td><td class="champ-country">🇯🇵 Japan</td><td class="champ-record">Dec 2023</td></tr>
+                <tr class="undisputed-row"><td><span class="org-badge org-wbo">WBO</span></td><td><span class="champ-name">Naoya Inoue</span></td><td class="champ-record">33–0 (27 KOs)</td><td class="champ-country">🇯🇵 Japan</td><td class="champ-record">Jul 2023</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:11px;color:var(--gold);margin-top:12px">★ UNDISPUTED — Naoya "Monster" Inoue holds all 4 major belts + The Ring.</p>
+          </div>
+
+          <!-- Flyweight -->
+          <div id="champ-sfw2" class="wt-panel">
+            <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Flyweight · Max 112 lbs</p>
+            <table class="belt-table">
+              <thead><tr><th>Org</th><th>Champion</th><th>Record</th><th>Country</th><th>Since</th></tr></thead>
+              <tbody>
+                <tr class="undisputed-row"><td><span class="org-badge org-wba">WBA</span></td><td><span class="champ-name">Jesse Rodriguez</span></td><td class="champ-record">23–0 (16 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">Nov 2025</td></tr>
+                <tr class="undisputed-row"><td><span class="org-badge org-wbc">WBC</span></td><td><span class="champ-name">Jesse Rodriguez</span></td><td class="champ-record">23–0 (16 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">Jun 2024</td></tr>
+                <tr><td><span class="org-badge org-ibf">IBF</span></td><td><span class="champ-name">Willibaldo García</span></td><td class="champ-record">23–6–2 (13 KOs)</td><td class="champ-country">🇲🇽 Mexico</td><td class="champ-record">May 2025</td></tr>
+                <tr class="undisputed-row"><td><span class="org-badge org-wbo">WBO</span></td><td><span class="champ-name">Jesse Rodriguez</span></td><td class="champ-record">23–0 (16 KOs)</td><td class="champ-country">🇺🇸 USA</td><td class="champ-record">Jul 2025</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:11px;color:var(--gold);margin-top:12px">★ Rodriguez holds WBA/WBC/WBO — near-undisputed.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TAB: RANKINGS ===== -->
+      <div id="tab-rankings" class="tab-panel">
+        <div class="section-block">
+          <div class="section-head">
+            <h2>P4P &amp; Division Rankings</h2>
+            <span class="pill">June 2026</span>
+          </div>
+
+          <div class="wt-tabs">
+            <button class="wtab active" onclick="switchWeight('rank','p4p')">P4P Top 10</button>
+            <button class="wtab" onclick="switchWeight('rank','hw')">Heavyweight</button>
+            <button class="wtab" onclick="switchWeight('rank','lhw')">Light Heavy</button>
+            <button class="wtab" onclick="switchWeight('rank','smw')">Super Middle</button>
+            <button class="wtab" onclick="switchWeight('rank','mw')">Middle</button>
+            <button class="wtab" onclick="switchWeight('rank','jmw')">Jr Middle</button>
+            <button class="wtab" onclick="switchWeight('rank','ww')">Welter</button>
+            <button class="wtab" onclick="switchWeight('rank','lw')">Light</button>
+            <button class="wtab" onclick="switchWeight('rank','bw')">Bantam</button>
+          </div>
+
+          <!-- P4P -->
+          <div id="rank-p4p" class="wt-panel active">
+            <table class="rank-table">
+              <thead><tr><th>#</th><th>Fighter</th><th>Record</th><th>Division</th></tr></thead>
+              <tbody>
+                <tr><td class="rank-num top3">1</td><td><span class="rank-name">Naoya Inoue</span></td><td class="rank-record">33–0 (27 KOs)</td><td class="rank-notes">Bantamweight · Undisputed</td></tr>
+                <tr><td class="rank-num top3">2</td><td><span class="rank-name">Oleksandr Usyk</span></td><td class="rank-record">25–0 (16 KOs)</td><td class="rank-notes">Heavyweight · WBA/WBC/IBF</td></tr>
+                <tr><td class="rank-num top3">3</td><td><span class="rank-name">Gervonta Davis</span></td><td class="rank-record">30–0–1 (28 KOs)</td><td class="rank-notes">Lightweight · WBA</td></tr>
+                <tr><td class="rank-num">4</td><td><span class="rank-name">Dmitry Bivol</span></td><td class="rank-record">25–1 (12 KOs)</td><td class="rank-notes">Light Heavyweight · WBA/IBF/WBO</td></tr>
+                <tr><td class="rank-num">5</td><td><span class="rank-name">Jaron "Boots" Ennis</span></td><td class="rank-record">35–0 (31 KOs)</td><td class="rank-notes">Jr Middleweight · IBF Interim</td></tr>
+                <tr><td class="rank-num">6</td><td><span class="rank-name">Jesse Rodriguez</span></td><td class="rank-record">23–0 (16 KOs)</td><td class="rank-notes">Flyweight · WBA/WBC/WBO</td></tr>
+                <tr><td class="rank-num">7</td><td><span class="rank-name">David Benavidez</span></td><td class="rank-record">31–0 (25 KOs)</td><td class="rank-notes">LHW WBC / Cruiser WBA/WBO</td></tr>
+                <tr><td class="rank-num">8</td><td><span class="rank-name">Xander Zayas</span></td><td class="rank-record">23–0 (13 KOs)</td><td class="rank-notes">Jr Middleweight · WBA/WBO</td></tr>
+                <tr><td class="rank-num">9</td><td><span class="rank-name">Shakur Stevenson</span></td><td class="rank-record">25–0 (11 KOs)</td><td class="rank-notes">Jr Welterweight · WBO</td></tr>
+                <tr><td class="rank-num">10</td><td><span class="rank-name">Devin Haney</span></td><td class="rank-record">33–0 (15 KOs)</td><td class="rank-notes">Welterweight · WBO</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- HW Rankings -->
+          <div id="rank-hw" class="wt-panel">
+            <table class="rank-table">
+              <thead><tr><th>#</th><th>Fighter</th><th>Record</th><th>Notes</th></tr></thead>
+              <tbody>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Oleksandr Usyk</span></td><td class="rank-record">25–0</td><td class="rank-notes">WBA Super / WBC / IBF</td></tr>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Daniel Dubois</span></td><td class="rank-record">23–3</td><td class="rank-notes">WBO Champion</td></tr>
+                <tr><td class="rank-num top3">1</td><td><span class="rank-name">Tyson Fury</span></td><td class="rank-record">34–1–1</td><td class="rank-notes">Fighting Aug 1, then Joshua Nov</td></tr>
+                <tr><td class="rank-num top3">2</td><td><span class="rank-name">Anthony Joshua</span></td><td class="rank-record">29–4</td><td class="rank-notes">Fighting Prenga Jul 25</td></tr>
+                <tr><td class="rank-num top3">3</td><td><span class="rank-name">Agit Kabayel</span></td><td class="rank-record">27–0</td><td class="rank-notes">WBC Interim</td></tr>
+                <tr><td class="rank-num">4</td><td><span class="rank-name">Joe Joyce</span></td><td class="rank-record">16–2</td><td class="rank-notes">Former Olympian</td></tr>
+                <tr><td class="rank-num">5</td><td><span class="rank-name">Kristian Prenga</span></td><td class="rank-record">20–1</td><td class="rank-notes">Fighting Joshua Jul 25</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- LHW Rankings -->
+          <div id="rank-lhw" class="wt-panel">
+            <table class="rank-table">
+              <thead><tr><th>#</th><th>Fighter</th><th>Record</th><th>Notes</th></tr></thead>
+              <tbody>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Dmitry Bivol</span></td><td class="rank-record">25–1</td><td class="rank-notes">WBA Super / IBF / WBO</td></tr>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">David Benavidez</span></td><td class="rank-record">31–0</td><td class="rank-notes">WBC Champion</td></tr>
+                <tr><td class="rank-num top3">1</td><td><span class="rank-name">Callum Smith</span></td><td class="rank-record">31–2</td><td class="rank-notes">Former WBA SMW champion</td></tr>
+                <tr><td class="rank-num top3">2</td><td><span class="rank-name">Joshua Buatsi</span></td><td class="rank-record">19–1</td><td class="rank-notes">Mandatory challenger</td></tr>
+                <tr><td class="rank-num top3">3</td><td><span class="rank-name">Badou Jack</span></td><td class="rank-record">28–4–3</td><td class="rank-notes">Former two-division champion</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- SMW Rankings -->
+          <div id="rank-smw" class="wt-panel">
+            <table class="rank-table">
+              <thead><tr><th>#</th><th>Fighter</th><th>Record</th><th>Notes</th></tr></thead>
+              <tbody>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Hamzah Sheeraz</span></td><td class="rank-record">23–0–1</td><td class="rank-notes">WBO Champion · British</td></tr>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Christian M'billi</span></td><td class="rank-record">29–0–1</td><td class="rank-notes">WBC Champion · vs Canelo Sep 12</td></tr>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Jaime Munguia</span></td><td class="rank-record">46–2</td><td class="rank-notes">WBA Champion</td></tr>
+                <tr><td class="rank-num top3">1</td><td><span class="rank-name">Canelo Alvarez</span></td><td class="rank-record">62–2–2</td><td class="rank-notes">vs M'billi Sep 12 for WBC</td></tr>
+                <tr><td class="rank-num top3">2</td><td><span class="rank-name">Edgar Berlanga</span></td><td class="rank-record">22–1</td><td class="rank-notes">Highly rated contender</td></tr>
+                <tr><td class="rank-num top3">3</td><td><span class="rank-name">Chris Eubank Jr.</span></td><td class="rank-record">35–4</td><td class="rank-notes">British contender</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- MW Rankings -->
+          <div id="rank-mw" class="wt-panel">
+            <table class="rank-table">
+              <thead><tr><th>#</th><th>Fighter</th><th>Record</th><th>Notes</th></tr></thead>
+              <tbody>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Carlos Adames</span></td><td class="rank-record">25–1–1</td><td class="rank-notes">WBC Champion</td></tr>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Janibek Alimkhanuly</span></td><td class="rank-record">17–0</td><td class="rank-notes">WBO Champion</td></tr>
+                <tr><td class="rank-num top3">1</td><td><span class="rank-name">Demetrius Andrade</span></td><td class="rank-record">33–0</td><td class="rank-notes">Former champion</td></tr>
+                <tr><td class="rank-num top3">2</td><td><span class="rank-name">Zhanibek Alimkhanuly</span></td><td class="rank-record">14–0</td><td class="rank-notes">Mandatory contender</td></tr>
+                <tr><td class="rank-num top3">3</td><td><span class="rank-name">Maciej Sulecki</span></td><td class="rank-record">32–3</td><td class="rank-notes">Top contender</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- JMW Rankings -->
+          <div id="rank-jmw" class="wt-panel">
+            <table class="rank-table">
+              <thead><tr><th>#</th><th>Fighter</th><th>Record</th><th>Notes</th></tr></thead>
+              <tbody>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Xander Zayas</span></td><td class="rank-record">23–0</td><td class="rank-notes">WBA + WBO · vs Ennis Jun 27</td></tr>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Sebastian Fundora</span></td><td class="rank-record">24–1–1</td><td class="rank-notes">WBC Champion</td></tr>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Josh Kelly</span></td><td class="rank-record">18–1–1</td><td class="rank-notes">IBF Champion · British</td></tr>
+                <tr><td class="rank-num top3">1</td><td><span class="rank-name">Jaron Ennis</span></td><td class="rank-record">35–0</td><td class="rank-notes">IBF Interim · vs Zayas Jun 27</td></tr>
+                <tr><td class="rank-num top3">2</td><td><span class="rank-name">Vergil Ortiz Jr.</span></td><td class="rank-record">24–0</td><td class="rank-notes">WBC Interim · legal issues delayed</td></tr>
+                <tr><td class="rank-num top3">3</td><td><span class="rank-name">Errol Spence Jr.</span></td><td class="rank-record">28–1</td><td class="rank-notes">vs Tszyu Jul 25</td></tr>
+                <tr><td class="rank-num">4</td><td><span class="rank-name">Tim Tszyu</span></td><td class="rank-record">23–2</td><td class="rank-notes">vs Spence Jul 25</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- WW Rankings -->
+          <div id="rank-ww" class="wt-panel">
+            <table class="rank-table">
+              <thead><tr><th>#</th><th>Fighter</th><th>Record</th><th>Notes</th></tr></thead>
+              <tbody>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Ryan Garcia</span></td><td class="rank-record">25–2</td><td class="rank-notes">WBC Champion</td></tr>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Lewis Crocker</span></td><td class="rank-record">22–0</td><td class="rank-notes">IBF Champion · British (N.Ireland)</td></tr>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Devin Haney</span></td><td class="rank-record">33–0</td><td class="rank-notes">WBO Champion</td></tr>
+                <tr><td class="rank-num top3">1</td><td><span class="rank-name">Terence Crawford</span></td><td class="rank-record">41–0</td><td class="rank-notes">Former undisputed champion</td></tr>
+                <tr><td class="rank-num top3">2</td><td><span class="rank-name">Shawn Porter</span></td><td class="rank-record">32–4–1</td><td class="rank-notes">Former champion</td></tr>
+                <tr><td class="rank-num top3">3</td><td><span class="rank-name">Jack Catterall</span></td><td class="rank-record">33–2</td><td class="rank-notes">WBA Regular champion · British</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- LW Rankings -->
+          <div id="rank-lw" class="wt-panel">
+            <table class="rank-table">
+              <thead><tr><th>#</th><th>Fighter</th><th>Record</th><th>Notes</th></tr></thead>
+              <tbody>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Gervonta Davis</span></td><td class="rank-record">30–0–1</td><td class="rank-notes">WBA Champion</td></tr>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Abdullah Mason</span></td><td class="rank-record">20–0</td><td class="rank-notes">WBO Champion · British (Leeds)</td></tr>
+                <tr><td class="rank-num top3">1</td><td><span class="rank-name">Vasyl Lomachenko</span></td><td class="rank-record">18–3</td><td class="rank-notes">Former 3-division champion</td></tr>
+                <tr><td class="rank-num top3">2</td><td><span class="rank-name">Joe Cordina</span></td><td class="rank-record">16–1</td><td class="rank-notes">British contender</td></tr>
+                <tr><td class="rank-num top3">3</td><td><span class="rank-name">Keyshawn Davis</span></td><td class="rank-record">12–0</td><td class="rank-notes">Rising contender</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- BW Rankings -->
+          <div id="rank-bw" class="wt-panel">
+            <table class="rank-table">
+              <thead><tr><th>#</th><th>Fighter</th><th>Record</th><th>Notes</th></tr></thead>
+              <tbody>
+                <tr style="background:#1a1a00"><td class="rank-num top3">C</td><td><span class="rank-name">Naoya Inoue</span></td><td class="rank-record">33–0</td><td class="rank-notes">UNDISPUTED — WBA/WBC/IBF/WBO</td></tr>
+                <tr><td class="rank-num top3">1</td><td><span class="rank-name">Junto Nakatani</span></td><td class="rank-record">28–0</td><td class="rank-notes">Mandatory contender</td></tr>
+                <tr><td class="rank-num top3">2</td><td><span class="rank-name">Nonito Donaire</span></td><td class="rank-record">43–7</td><td class="rank-notes">4-division champion</td></tr>
+                <tr><td class="rank-num top3">3</td><td><span class="rank-name">Marlon Tapales</span></td><td class="rank-record">38–4</td><td class="rank-notes">Former dual-weight champion</td></tr>
+                <tr><td class="rank-num">4</td><td><span class="rank-name">Emmanuel Rodriguez</span></td><td class="rank-record">22–1</td><td class="rank-notes">Former IBF champ</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TAB: NEWS ===== -->
+      <div id="tab-news" class="tab-panel">
+        <div class="section-block">
+          <div class="section-head">
+            <h2>Boxing News</h2>
+            <span class="pill">Live Feed</span>
+          </div>
+          <div id="news-loading">Loading boxing news…</div>
+          <div id="news-feed"></div>
+        </div>
+      </div>
+
+    </div><!-- /main-content -->
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+      <div class="sb-block">
+        <div class="sb-title">📅 Fight Schedule</div>
+        <div class="sb-fight">
+          <div>
+            <div class="matchup">Zayas vs Ennis</div>
+            <div class="belt">WBA+WBO+IBF JMW · DAZN PPV</div>
+          </div>
+          <div class="date">Jun 27</div>
+        </div>
+        <div class="sb-fight">
+          <div>
+            <div class="matchup">Joshua vs Prenga</div>
+            <div class="belt">HW · DAZN · Riyadh</div>
+          </div>
+          <div class="date">Jul 25</div>
+        </div>
+        <div class="sb-fight">
+          <div>
+            <div class="matchup">Spence vs Tszyu</div>
+            <div class="belt">JMW · PBC/Prime · Australia</div>
+          </div>
+          <div class="date">Jul 25</div>
+        </div>
+        <div class="sb-fight">
+          <div>
+            <div class="matchup">Fury vs TBA</div>
+            <div class="belt">HW Warm-up · Dublin</div>
+          </div>
+          <div class="date">Aug 1</div>
+        </div>
+        <div class="sb-fight">
+          <div>
+            <div class="matchup">Canelo vs M'billi</div>
+            <div class="belt">WBC SMW Title · Riyadh</div>
+          </div>
+          <div class="date">Sep 12</div>
+        </div>
+        <div class="sb-fight">
+          <div>
+            <div class="matchup">Fury vs Joshua</div>
+            <div class="belt">HW Mega Fight — contracts signed</div>
+          </div>
+          <div class="date">Nov</div>
+        </div>
+      </div>
+
+      <div class="sb-block">
+        <div class="sb-title">🏆 P4P Top 5</div>
+        <div class="p4p-row">
+          <div class="p4p-num gold">1</div>
+          <div>
+            <div class="p4p-name">Naoya Inoue</div>
+            <div class="p4p-div">Bantamweight · Undisputed</div>
+          </div>
+        </div>
+        <div class="p4p-row">
+          <div class="p4p-num gold">2</div>
+          <div>
+            <div class="p4p-name">Oleksandr Usyk</div>
+            <div class="p4p-div">Heavyweight · WBA/WBC/IBF</div>
+          </div>
+        </div>
+        <div class="p4p-row">
+          <div class="p4p-num gold">3</div>
+          <div>
+            <div class="p4p-name">Gervonta Davis</div>
+            <div class="p4p-div">Lightweight · WBA</div>
+          </div>
+        </div>
+        <div class="p4p-row">
+          <div class="p4p-num">4</div>
+          <div>
+            <div class="p4p-name">Dmitry Bivol</div>
+            <div class="p4p-div">Light Heavy · WBA/IBF/WBO</div>
+          </div>
+        </div>
+        <div class="p4p-row">
+          <div class="p4p-num">5</div>
+          <div>
+            <div class="p4p-name">Jaron "Boots" Ennis</div>
+            <div class="p4p-div">Jr Middle · IBF Interim</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sb-block">
+        <div class="sb-title">🇬🇧 British Champions</div>
+        <div class="boxrec-link">
+          <span>Lewis Crocker — IBF Welter</span>
+          <a href="https://boxrec.com/en/proboxer/864455" target="_blank" rel="noopener">BoxRec ↗</a>
+        </div>
+        <div class="boxrec-link">
+          <span>Hamzah Sheeraz — WBO S.Middle</span>
+          <a href="https://boxrec.com/en/proboxer/753823" target="_blank" rel="noopener">BoxRec ↗</a>
+        </div>
+        <div class="boxrec-link">
+          <span>Abdullah Mason — WBO Light</span>
+          <a href="https://boxrec.com/en/proboxer/930000" target="_blank" rel="noopener">BoxRec ↗</a>
+        </div>
+        <div class="boxrec-link">
+          <span>Dalton Smith — WBC Jr Welter</span>
+          <a href="https://boxrec.com/en/proboxer/816234" target="_blank" rel="noopener">BoxRec ↗</a>
+        </div>
+        <div class="boxrec-link">
+          <span>Anthony Cacace — WBA S.Feather</span>
+          <a href="https://boxrec.com/en/proboxer/668765" target="_blank" rel="noopener">BoxRec ↗</a>
+        </div>
+        <div class="boxrec-link">
+          <span>Jack Catterall — WBA-R Welter</span>
+          <a href="https://boxrec.com/en/proboxer/659480" target="_blank" rel="noopener">BoxRec ↗</a>
+        </div>
+        <div class="boxrec-link">
+          <span>Josh Kelly — IBF Jr Middle</span>
+          <a href="https://boxrec.com/en/proboxer/776543" target="_blank" rel="noopener">BoxRec ↗</a>
+        </div>
+      </div>
+
+      <div class="sb-block">
+        <div class="sb-title">🔗 Fighter Records</div>
+        <div class="boxrec-link">
+          <span>Oleksandr Usyk</span>
+          <a href="https://boxrec.com/en/proboxer/663461" target="_blank" rel="noopener">BoxRec ↗</a>
+        </div>
+        <div class="boxrec-link">
+          <span>Naoya Inoue</span>
+          <a href="https://boxrec.com/en/proboxer/618857" target="_blank" rel="noopener">BoxRec ↗</a>
+        </div>
+        <div class="boxrec-link">
+          <span>Canelo Alvarez</span>
+          <a href="https://boxrec.com/en/proboxer/348759" target="_blank" rel="noopener">BoxRec ↗</a>
+        </div>
+        <div class="boxrec-link">
+          <span>Dmitry Bivol</span>
+          <a href="https://boxrec.com/en/proboxer/656995" target="_blank" rel="noopener">BoxRec ↗</a>
+        </div>
+        <div class="boxrec-link">
+          <span>Jaron Ennis</span>
+          <a href="https://boxrec.com/en/proboxer/779082" target="_blank" rel="noopener">BoxRec ↗</a>
+        </div>
+        <div class="boxrec-link">
+          <span>Tyson Fury</span>
+          <a href="https://boxrec.com/en/proboxer/479205" target="_blank" rel="noopener">BoxRec ↗</a>
+        </div>
+        <div class="boxrec-link">
+          <span>Anthony Joshua</span>
+          <a href="https://boxrec.com/en/proboxer/618817" target="_blank" rel="noopener">BoxRec ↗</a>
+        </div>
+        <div class="boxrec-link">
+          <span>Gervonta Davis</span>
+          <a href="https://boxrec.com/en/proboxer/701252" target="_blank" rel="noopener">BoxRec ↗</a>
+        </div>
+      </div>
+
+    </div><!-- /sidebar -->
+  </div><!-- /main-grid -->
+</div><!-- /wrap -->
+
+<!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="logo">Football <span style="color:var(--red)">&</span> Fighting</a>
-        <p>World boxing champions, upcoming fights and news. No ads. No fluff. 18+ Bet Responsibly.</p>
+        <div class="logo">Football<span style="color:var(--red)">&</span>Fighting</div>
+        <p>Your home for boxing and UFC coverage. Champions, rankings, upcoming fights and news — all in one place.</p>
       </div>
       <div class="footer-col">
         <h4>Boxing</h4>
         <a href="fighting.html">Upcoming Fights</a>
         <a href="fighting.html">World Champions</a>
         <a href="fighting.html">Rankings</a>
-        <a href="ufc.html">UFC</a>
-      </div>
-      <div class="footer-col">
-        <h4>Football</h4>
-        <a href="football.html">Stats &amp; Tables</a>
-        <a href="worldcup.html">World Cup 2026</a>
-        <a href="tips.html">Betting Tips</a>
+        <a href="fighting.html">British Champions</a>
       </div>
       <div class="footer-col">
         <h4>Site</h4>
+        <a href="ufc.html">UFC</a>
+        <a href="football.html">Football</a>
+        <a href="tips.html">Tips</a>
         <a href="about.html">About</a>
-        <a href="community.html">Community</a>
-        <a href="membership.html">Membership</a>
         <a href="privacy.html">Privacy</a>
-        <a href="terms.html">Terms</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Football &amp; Fighting. For entertainment only. 18+ Gamble Responsibly.</span>
-      <span class="gambling-aware">BeGambleAware.org | GamCare.org.uk</span>
+      <span>© 2026 Football & Fighting</span>
+      <span>Data: Wikipedia, BoxRec, DAZN, ESPN. Updated June 2026.</span>
     </div>
   </div>
 </footer>
 
 <script>
-// Load boxing news from Guardian RSS
-function loadBoxingNews() {
-  const RSS = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://www.theguardian.com/sport/boxing/rss');
-  fetch(RSS)
-    .then(r => r.json())
-    .then(data => {
-      const items = data.items || [];
-      if (!items.length) throw new Error('no items');
-      const el = document.getElementById('boxing-news-list');
-      el.innerHTML = items.slice(0,15).map(item => `
-        <div class="news-item">
-          <div class="news-source">The Guardian</div>
-          <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
-          <div class="news-time">${timeAgo(item.pubDate)}</div>
-        </div>`).join('');
-    })
-    .catch(() => {
-      // Fallback: BBC boxing RSS
-      const RSS2 = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://feeds.bbci.co.uk/sport/boxing/rss.xml');
-      fetch(RSS2)
-        .then(r => r.json())
-        .then(data => {
-          const items = data.items || [];
-          const el = document.getElementById('boxing-news-list');
-          if (!items.length) { el.innerHTML = '<div class="loading">News unavailable.</div>'; return; }
-          el.innerHTML = items.slice(0,15).map(item => `
+  // ---- MOBILE NAV ----
+  function toggleMobileNav(){
+    document.getElementById('mobile-nav').classList.toggle('open');
+  }
+
+  // ---- PAGE TABS ----
+  function switchTab(id){
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
+    document.getElementById('tab-'+id).classList.add('active');
+    event.currentTarget.classList.add('active');
+    if(id==='news' && !document.getElementById('news-feed').innerHTML) loadNews();
+  }
+
+  // ---- WEIGHT CLASS TABS ----
+  function switchWeight(prefix, id){
+    const scope = (prefix === 'champ') ? 'champ' : 'rank';
+    document.querySelectorAll('#tab-'+scope+'s .wt-panel').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('#tab-'+scope+'s .wtab').forEach(b=>b.classList.remove('active'));
+    document.getElementById(scope+'-'+id).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  // ---- COUNTDOWN ----
+  function updateCountdown(){
+    const fight = new Date('2026-06-27T23:00:00Z');
+    const now = new Date();
+    const diff = fight - now;
+    if(diff <= 0){ document.getElementById('nfh-countdown').textContent = '🔴 TONIGHT'; return; }
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    document.getElementById('nfh-countdown').textContent = d > 0 ? d+'d '+h+'h away' : h+'h away';
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+
+  // ---- NEWS ----
+  function loadNews(){
+    const feed = document.getElementById('news-feed');
+    const loading = document.getElementById('news-loading');
+    const feeds = [
+      'https://www.theguardian.com/sport/boxing/rss',
+      'https://www.skysports.com/rss/12183'
+    ];
+    const api = 'https://api.rss2json.com/v1/api.json?rss_url=';
+    fetch(api + encodeURIComponent(feeds[0]) + '&count=15')
+      .then(r=>r.json())
+      .then(d=>{
+        if(d.status==='ok' && d.items && d.items.length){
+          loading.style.display='none';
+          feed.innerHTML = d.items.map(item=>`
             <div class="news-item">
-              <div class="news-source">BBC Sport</div>
-              <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
-              <div class="news-time">${timeAgo(item.pubDate)}</div>
+              <div class="news-content">
+                <div class="news-source">The Guardian · Boxing</div>
+                <a class="news-title" href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
+                <div class="news-date">${new Date(item.pubDate).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div>
+              </div>
             </div>`).join('');
-        })
-        .catch(() => {
-          document.getElementById('boxing-news-list').innerHTML = '<div class="loading">News unavailable. Check back shortly.</div>';
-        });
-    });
-}
-
-function timeAgo(dateStr) {
-  const d = new Date(dateStr), now = new Date();
-  const diff = Math.floor((now - d) / 1000);
-  if (diff < 3600) return Math.floor(diff/60) + 'm ago';
-  if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
-  return Math.floor(diff/86400) + 'd ago';
-}
-
-// Tab switching
-document.querySelectorAll('.ptab').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.ptab').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-    if (btn.dataset.tab === 'news') loadBoxingNews();
-  });
-});
+        } else { throw new Error('no items'); }
+      })
+      .catch(()=>{
+        fetch(api + encodeURIComponent(feeds[1]) + '&count=15')
+          .then(r=>r.json())
+          .then(d=>{
+            if(d.status==='ok' && d.items && d.items.length){
+              loading.style.display='none';
+              feed.innerHTML = d.items.map(item=>`
+                <div class="news-item">
+                  <div class="news-content">
+                    <div class="news-source">Sky Sports · Boxing</div>
+                    <a class="news-title" href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
+                    <div class="news-date">${new Date(item.pubDate).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div>
+                  </div>
+                </div>`).join('');
+            } else { throw new Error(); }
+          })
+          .catch(()=>{
+            loading.textContent = 'Unable to load news. Please check back later.';
+          });
+      });
+  }
 </script>
 </body>
 </html>
