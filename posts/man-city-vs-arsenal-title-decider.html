@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ARTICLE TITLE | Football & Fighting</title>
+  <meta name="description" content="ARTICLE EXCERPT"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --red: #e50000; --dark: #0a0a0a; --card: #1e1e1e; --card2: #272727; --border: #333; --text: #f0f0f0; --muted: #888; }
+    body { background: var(--dark); color: var(--text); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.8; }
+    a { color: var(--red); }
+
+    /* HEADER */
+    header { background: #0a0a0a; border-bottom: 3px solid var(--red); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 70px; position: sticky; top: 0; z-index: 100; }
+    .logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.05em; color: var(--text); text-decoration: none; }
+    .logo span { color: var(--red); }
+    nav { display: flex; gap: 4px; }
+    nav a { padding: 8px 14px; font-size: 13px; font-weight: 600; text-transform: uppercase; border-radius: 3px; color: var(--text); text-decoration: none; }
+    nav a:hover { background: #222; }
+    .nav-join { background: var(--red) !important; color: #fff !important; padding: 8px 18px !important; border-radius: 3px; }
+
+    /* ARTICLE HERO */
+    .article-hero { position: relative; height: 480px; overflow: hidden; }
+    .article-hero img { width: 100%; height: 100%; object-fit: cover; }
+    .article-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.85) 100%); }
+    .article-hero-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 40px; z-index: 2; max-width: 860px; margin: 0 auto; }
+    .article-tag { display: inline-block; background: var(--red); color: #fff; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 2px; margin-bottom: 12px; }
+    .article-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 0.03em; line-height: 1.05; margin-bottom: 12px; }
+    .article-meta { font-size: 13px; color: rgba(255,255,255,0.6); }
+    .article-meta span { margin-right: 16px; }
+
+    /* ARTICLE BODY */
+    .article-layout { max-width: 1100px; margin: 0 auto; padding: 48px 24px; display: grid; grid-template-columns: 1fr 320px; gap: 48px; }
+    .article-body h2 { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 0.04em; margin: 36px 0 14px; color: var(--text); }
+    .article-body p { color: #ccc; margin-bottom: 20px; }
+    .article-body ul, .article-body ol { color: #ccc; padding-left: 22px; margin-bottom: 20px; }
+    .article-body ul li, .article-body ol li { margin-bottom: 8px; }
+    .article-body blockquote { border-left: 4px solid var(--red); padding: 12px 20px; background: var(--card); margin: 28px 0; font-style: italic; color: #bbb; border-radius: 0 4px 4px 0; }
+    .article-body .stat-box { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 24px; margin: 28px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center; }
+    .article-body .stat-box .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: var(--red); }
+    .article-body .stat-box .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+    .article-body .verdict { background: #0f1a0a; border: 1px solid #2a4a1a; border-left: 4px solid #4caf50; border-radius: 4px; padding: 20px 24px; margin: 28px 0; }
+    .article-body .verdict h3 { color: #4caf50; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+    .article-body .verdict p { color: #bbb; margin: 0; }
+
+    /* SIDEBAR */
+    .article-sidebar { position: sticky; top: 90px; align-self: start; }
+    .sidebar-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 20px; margin-bottom: 16px; }
+    .sidebar-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.04em; margin-bottom: 14px; }
+    .tip-odds { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: #4caf50; letter-spacing: 0.04em; }
+    .tip-meta { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .tip-pick { font-weight: 700; font-size: 15px; margin: 10px 0 4px; }
+    .tip-reasoning { font-size: 13px; color: #aaa; line-height: 1.5; }
+    .cta-btn { display: block; background: var(--red); color: #fff; text-align: center; padding: 12px; border-radius: 4px; font-weight: 700; font-size: 14px; text-decoration: none; margin-top: 12px; }
+    .related-article { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .related-article:last-child { border-bottom: none; padding-bottom: 0; }
+    .related-article img { width: 72px; height: 54px; object-fit: cover; border-radius: 3px; flex-shrink: 0; }
+    .related-article h4 { font-size: 13px; font-weight: 600; line-height: 1.4; color: var(--text); }
+    .related-article .meta { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+    /* FOOTER */
+    footer { background: #080808; border-top: 2px solid var(--border); padding: 32px 24px; margin-top: 40px; }
+    .footer-bottom { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+    .gambling-aware { background: var(--card); border: 1px solid var(--border); border-radius: 3px; padding: 6px 12px; font-size: 11px; font-weight: 700; }
+
+    @media (max-width: 768px) {
+      .article-layout { grid-template-columns: 1fr; }
+      .article-hero h1 { font-size: 34px; }
+      .article-sidebar { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="../index.html" class="logo">Football <span>&</span> Fighting</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../football.html">Football</a>
+    <a href="../fighting.html">Fighting</a>
+    <a href="../tips.html">Tips</a>
+    <a href="../community.html">Community</a>
+    <a href="../membership.html" class="nav-join">Join Now</a>
+  </nav>
+</header>
+
+<!-- HERO IMAGE — replace src with your image -->
+<div class="article-hero">
+  <img src="https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=1400&q=80" alt="ARTICLE TITLE"/>
+  <div class="article-hero-content">
+    <div class="article-tag">⚽ Premier League</div>
+    <h1>ARTICLE TITLE GOES HERE</h1>
+    <div class="article-meta">
+      <span>By Chris</span>
+      <span>18 June 2025</span>
+      <span>6 min read</span>
+    </div>
+  </div>
+</div>
+
+<div class="article-layout">
+
+  <!-- ARTICLE BODY -->
+  <article class="article-body">
+
+    <p>Your opening paragraph goes here. This is the hook — make it count. One or two sentences that tell the reader exactly why this matters right now.</p>
+
+    <h2>First Section Heading</h2>
+    <p>Body copy goes here. Write naturally. Each paragraph should make one clear point.</p>
+
+    <!-- STAT BOX — optional, delete if not needed -->
+    <div class="stat-box">
+      <div><div class="stat-num">68%</div><div class="stat-label">Win Rate</div></div>
+      <div><div class="stat-num">9</div><div class="stat-label">Games Above xG</div></div>
+      <div><div class="stat-num">1.8</div><div class="stat-label">xG Per 90</div></div>
+    </div>
+
+    <h2>Second Section Heading</h2>
+    <p>More analysis here.</p>
+
+    <blockquote>A key quote or standout stat can go in a blockquote like this. It breaks up the text and draws the eye.</blockquote>
+
+    <p>Continue your analysis...</p>
+
+    <!-- VERDICT BOX -->
+    <div class="verdict">
+      <h3>Our Verdict</h3>
+      <p>Your conclusion and any betting angle goes here. Be direct. What does the data say? What's the play?</p>
+    </div>
+
+  </article>
+
+  <!-- SIDEBAR -->
+  <aside class="article-sidebar">
+
+    <!-- TODAY'S TIP -->
+    <div class="sidebar-card">
+      <h3>Today's Free Tip</h3>
+      <div style="font-size:13px; color:var(--muted); margin-bottom:10px;">Man City vs Arsenal</div>
+      <div class="tip-pick">Over 2.5 Goals</div>
+      <div class="tip-odds">8/11</div>
+      <div class="tip-meta">Premier League · Tonight 20:00</div>
+      <div class="tip-reasoning" style="margin-top:10px;">Both teams average 3.1 goals per game in head-to-heads. Neither side can afford to sit back at this stage of the season.</div>
+      <a href="../tips.html" class="cta-btn">🔒 Get All Tips — £8/mo</a>
+    </div>
+
+    <!-- RELATED ARTICLES — update slugs/titles as needed -->
+    <div class="sidebar-card">
+      <h3>Related</h3>
+      <div class="related-article">
+        <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=200&q=80" alt=""/>
+        <div>
+          <h4><a href="haaland-xg-analysis.html" style="color:var(--text); text-decoration:none;">Haaland's xG vs Actual Goals: Is He Due a Dry Spell?</a></h4>
+          <div class="meta">Today · 5 min read</div>
+        </div>
+      </div>
+      <div class="related-article">
+        <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=200&q=80" alt=""/>
+        <div>
+          <h4><a href="arsenal-half-space-tactics.html" style="color:var(--text); text-decoration:none;">How Arsenal Are Exploiting the Half-Space</a></h4>
+          <div class="meta">2 days ago · 8 min read</div>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <div>© 2025 Football & Fighting. All rights reserved. <a href="../terms.html">Terms</a> · <a href="../privacy.html">Privacy</a> · Tips for entertainment only. 18+ BeGambleAware.</div>
+    <div class="gambling-aware">18+ | BeGambleAware</div>
+  </div>
+</footer>
+
+</body>
+</html>
