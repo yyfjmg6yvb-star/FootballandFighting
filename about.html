@@ -15,6 +15,7 @@
     .ticker{background:var(--red);padding:8px 0;overflow:hidden;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:0.04em}
     .ticker-inner{display:inline-block;animation:ticker 60s linear infinite}
     .ticker-inner span{margin-right:60px}
+    .ticker-inner span::before{content:"▶  ";font-size:9px}
     @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
     header{background:#0a0a0a;border-bottom:3px solid var(--red);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:70px;position:sticky;top:0;z-index:200}
     .logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.05em}
@@ -67,6 +68,7 @@
     .contact-block h3{font-family:'Bebas Neue',sans-serif;font-size:20px;margin-bottom:12px}
     .contact-link{display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:3px;font-size:13px;font-weight:600;margin-bottom:8px;transition:background 0.15s}
     .contact-link:last-child{margin-bottom:0}
+    .contact-link:hover{background:#333}
     .timeline{display:flex;flex-direction:column;margin:24px 0}
     .tl-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)}
     .tl-item:last-child{border-bottom:none}
@@ -84,114 +86,186 @@
   </style>
 </head>
 <body>
+
 <div class="ticker"><div class="ticker-inner">
-  <span>Football & Fighting — Live data, no ads, built for fans</span>
-  <span>World Cup 2026 — Full live coverage, group tables, knockout bracket</span>
-  <span>UFC & Boxing — Full fight cards, champions, results</span>
-  <span>Football & Fighting — Live data, no ads, built for fans</span>
-  <span>World Cup 2026 — Full live coverage, group tables, knockout bracket</span>
-  <span>UFC & Boxing — Full fight cards, champions, results</span>
+  <span>⚽ Football & Fighting — Live data, no ads, built for fans</span>
+  <span>🌍 World Cup 2026 — Full live coverage, group tables, knockout bracket</span>
+  <span>🥊 UFC & Boxing — Full fight cards, champions, results</span>
+  <span>⚽ Football & Fighting — Live data, no ads, built for fans</span>
+  <span>🌍 World Cup 2026 — Full live coverage, group tables, knockout bracket</span>
+  <span>🥊 UFC & Boxing — Full fight cards, champions, results</span>
 </div></div>
+
 <header>
   <div class="logo">Football <span>&</span> Fighting</div>
   <nav>
     <a href="index.html">Home</a>
     <a href="football.html">Football</a>
     <a href="worldcup.html">World Cup</a>
-    <a href="fighting.html">Fighting</a>
+    <a href="ufc.html">UFC</a>
+    <a href="fighting.html">Boxing</a>
     <a href="tips.html">Tips</a>
     <a href="articles.html">Articles</a>
     <a href="community.html">Community</a>
     <a href="membership.html" class="nav-join">Join Now</a>
   </nav>
 </header>
-<div class="page-hero"><div class="wrap">
-  <h1>About Us</h1>
-  <p>We built Football & Fighting because we wanted one place for everything — live scores, deep stats, UFC cards and boxing news — without the clutter, paywalls or ads that slow every other sports site down.</p>
-</div></div>
-<div class="wrap"><div class="content-grid">
-  <div class="prose">
-    <h2>What We Are</h2>
-    <p>Football & Fighting is an independent sports site covering the Premier League, La Liga, Bundesliga, Serie A, Ligue 1, the Champions League, the FIFA World Cup 2026, UFC and professional boxing. Everything updates automatically throughout the day using live data feeds.</p>
-    <h2>Live Data — How It Works</h2>
-    <p>Every page pulls real-time data directly in your browser from ESPN and The Guardian. Scores, tables and fight results are as fresh as possible at all times.</p>
-    <table class="api-table">
-      <thead><tr><th>Source</th><th>What We Use It For</th><th>Type</th></tr></thead>
-      <tbody>
-        <tr><td><strong>ESPN API</strong></td><td>Football scoreboard, league tables, player stats, UFC events</td><td><span class="tag free">Free</span></td></tr>
-        <tr><td><strong>Guardian RSS</strong></td><td>Football and boxing news updated throughout the day</td><td><span class="tag rss">RSS</span></td></tr>
-        <tr><td><strong>ESPN WC API</strong></td><td>World Cup 2026 fixtures, group tables, knockout, scorers</td><td><span class="tag free">Free</span></td></tr>
-      </tbody>
-    </table>
-    <div class="stat-grid">
-      <div class="stat-box"><div class="val">6</div><div class="lbl">Competitions</div><div class="sub">PL, La Liga, Bundesliga, Serie A, Ligue 1, UCL</div></div>
-      <div class="stat-box gold"><div class="val">48</div><div class="lbl">WC 2026 Teams</div><div class="sub">Full group stage & knockout live</div></div>
-      <div class="stat-box green"><div class="val">2min</div><div class="lbl">Score Refresh</div><div class="sub">Auto-updating, no reload needed</div></div>
-      <div class="stat-box blue"><div class="val">0</div><div class="lbl">Ads</div><div class="sub">No banners, no tracking</div></div>
-    </div>
-    <h2>What We Cover</h2>
-    <div class="feature-list">
-      <div class="feature-item"><div class="feature-icon">&#x26BD;</div><div><h3>Football — Six Competitions</h3><p>Live tables, top scorers, assists, yellow and red cards, team goals across PL, La Liga, Bundesliga, Serie A, Ligue 1 and UCL. Refreshes every 5 minutes.</p></div></div>
-      <div class="feature-item"><div class="feature-icon">&#x1F30D;</div><div><h3>FIFA World Cup 2026</h3><p>All 48 teams, live group tables, knockout bracket, top scorers and England tracker in one page.</p></div></div>
-      <div class="feature-item"><div class="feature-icon">&#x1F94A;</div><div><h3>UFC & Boxing</h3><p>Full fight cards, fighter records, results as they come in. Champions across all weight classes. Boxing news from The Guardian.</p></div></div>
-      <div class="feature-item"><div class="feature-icon">&#x1F4B0;</div><div><h3>Betting Tips</h3><p>Analyst picks with reasoning. Always bet responsibly. 18+ only. We show our record transparently.</p></div></div>
-      <div class="feature-item"><div class="feature-icon">&#x1F4F0;</div><div><h3>Analysis & Articles</h3><p>Tactical breakdowns, pre-match analysis and fighter profiles. Real takes from people who watch too much sport.</p></div></div>
-    </div>
-    <h2>Our Story</h2>
-    <div class="timeline">
-      <div class="tl-item"><div class="tl-date">2025</div><div class="tl-content"><h4>Site launched</h4><p>Started with a homepage and football tables. Goal: the best sports site for fans who want data, not noise.</p></div></div>
-      <div class="tl-item"><div class="tl-date">Early 2026</div><div class="tl-content"><h4>Fighting coverage added</h4><p>UFC fight cards, champions grid and boxing news joined the site.</p></div></div>
-      <div class="tl-item"><div class="tl-date">June 2026</div><div class="tl-content"><h4>World Cup 2026 hub live</h4><p>Full tournament coverage — 48 teams, group tables, knockout bracket, scorers.</p></div></div>
-      <div class="tl-item"><div class="tl-date">Now</div><div class="tl-content"><h4>Multi-league stats overhaul</h4><p>Every competition shows full player and team stats computed live from full-season data.</p></div></div>
-    </div>
-    <h2>No Ads. No Paywalls.</h2>
-    <p>No banner ads, no pop-ups, no tracking. Live data, tables, scores and fight cards will always be free. See our <a href="privacy.html" style="color:var(--red)">Privacy Policy</a>.</p>
+
+<div class="page-hero">
+  <div class="wrap">
+    <h1>About Us</h1>
+    <p>We built Football & Fighting because we wanted one place for everything — live scores, deep stats, UFC cards and boxing news — without the clutter, paywalls or ads that slow every other sports site down.</p>
   </div>
-  <div class="sidebar">
-    <div class="sb-block">
-      <div class="live-badge"><span class="live-dot"></span> Live Right Now</div>
-      <div class="live-stat-row"><span>PL Top Scorer Goals</span><span class="lval" id="ab-scorer">—</span></div>
-      <div class="live-stat-row"><span>WC Matches Played</span><span class="lval" id="ab-wcmatches">—</span></div>
-      <div class="live-stat-row"><span>WC Goals Scored</span><span class="lval" id="ab-wcgoals">—</span></div>
-      <div class="live-stat-row"><span style="font-size:12px">Next UFC</span><span class="lval" id="ab-ufc" style="font-size:12px;font-family:'Inter'">—</span></div>
-    </div>
-    <div class="sb-block">
-      <div class="sb-head"><h3>Explore the Site</h3></div>
-      <div style="padding:14px;display:flex;flex-direction:column;gap:8px">
-        <a href="index.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:3px;font-size:13px;font-weight:600">Home — Live Scores</a>
-        <a href="football.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:3px;font-size:13px;font-weight:600">Football Stats & Tables</a>
-        <a href="worldcup.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:3px;font-size:13px;font-weight:600">World Cup 2026 Hub</a>
-        <a href="fighting.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:3px;font-size:13px;font-weight:600">UFC & Boxing</a>
-        <a href="tips.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:3px;font-size:13px;font-weight:600">Betting Tips</a>
-        <a href="membership.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--red);border-radius:3px;font-size:13px;font-weight:700;color:#fff">Join — Membership</a>
+</div>
+
+<div class="wrap">
+  <div class="content-grid">
+
+    <div class="prose">
+
+      <h2>What We Are</h2>
+      <p>Football & Fighting is an independent sports site covering the Premier League, La Liga, Bundesliga, Serie A, Ligue 1, the Champions League, the FIFA World Cup 2026, UFC and professional boxing. Everything on this site updates automatically throughout the day using live data feeds — no manual refreshing, no waiting for a journalist to file copy.</p>
+      <p>We are not a broadcaster. We are not affiliated with the Premier League, FIFA, the UFC or any rights-holder. We are fans building the site we always wanted to use.</p>
+
+      <h2>Live Data — How It Works</h2>
+      <p>Every page on this site pulls real-time data directly in your browser. There is no server between you and the data — your browser fetches it directly from the source APIs, which means scores, tables and fight results are as fresh as possible at all times.</p>
+
+      <table class="api-table">
+        <thead><tr><th>Source</th><th>What We Use It For</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ESPN API</strong></td><td>Football scoreboard, league tables, player stats (goals, assists, cards), UFC fight cards and results</td><td><span class="tag free">Free</span></td></tr>
+          <tr><td><strong>The Guardian RSS</strong></td><td>Football news, boxing news, articles — updated throughout the day</td><td><span class="tag rss">RSS</span></td></tr>
+          <tr><td><strong>FIFA / ESPN WC API</strong></td><td>World Cup 2026 fixtures, group tables, knockout bracket, team and scorer data</td><td><span class="tag free">Free</span></td></tr>
+        </tbody>
+      </table>
+
+      <p>Pages refresh automatically every 2–15 minutes depending on the section — live scores every 2 minutes, tables every 5 minutes, news every 15 minutes. You never need to reload the page manually.</p>
+
+      <div class="stat-grid">
+        <div class="stat-box"><div class="val">6</div><div class="lbl">Competitions Tracked</div><div class="sub">PL, La Liga, Bundesliga, Serie A, Ligue 1, UCL</div></div>
+        <div class="stat-box gold"><div class="val">48</div><div class="lbl">WC 2026 Teams</div><div class="sub">Full group stage & knockout live</div></div>
+        <div class="stat-box green"><div class="val">2min</div><div class="lbl">Live Score Refresh</div><div class="sub">Auto-updating, no reload needed</div></div>
+        <div class="stat-box blue"><div class="val">0</div><div class="lbl">Ads</div><div class="sub">No banners, no tracking ads</div></div>
       </div>
-    </div>
-    <div class="contact-block">
-      <h3>Get in Touch</h3>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Got a tip, a correction, or want to write for the site?</p>
-      <a href="community.html" class="contact-link">Community Forum</a>
-      <a href="mailto:hello@footballandfighting.com" class="contact-link">hello@footballandfighting.com</a>
-    </div>
-    <div class="sb-block">
-      <div class="sb-head"><h3>Data Freshness</h3></div>
-      <div style="padding:14px;display:flex;flex-direction:column;gap:10px;font-size:12px">
-        <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Live scores</span><span style="color:var(--green);font-weight:700">Every 2 min</span></div>
-        <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">League tables</span><span style="color:var(--green);font-weight:700">Every 5 min</span></div>
-        <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Player stats</span><span style="color:var(--green);font-weight:700">Every 5 min</span></div>
-        <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">WC fixtures</span><span style="color:var(--green);font-weight:700">Every 3 min</span></div>
-        <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">UFC events</span><span style="color:var(--green);font-weight:700">Every 5 min</span></div>
-        <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">News feeds</span><span style="color:var(--gold);font-weight:700">Every 15 min</span></div>
+
+      <h2>What We Cover</h2>
+
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-icon">⚽</div>
+          <div>
+            <h3>Football — Six Competitions</h3>
+            <p>Live league tables, top scorers, assists, yellow and red cards, team goals scored and conceded — across the Premier League, La Liga, Bundesliga, Serie A, Ligue 1 and Champions League. Switch between leagues with one click. Data refreshes every 5 minutes.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🌍</div>
+          <div>
+            <h3>FIFA World Cup 2026</h3>
+            <p>Full fixture list for all 48 teams, live group tables, knockout bracket as it fills in, top scorers, team stats and a dedicated England tracker. The most comprehensive WC hub we could build — all in one page.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🥊</div>
+          <div>
+            <h3>UFC & Boxing</h3>
+            <p>Full fight cards for upcoming and recent UFC events — main card and prelims, fighter records, results as they come in. Champions across all weight classes. Boxing news direct from The Guardian, updated throughout the day.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">💰</div>
+          <div>
+            <h3>Betting Tips</h3>
+            <p>Analyst picks based on form, stats and value — clearly marked with reasoning. Always bet responsibly. 18+ only. We show our record transparently.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📰</div>
+          <div>
+            <h3>Analysis & Articles</h3>
+            <p>Original writing — tactical breakdowns, pre-match analysis, fighter profiles and opinion. Not AI-generated filler. Real takes from people who watch too much sport.</p>
+          </div>
+        </div>
       </div>
+
+      <h2>Our Story</h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">2025</div>
+          <div class="tl-content"><h4>Site launched</h4><p>Started with a homepage and football tables. Goal: the best sports site for fans who want data, not noise.</p></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Early 2026</div>
+          <div class="tl-content"><h4>Fighting coverage added</h4><p>UFC fight cards, champions grid and boxing news joined the site. Full main card and prelims listing.</p></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">June 2026</div>
+          <div class="tl-content"><h4>World Cup 2026 hub live</h4><p>Full tournament coverage — 48 teams, group tables, knockout bracket, top scorers and England tracker all in one place.</p></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Now</div>
+          <div class="tl-content"><h4>Multi-league stats overhaul</h4><p>Every competition now shows full player and team stats — top scorers, assists, cards — computed live from full-season data.</p></div>
+        </div>
+      </div>
+
+      <h2>No Ads. No Paywalls.</h2>
+      <p>This site has no advertising. No banner ads, no pop-ups, no affiliate tracking links disguised as recommendations. We may introduce a voluntary membership tier for extra features — but the live data, tables, scores and fight cards will always be free.</p>
+      <p>We run on Cloudflare Pages (free tier) — fast, globally distributed, zero downtime. Your data is not sold to anyone. See our <a href="privacy.html" style="color:var(--red)">Privacy Policy</a> for the full picture.</p>
+
+    </div>
+
+    <div class="sidebar">
+
+      <div class="sb-block">
+        <div class="live-badge"><span class="live-dot"></span> Live Right Now</div>
+        <div class="live-stat-row"><span>PL Top Scorer Goals</span><span class="lval" id="ab-scorer">—</span></div>
+        <div class="live-stat-row"><span>WC Matches Played</span><span class="lval" id="ab-wcmatches">—</span></div>
+        <div class="live-stat-row"><span>WC Goals Scored</span><span class="lval" id="ab-wcgoals">—</span></div>
+        <div class="live-stat-row"><span style="font-size:12px">Next UFC</span><span class="lval" id="ab-ufc" style="font-size:12px;font-family:'Inter'">—</span></div>
+      </div>
+
+      <div class="sb-block">
+        <div class="sb-head"><h3>Explore the Site</h3></div>
+        <div style="padding:14px;display:flex;flex-direction:column;gap:8px">
+          <a href="index.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:3px;font-size:13px;font-weight:600">🏠 Homepage — Live Scores</a>
+          <a href="football.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:3px;font-size:13px;font-weight:600">⚽ Football Stats & Tables</a>
+          <a href="worldcup.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:3px;font-size:13px;font-weight:600">🌍 World Cup 2026 Hub</a>
+          <a href="fighting.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:3px;font-size:13px;font-weight:600">🥊 UFC & Boxing</a>
+          <a href="tips.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:3px;font-size:13px;font-weight:600">💰 Betting Tips</a>
+          <a href="membership.html" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--red);border-radius:3px;font-size:13px;font-weight:700;color:#fff">🚀 Join — Membership</a>
+        </div>
+      </div>
+
+      <div class="contact-block">
+        <h3>Get in Touch</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Got a tip, a correction, or want to write for the site? We read everything.</p>
+        <a href="community.html" class="contact-link"><span>💬</span> Community Forum</a>
+        <a href="mailto:hello@footballandfighting.com" class="contact-link"><span>✉️</span> hello@footballandfighting.com</a>
+      </div>
+
+      <div class="sb-block">
+        <div class="sb-head"><h3>Data Freshness</h3></div>
+        <div style="padding:14px;display:flex;flex-direction:column;gap:10px;font-size:12px">
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Live scores</span><span style="color:var(--green);font-weight:700">Every 2 min</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">League tables</span><span style="color:var(--green);font-weight:700">Every 5 min</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Player stats</span><span style="color:var(--green);font-weight:700">Every 5 min</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">WC fixtures</span><span style="color:var(--green);font-weight:700">Every 3 min</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">UFC events</span><span style="color:var(--green);font-weight:700">Every 5 min</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">News feeds</span><span style="color:var(--gold);font-weight:700">Every 15 min</span></div>
+        </div>
+      </div>
+
     </div>
   </div>
-</div></div>
+</div>
+
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="logo" style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.05em;margin-bottom:10px">Football <span style="color:var(--red)">&</span> Fighting</div>
-      <p>Live football data, World Cup 2026 coverage and UFC/boxing news — all in one place, updating all day. No ads.</p>
+      <p>Live football data, World Cup 2026 coverage and UFC/boxing news — all in one place, updating automatically all day. No ads. No paywalls on the data.</p>
     </div>
-    <div class="footer-col"><h4>Football</h4><a href="football.html">Tables & Stats</a><a href="worldcup.html">World Cup 2026</a><a href="tips.html">Betting Tips</a></div>
+    <div class="footer-col"><h4>Football</h4><a href="football.html">Tables & Stats</a><a href="worldcup.html">World Cup 2026</a><a href="tips.html">Betting Tips</a><a href="articles.html">Analysis</a></div>
     <div class="footer-col"><h4>Fighting</h4><a href="fighting.html">UFC & Boxing</a><a href="articles.html">Fight Previews</a></div>
     <div class="footer-col"><h4>Site</h4><a href="about.html" style="color:var(--red)">About</a><a href="community.html">Community</a><a href="membership.html">Membership</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
   </div>
@@ -200,32 +274,55 @@
     <span class="gambling-aware">18+ | Gamble Aware</span>
   </div>
 </footer>
+
 <script>
-function loadLiveStats() {
+async function loadLiveStats() {
+  // PL top scorer
   fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=20250815-20260525&limit=500')
-    .then(r=>r.json()).then(data=>{
-      const sc={};
-      (data.events||[]).forEach(ev=>(ev.competitions?.[0]?.details||[]).forEach(d=>{
-        if(d.type?.text==='Goal'){const n=d.athletesInvolved?.[0]?.displayName;if(n)sc[n]=(sc[n]||0)+1;}
-      }));
-      const top=Object.entries(sc).sort((a,b)=>b[1]-a[1])[0];
-      if(top)document.getElementById('ab-scorer').textContent=top[1];
+    .then(r => r.json()).then(data => {
+      const scorers = {};
+      (data.events||[]).forEach(ev => {
+        (ev.competitions?.[0]?.details||[]).forEach(d => {
+          if (d.type?.text === 'Goal') {
+            const n = d.athletesInvolved?.[0]?.displayName;
+            if (n) scorers[n] = (scorers[n]||0) + 1;
+          }
+        });
+      });
+      const top = Object.entries(scorers).sort((a,b) => b[1]-a[1])[0];
+      if (top) document.getElementById('ab-scorer').textContent = top[1];
     }).catch(()=>{});
+
+  // WC stats
   fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=20260611-20260719')
-    .then(r=>r.json()).then(data=>{
-      const evs=data.events||[];
-      const played=evs.filter(e=>{const s=e.competitions?.[0]?.status?.type?.name;return s==='STATUS_FULL_TIME'||s==='STATUS_FINAL';}).length;
-      let goals=0;evs.forEach(ev=>(ev.competitions?.[0]?.competitors||[]).forEach(c=>{goals+=parseInt(c.score||0);}));
-      document.getElementById('ab-wcmatches').textContent=played;
-      document.getElementById('ab-wcgoals').textContent=goals;
+    .then(r => r.json()).then(data => {
+      const events = data.events || [];
+      const played = events.filter(e => {
+        const s = e.competitions?.[0]?.status?.type?.name;
+        return s === 'STATUS_FULL_TIME' || s === 'STATUS_FINAL';
+      }).length;
+      let goals = 0;
+      events.forEach(ev => {
+        (ev.competitions?.[0]?.competitors||[]).forEach(c => { goals += parseInt(c.score||0); });
+      });
+      document.getElementById('ab-wcmatches').textContent = played;
+      document.getElementById('ab-wcgoals').textContent = goals;
     }).catch(()=>{});
+
+  // UFC
   fetch('https://site.api.espn.com/apis/site/v2/sports/mma/ufc/scoreboard')
-    .then(r=>r.json()).then(data=>{
-      const ev=data.events?.[0];
-      if(ev){const name=(ev.name||'').replace('UFC ','').split(':')[0];const d=new Date(ev.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'});document.getElementById('ab-ufc').textContent=name+' · '+d;}
+    .then(r => r.json()).then(data => {
+      const ev = data.events?.[0];
+      if (ev) {
+        const name = (ev.name||'').replace('UFC ','').split(':')[0];
+        const d = new Date(ev.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+        document.getElementById('ab-ufc').textContent = name + ' · ' + d;
+      }
     }).catch(()=>{});
 }
-loadLiveStats();setInterval(loadLiveStats,300000);
+
+loadLiveStats();
+setInterval(loadLiveStats, 5 * 60 * 1000);
 </script>
 </body>
 </html>
