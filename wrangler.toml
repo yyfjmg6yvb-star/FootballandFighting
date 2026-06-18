@@ -1,26 +1,17 @@
 # ============================================================
 # Football & Fighting — Cloudflare Wrangler Config
 # ============================================================
-# SETUP STEPS:
-# 1. npm install -g wrangler
-# 2. wrangler login
-# 3. wrangler d1 create FF_DB
-# 4. Paste the database_id from the output below
-# 5. wrangler d1 execute FF_DB --file=schema.sql
-# 6. Add secrets: wrangler secret put JWT_SECRET
-#                 wrangler secret put STRIPE_SECRET_KEY
-#                 wrangler secret put STRIPE_WEBHOOK_SECRET
-# ============================================================
 
-name = "footballandfighting"
+name = "football-and-fighting"
 compatibility_date = "2024-01-01"
-pages_build_output_dir = "."
+
+[assets]
+directory = "."
 
 [[d1_databases]]
 binding = "DB"
 database_name = "FF_DB"
 database_id = "PASTE_YOUR_D1_DATABASE_ID_HERE"
-# account_id = "306b459fe91a4a722621852a8e494dbb"  # your CF account ID (for reference)
 
 [vars]
 STRIPE_PRICE_ID = "PASTE_YOUR_STRIPE_PRICE_ID_HERE"
