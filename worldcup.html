@@ -168,6 +168,28 @@
 
     @media(max-width:1000px){.groups-grid{grid-template-columns:repeat(2,1fr)}.fixture-layout{grid-template-columns:1fr}}
     @media(max-width:700px){.groups-grid{grid-template-columns:1fr}.hero-left h1{font-size:44px}.eng-stats{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){
+      header{padding:0 12px;height:56px}
+      .logo{font-size:22px}
+      nav{overflow-x:auto;-webkit-overflow-scrolling:touch;gap:0}
+      nav a{padding:6px 9px;font-size:11px;white-space:nowrap;letter-spacing:0.03em}
+      .nav-join{padding:6px 10px!important;font-size:11px!important}
+      .wrap{padding:0 12px}
+      .hero-inner{flex-direction:column;gap:16px;padding:20px 0}
+      .hero-left h1{font-size:36px}
+      .page-tabs{overflow-x:auto}
+      .ptab{padding:10px 14px;font-size:12px}
+      .fixture-card{grid-template-columns:1fr 60px 1fr}
+      .fixture-team{font-size:12px}
+      .modal-stats{grid-template-columns:repeat(2,1fr)}
+      .eng-stats{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:1fr 1fr!important;gap:20px}
+      .footer-bottom{flex-direction:column;gap:8px;text-align:center}
+    }
+    @media(max-width:480px){
+      .hero-left h1{font-size:28px}
+      .footer-grid{grid-template-columns:1fr!important}
+    }
   </style>
 </head>
 <body>
