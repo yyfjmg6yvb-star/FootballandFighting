@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Membership | Football & Fighting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #e50000;
+      --dark: #0a0a0a;
+      --card: #1e1e1e;
+      --card2: #272727;
+      --border: #333;
+      --text: #f0f0f0;
+      --muted: #888;
+      --gold: #f5a623;
+      --green: #2ecc71;
+      --creator: #7c3aed;
+      --creator-light: #9f67ff;
+    }
+    body { background: var(--dark); color: var(--text); font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.5; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TICKER ── */
+    .ticker { background: var(--red); padding: 8px 0; overflow: hidden; white-space: nowrap; font-size: 13px; font-weight: 600; }
+    .ticker-inner { display: inline-block; animation: ticker 40s linear infinite; }
+    .ticker-inner span { margin-right: 60px; }
+    .ticker-inner span::before { content: "▶  "; font-size: 10px; }
+    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* ── HEADER ── */
+    header { background: #0a0a0a; border-bottom: 3px solid var(--red); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 70px; position: sticky; top: 0; z-index: 100; }
+    .logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.05em; }
+    .logo span { color: var(--red); }
+    nav { display: flex; gap: 4px; }
+    nav a { padding: 8px 14px; font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 3px; transition: background 0.15s; }
+    nav a:hover { background: #222; }
+    nav a.active { color: var(--red); }
+    .nav-join { background: var(--red) !important; color: #fff !important; padding: 8px 18px !important; border-radius: 3px; }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 0%, rgba(124,58,237,0.1) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 0%, rgba(229,0,0,0.08) 0%, transparent 60%);
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 20px; padding: 6px 16px; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px; }
+    .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 72px; line-height: 0.95; letter-spacing: 0.03em; margin-bottom: 20px; }
+    .hero h1 .red { color: var(--red); }
+    .hero h1 .purple { color: var(--creator-light); }
+    .hero p { font-size: 18px; color: #aaa; line-height: 1.7; margin-bottom: 16px; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .hero-note { font-size: 13px; color: var(--muted); }
+    .hero-note strong { color: var(--green); }
+
+    /* ── SOCIAL PROOF BAR ── */
+    .proof-bar {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+    }
+    .proof-item { text-align: center; }
+    .proof-item .num { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--red); line-height: 1; }
+    .proof-item .lbl { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .proof-divider { width: 1px; height: 36px; background: var(--border); }
+
+    /* ── PRICING TOGGLE ── */
+    .pricing-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 56px 0 40px;
+    }
+    .toggle-label { font-size: 14px; font-weight: 600; color: var(--muted); }
+    .toggle-label.active { color: var(--text); }
+    .toggle-switch {
+      width: 52px; height: 28px;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .toggle-switch.annual { background: var(--red); }
+    .toggle-knob {
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 20px; height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+    .toggle-switch.annual .toggle-knob { transform: translateX(24px); }
+    .save-badge { background: var(--green); color: #000; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 10px; letter-spacing: 0.05em; }
+
+    /* ── PRICING CARDS ── */
+    .pricing-section { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 60px; }
+
+    .pricing-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+    .pricing-card.fan { border-top: 4px solid var(--red); }
+    .pricing-card.creator {
+      border: 2px solid var(--creator);
+      border-top: 4px solid var(--creator-light);
+      background: linear-gradient(180deg, #1a0f2e 0%, #1e1e1e 40%);
+    }
+
+    .most-popular {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: var(--creator-light);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .card-header { padding: 32px 32px 24px; border-bottom: 1px solid var(--border); }
+    .card-header .tier-name { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .card-header .tier-name.fan-name { color: var(--red); }
+    .card-header .tier-name.creator-name { color: var(--creator-light); }
+    .card-header .tier-desc { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+    .price-block { display: flex; align-items: flex-end; gap: 6px; margin-bottom: 6px; }
+    .price-block .price { font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: 1; }
+    .price-block .price-per { font-size: 14px; color: var(--muted); padding-bottom: 10px; }
+    .price-annual { font-size: 13px; color: var(--muted); height: 20px; }
+    .price-annual .saving { color: var(--green); font-weight: 600; }
+
+    .card-cta { display: block; margin: 24px 0 0; padding: 14px; border-radius: 4px; text-align: center; font-size: 15px; font-weight: 700; letter-spacing: 0.02em; transition: opacity 0.15s; }
+    .card-cta.fan-cta { background: var(--red); color: #fff; }
+    .card-cta.fan-cta:hover { opacity: 0.88; }
+    .card-cta.creator-cta { background: var(--creator-light); color: #fff; }
+    .card-cta.creator-cta:hover { opacity: 0.88; }
+    .trial-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 8px; }
+
+    .card-features { padding: 28px 32px; }
+    .feature-group { margin-bottom: 24px; }
+    .feature-group-title { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    .feature-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 14px; }
+    .feature-item .check { flex-shrink: 0; margin-top: 1px; }
+    .feature-item .check.yes { color: var(--green); font-weight: 700; }
+    .feature-item .check.no { color: #444; }
+    .feature-item .text { line-height: 1.4; }
+    .feature-item .text .badge { display: inline-block; background: rgba(124,58,237,0.2); color: var(--creator-light); font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 2px; margin-left: 6px; letter-spacing: 0.05em; vertical-align: middle; }
+    .feature-item .text .new-badge { display: inline-block; background: rgba(46,204,113,0.15); color: var(--green); font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 2px; margin-left: 6px; letter-spacing: 0.05em; vertical-align: middle; }
+    .feature-item.muted .text { color: #555; }
+
+    /* ── CREATOR DEEP DIVE ── */
+    .creator-section {
+      background: linear-gradient(135deg, #0e0818 0%, #110a1f 50%, #0a0a0a 100%);
+      border-top: 1px solid rgba(124,58,237,0.3);
+      border-bottom: 1px solid rgba(124,58,237,0.3);
+      padding: 80px 20px;
+    }
+    .creator-inner { max-width: 1100px; margin: 0 auto; }
+    .creator-header { text-align: center; margin-bottom: 56px; }
+    .creator-header .eyebrow { display: inline-block; background: rgba(124,58,237,0.15); border: 1px solid rgba(124,58,237,0.3); color: var(--creator-light); font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+    .creator-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 56px; letter-spacing: 0.04em; margin-bottom: 12px; }
+    .creator-header h2 span { color: var(--creator-light); }
+    .creator-header p { font-size: 16px; color: #aaa; max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+    .creator-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 48px; }
+    .creator-card {
+      background: rgba(124,58,237,0.06);
+      border: 1px solid rgba(124,58,237,0.2);
+      border-radius: 6px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .creator-card:hover { border-color: var(--creator-light); }
+    .creator-card .icon { font-size: 32px; margin-bottom: 14px; }
+    .creator-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.04em; margin-bottom: 8px; color: var(--creator-light); }
+    .creator-card p { font-size: 13px; color: #999; line-height: 1.7; }
+    .creator-card .example { margin-top: 12px; padding: 10px 12px; background: rgba(0,0,0,0.3); border-radius: 3px; font-size: 12px; color: #aaa; border-left: 2px solid var(--creator); }
+    .creator-card .example strong { color: var(--creator-light); display: block; margin-bottom: 3px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* ── DATA LIVE SECTION ── */
+    .data-section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
+    .data-header { text-align: center; margin-bottom: 48px; }
+    .data-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 0.04em; margin-bottom: 10px; }
+    .data-header h2 span { color: var(--red); }
+    .data-header p { font-size: 15px; color: var(--muted); max-width: 520px; margin: 0 auto; }
+
+    .data-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
+    .data-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+      position: relative;
+    }
+    .data-card .live-pill {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(46,204,113,0.15);
+      border: 1px solid rgba(46,204,113,0.3);
+      color: var(--green);
+      font-size: 10px; font-weight: 700;
+      padding: 2px 8px; border-radius: 10px;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .data-card .live-pill .dot { width: 5px; height: 5px; background: var(--green); border-radius: 50%; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .data-card .icon { font-size: 28px; margin-bottom: 12px; }
+    .data-card h4 { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+    .data-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .data-card .source { margin-top: 12px; font-size: 11px; color: #555; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    .data-promise {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--green);
+      border-radius: 4px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .data-promise .icon { font-size: 32px; flex-shrink: 0; }
+    .data-promise h3 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 0.04em; margin-bottom: 4px; }
+    .data-promise p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ── WHO IS IT FOR ── */
+    .who-section { background: #111; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 20px; }
+    .who-inner { max-width: 1100px; margin: 0 auto; }
+    .who-header { text-align: center; margin-bottom: 48px; }
+    .who-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 0.04em; margin-bottom: 10px; }
+    .who-header p { font-size: 15px; color: var(--muted); }
+    .who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .who-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 28px;
+    }
+    .who-card .who-icon { font-size: 40px; margin-bottom: 16px; }
+    .who-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .who-card p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+    .who-card .tier-rec { display: inline-block; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 3px; }
+    .tier-rec.fan { background: rgba(229,0,0,0.15); color: var(--red); }
+    .tier-rec.creator { background: rgba(124,58,237,0.15); color: var(--creator-light); }
+
+    /* ── COMPARISON TABLE ── */
+    .compare-section { max-width: 900px; margin: 0 auto; padding: 80px 20px; }
+    .compare-header { text-align: center; margin-bottom: 40px; }
+    .compare-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 0.04em; margin-bottom: 8px; }
+    .compare-table { width: 100%; border-collapse: collapse; }
+    .compare-table th { padding: 16px 20px; font-size: 13px; font-weight: 700; text-align: center; border-bottom: 2px solid var(--border); }
+    .compare-table th:first-child { text-align: left; color: var(--muted); font-weight: 600; }
+    .compare-table th.fan-col { color: var(--red); }
+    .compare-table th.creator-col { color: var(--creator-light); }
+    .compare-table td { padding: 13px 20px; border-bottom: 1px solid var(--border); font-size: 13px; text-align: center; background: var(--card); }
+    .compare-table td:first-child { text-align: left; color: var(--muted); background: #161616; }
+    .compare-table tr:hover td { background: var(--card2); }
+    .compare-table tr:hover td:first-child { background: #1a1a1a; }
+    .compare-table .section-row td { background: #111; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 10px 20px; }
+    .yes { color: var(--green); font-size: 18px; }
+    .no { color: #444; font-size: 18px; }
+    .partial { color: var(--gold); font-size: 13px; font-weight: 600; }
+
+    /* ── FAQ ── */
+    .faq-section { max-width: 720px; margin: 0 auto; padding: 60px 20px 80px; }
+    .faq-header { text-align: center; margin-bottom: 40px; }
+    .faq-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 44px; letter-spacing: 0.04em; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q { padding: 18px 0; font-weight: 600; font-size: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-q:hover { color: var(--red); }
+    .faq-q .arrow { font-size: 18px; color: var(--muted); transition: transform 0.2s; }
+    .faq-q.open .arrow { transform: rotate(45deg); color: var(--red); }
+    .faq-a { font-size: 14px; color: var(--muted); line-height: 1.7; padding: 0 0 18px; display: none; }
+    .faq-a.open { display: block; }
+
+    /* ── FINAL CTA ── */
+    .final-cta { text-align: center; padding: 80px 20px; background: linear-gradient(180deg, #0a0a0a, #0d0005, #0a0a0a); border-top: 1px solid var(--border); }
+    .final-cta h2 { font-family: 'Bebas Neue', sans-serif; font-size: 60px; letter-spacing: 0.04em; margin-bottom: 12px; }
+    .final-cta h2 .red { color: var(--red); }
+    .final-cta p { font-size: 16px; color: var(--muted); margin-bottom: 36px; }
+    .final-cta-btns { display: flex; gap: 14px; justify-content: center; }
+    .final-cta-btns a { padding: 16px 36px; border-radius: 4px; font-size: 15px; font-weight: 700; letter-spacing: 0.02em; transition: opacity 0.15s; }
+    .final-cta-btns .fan-btn { background: var(--red); color: #fff; }
+    .final-cta-btns .creator-btn { background: var(--creator-light); color: #fff; }
+    .final-cta-btns a:hover { opacity: 0.88; }
+    .final-note { margin-top: 16px; font-size: 13px; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer { background: #080808; border-top: 2px solid var(--border); padding: 40px 24px 24px; }
+    .footer-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+    .footer-brand .logo { font-size: 24px; margin-bottom: 10px; }
+    .footer-brand p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .footer-col h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 12px; }
+    .footer-col a { display: block; font-size: 13px; color: #aaa; margin-bottom: 8px; }
+    .footer-col a:hover { color: var(--red); }
+    .footer-bottom { max-width: 1280px; margin: 0 auto; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+    .gambling-aware { background: var(--card); border: 1px solid var(--border); border-radius: 3px; padding: 6px 12px; font-size: 11px; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>Fan Membership — £8/month · 7 Day Free Trial · Cancel Anytime</span>
+    <span>Creator Membership — £15/month · Live Data · Content Kits · Weekly Data Packs</span>
+    <span>Season Record: 68% Win Rate · +31 Units Profit · 142 Tips</span>
+    <span>Fan Membership — £8/month · 7 Day Free Trial · Cancel Anytime</span>
+    <span>Creator Membership — £15/month · Live Data · Content Kits · Weekly Data Packs</span>
+    <span>Season Record: 68% Win Rate · +31 Units Profit · 142 Tips</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">Football <span>&</span> Fighting</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="football.html">Football</a>
+    <a href="fighting.html">Fighting</a>
+    <a href="tips.html">Tips</a>
+    <a href="#">Fixtures</a>
+    <a href="community.html">Community</a>
+    <a href="#" class="nav-join active">Join Now</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">⚡ Two Memberships. One Platform.</div>
+    <h1>Built for <span class="red">Fans.</span><br/>Powered by <span class="purple">Creators.</span></h1>
+    <p>Whether you want sharper tips or a full data engine to fuel your YouTube, TikTok and X content — there's a membership built for you.</p>
+    <div class="hero-note">Join <strong>1,200+ members</strong> already inside · 7 day free trial on both tiers</div>
+  </div>
+</div>
+
+<!-- SOCIAL PROOF -->
+<div class="proof-bar">
+  <div class="proof-item">
+    <div class="num">1,200+</div>
+    <div class="lbl">Active Members</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <div class="num">68%</div>
+    <div class="lbl">Tip Win Rate</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <div class="num">+31u</div>
+    <div class="lbl">Season Profit</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <div class="num">Live</div>
+    <div class="lbl">Data Updated</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <div class="num">24/7</div>
+    <div class="lbl">Coverage</div>
+  </div>
+</div>
+
+<!-- PRICING TOGGLE -->
+<div class="pricing-toggle">
+  <span class="toggle-label active" id="monthly-label">Monthly</span>
+  <div class="toggle-switch" id="toggle" onclick="toggleBilling()">
+    <div class="toggle-knob"></div>
+  </div>
+  <span class="toggle-label" id="annual-label">Annual</span>
+  <span class="save-badge">Save 20%</span>
+</div>
+
+<!-- PRICING CARDS -->
+<div class="pricing-section">
+  <div class="pricing-grid">
+
+    <!-- FAN TIER -->
+    <div class="pricing-card fan">
+      <div class="card-header">
+        <div class="tier-name fan-name">⚽ Fan</div>
+        <div class="tier-desc">Everything you need to follow football and boxing with sharper insight and smarter tips.</div>
+        <div class="price-block">
+          <div class="price" id="fan-price">£8</div>
+          <div class="price-per">/month</div>
+        </div>
+        <div class="price-annual" id="fan-annual">&nbsp;</div>
+        <a href="#" class="card-cta fan-cta">Start Free Trial →</a>
+        <div class="trial-note">7 days free · No card needed · Cancel anytime</div>
+      </div>
+      <div class="card-features">
+        <div class="feature-group">
+          <div class="feature-group-title">Tips & Analysis</div>
+          <div class="feature-item"><span class="check yes">✓</span><span class="text">Daily free tip with full reasoning</span></div>
+          <div class="feature-item"><span class="check yes">✓</span><span class="text">Bet of the Day — every day</span></div>
+          <div class="feature-item"><span class="check yes">✓</span><span class="text">Full daily tips (football & boxing)</span></div>
+          <div class="feature-item"><span class="check yes">✓</span><span class="text">Accumulator of the day</span></div>
+          <div class="feature-item"><span class="check yes">✓</span><span class="text">Outside bet — value picks</span></div>
+          <div class="feature-item"><span class="check yes">✓</span><span class="text">Early access to match previews</span></div>
+          <div class="feature-item"><span class="check yes">✓</span><span class="text">Full tips history & verified record</span></div>
+        </div>
+        <div class="feature-group">
+          <div class="feature-group-title">Content & Data</div>
+          <div class="feature-item"><span class="check yes">✓</span><span class="text">Fixtures, results & live scores</span></div>
+          <div class="feature-item"><span class="check yes">✓</span><span class="text">League tables & top scorers</span></div>
+          <div class="feature-item"><span class="check yes">✓</span><span class="text">Fighter records & rankings</span></div>
+          <div class="feature-item"><span class="check yes">✓</span><span class="text">Boxing fight schedule</span></div>
+          <div class="feature-item muted"><span class="check no">✗</span><span class="text" style="color:#555;">Weekly content data packs</span></div>
+          <div class="feature-item muted"><span class="check no">✗</span><span class="text" style="color:#555;">Creator content kits</span></div>
+          <div class="feature-item muted"><span class="check no">✗</span><span class="text" style="color:#555;">Exportable stats & data</span></div>
+        </div>
+        <div class="feature-group">
+          <div class="feature-group-title">Community</div>
+          <div class="feature-item"><span class="check yes">✓</span><span class="text">Full community access</span></div>
+          <div class="feature-item"><span class="check yes">✓</span><span class="text">Predictions game & leaderboard</span></div>
+          <div class="feature-item"><span class="check yes">✓</span><span class="text">Match day & fight night threads</span></div>
+          <div class="feature-item"><span class="check yes">✓</span><span class="text">Fan member badge</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CREATOR TIER -->
+    <div class="pricing-card creator">
+      <div class="most-popular">Most Popular</div>
+      <div class="card-header">
+        <div class="tier-name creator-name">🎬 Creator</div>
+        <div class="tier-desc">Everything in Fan, plus a live data engine and weekly content toolkit to fuel your YouTube, TikTok and X.</div>
+        <div class="price-block">
+          <div class="price" id="creator-price" style="color:var(--creator-light)">£15</div>
+          <div class="price-per">/month</div>
+        </div>
+        <div class="price-annual" id="creator-annual">&nbsp;</div>
+        <a href="#" class="card-cta creator-cta">Start Free Trial →</a>
+        <div class="trial-note">7 days free · No card needed · Cancel anytime</div>
+      </div>
+      <div class="card-features">
+        <div class="feature-group">
+          <div class="feature-group-title">Everything in Fan, plus...</div>
+          <div class="feature-item"><span class="check yes" style="color:var(--creator-light)">✓</span><span class="text">Weekly content data pack <span class="badge">Creator</span></span></div>
+          <div class="feature-item"><span class="check yes" style="color:var(--creator-light)">✓</span><span class="text">Per-fixture content kit — key stats, storylines, angles <span class="badge">Creator</span></span></div>
+          <div class="feature-item"><span class="check yes" style="color:var(--creator-light)">✓</span><span class="text">X thread starters — ready to post <span class="badge">Creator</span></span></div>
+          <div class="feature-item"><span class="check yes" style="color:var(--creator-light)">✓</span><span class="text">YouTube script bullet points per fixture <span class="badge">Creator</span></span></div>
+          <div class="feature-item"><span class="check yes" style="color:var(--creator-light)">✓</span><span class="text">TikTok talking points — 60 second scripts <span class="badge">Creator</span></span></div>
+        </div>
+        <div class="feature-group">
+          <div class="feature-group-title">Live Data Access</div>
+          <div class="feature-item"><span class="check yes" style="color:var(--creator-light)">✓</span><span class="text">Live match stats — updated in real time <span class="new-badge">Live</span></span></div>
+          <div class="feature-item"><span class="check yes" style="color:var(--creator-light)">✓</span><span class="text">xG, possession, shots, passes — per match <span class="new-badge">Live</span></span></div>
+          <div class="feature-item"><span class="check yes" style="color:var(--creator-light)">✓</span><span class="text">Live odds movements & bookmaker comparison <span class="new-badge">Live</span></span></div>
+          <div class="feature-item"><span class="check yes" style="color:var(--creator-light)">✓</span><span class="text">Fighter punch stats & live round scoring <span class="new-badge">Live</span></span></div>
+          <div class="feature-item"><span class="check yes" style="color:var(--creator-light)">✓</span><span class="text">Exportable data — CSV download per fixture <span class="badge">Creator</span></span></div>
+          <div class="feature-item"><span class="check yes" style="color:var(--creator-light)">✓</span><span class="text">Head-to-head historical data <span class="badge">Creator</span></span></div>
+        </div>
+        <div class="feature-group">
+          <div class="feature-group-title">Creator Community</div>
+          <div class="feature-item"><span class="check yes" style="color:var(--creator-light)">✓</span><span class="text">Creator-only channel in community</span></div>
+          <div class="feature-item"><span class="check yes" style="color:var(--creator-light)">✓</span><span class="text">Creator badge — stand out in the community</span></div>
+          <div class="feature-item"><span class="check yes" style="color:var(--creator-light)">✓</span><span class="text">Monthly creator Q&A with F&F team</span></div>
+          <div class="feature-item"><span class="check yes" style="color:var(--creator-light)">✓</span><span class="text">First access to new data features</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CREATOR DEEP DIVE -->
+<div class="creator-section">
+  <div class="creator-inner">
+    <div class="creator-header">
+      <div class="eyebrow">🎬 Creator Tier</div>
+      <h2>Your Research Team<br/><span>for £15 a Month</span></h2>
+      <p>Football and boxing YouTubers, TikTokers and X accounts spend hours researching stats and storylines. We do it for you — every week, every fixture, every fight card.</p>
+    </div>
+    <div class="creator-grid">
+      <div class="creator-card">
+        <div class="icon">📊</div>
+        <h3>Weekly Data Pack</h3>
+        <p>Every Monday, a full data pack lands in your account — the week's biggest fixtures, key stats, form guides, injury news and betting angles. Ready to use in your content.</p>
+        <div class="example">
+          <strong>Example — this week</strong>
+          Man City vs Arsenal — xG last 5, BTTS rate, Haaland form, Arsenal away record vs top 6, odds movement
+        </div>
+      </div>
+      <div class="creator-card">
+        <div class="icon">🎬</div>
+        <h3>YouTube Script Bullets</h3>
+        <p>For every major fixture and fight card, we produce bullet point talking points structured for a 5-10 minute YouTube video. Open with the stat, build the argument, land the conclusion.</p>
+        <div class="example">
+          <strong>Example — Man City vs Arsenal</strong>
+          • Rodri out — City's passing accuracy drops 12% without him<br/>
+          • Arsenal have won 11 of 17 away games this season<br/>
+          • 8 of last 10 H2Hs produced 3+ goals
+        </div>
+      </div>
+      <div class="creator-card">
+        <div class="icon">𝕏</div>
+        <h3>X Thread Starters</h3>
+        <p>Pre-written thread openers — the hook, the stat, the argument. Edit to add your voice and post. Designed to drive engagement and grow your following.</p>
+        <div class="example">
+          <strong>Example thread opener</strong>
+          "Rodri being out doesn't just hurt Man City — the data shows it changes everything about how they set up. Here's why Arsenal should fancy this more than the odds suggest 🧵"
+        </div>
+      </div>
+      <div class="creator-card">
+        <div class="icon">📱</div>
+        <h3>TikTok Scripts</h3>
+        <p>60-second scripts — hook, three punchy stats, your take, CTA. Format tested for sports content. Just add your face and voice.</p>
+        <div class="example">
+          <strong>Example — 60 sec format</strong>
+          Hook → "This stat about Haaland will shock you" → Stat 1, 2, 3 → Your take → "Follow for more"
+        </div>
+      </div>
+      <div class="creator-card">
+        <div class="icon">📈</div>
+        <h3>Live Data Dashboard</h3>
+        <p>During matches and fights, access live stats — xG, possession, shots, passes, punch connects, round scoring. React in real time with real numbers.</p>
+        <div class="example">
+          <strong>Example — in-game</strong>
+          HT: City xG 0.4 · Arsenal xG 1.2 · Arsenal dominating possession 58% · Haaland 0 shots on target
+        </div>
+      </div>
+      <div class="creator-card">
+        <div class="icon">💾</div>
+        <h3>Data Exports</h3>
+        <p>Download CSV data for any fixture or fighter. Build your own spreadsheets, visualisations or analysis pieces. Your content, powered by our data.</p>
+        <div class="example">
+          <strong>Available exports</strong>
+          Fixture stats · Season form · H2H records · Odds history · Fighter punch data · Round scoring
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <a href="#" style="display:inline-block; background:var(--creator-light); color:#fff; padding:16px 40px; border-radius:4px; font-size:15px; font-weight:700; letter-spacing:0.02em;">Get Creator Access — £15/mo →</a>
+      <div style="margin-top:10px; font-size:13px; color:var(--muted);">7 days free · Cancel anytime</div>
+    </div>
+  </div>
+</div>
+
+<!-- LIVE DATA SECTION -->
+<div class="data-section">
+  <div class="data-header">
+    <h2>The Data is <span>Live.</span> Always.</h2>
+    <p>We pull from professional sports data APIs throughout the day. What you see is current. What you use is accurate.</p>
+  </div>
+  <div class="data-grid">
+    <div class="data-card">
+      <div class="live-pill"><div class="dot"></div> Live</div>
+      <div class="icon">⚽</div>
+      <h4>Football Stats</h4>
+      <p>Live scores, xG, possession, shots, lineups, injuries, form tables, league standings.</p>
+      <div class="source">Via API-Football</div>
+    </div>
+    <div class="data-card">
+      <div class="live-pill"><div class="dot"></div> Live</div>
+      <div class="icon">🥊</div>
+      <h4>Boxing Data</h4>
+      <p>Fighter records, upcoming cards, punch stats, live round scoring, rankings.</p>
+      <div class="source">Via API-Sports Boxing</div>
+    </div>
+    <div class="data-card">
+      <div class="live-pill"><div class="dot"></div> Live</div>
+      <div class="icon">📊</div>
+      <h4>Live Odds</h4>
+      <p>Odds from 40+ bookmakers updated in real time. Spot line movement before it moves.</p>
+      <div class="source">Via The Odds API</div>
+    </div>
+    <div class="data-card">
+      <div class="live-pill"><div class="dot"></div> Live</div>
+      <div class="icon">📰</div>
+      <h4>News Feed</h4>
+      <p>Football and boxing news pulled throughout the day. Injuries, transfers, press conferences.</p>
+      <div class="source">Via RSS Aggregation</div>
+    </div>
+  </div>
+  <div class="data-promise">
+    <div class="icon">🔒</div>
+    <div>
+      <h3>Our Data Promise</h3>
+      <p>We only charge for Creator access when live data is working. If an API goes down for more than 24 hours, affected Creator members get a prorated credit. We don't charge for a service we're not delivering.</p>
+    </div>
+  </div>
+</div>
+
+<!-- WHO IS IT FOR -->
+<div class="who-section">
+  <div class="who-inner">
+    <div class="who-header">
+      <h2>Who's It For?</h2>
+      <p>Two very different people. Both completely at home here.</p>
+    </div>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-icon">🎯</div>
+        <h3>The Smart Bettor</h3>
+        <p>You don't just want a tip — you want to know why. You want the data behind it, the reasoning, the record. You want to make smarter decisions, not just follow blindly.</p>
+        <span class="tier-rec fan">Fan — £8/month</span>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🎬</div>
+        <h3>The Sports Content Creator</h3>
+        <p>You're building a YouTube channel, TikTok or X account about football or boxing. You know your stuff but researching stats and storylines takes hours. We do that for you.</p>
+        <span class="tier-rec creator">Creator — £15/month</span>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">📣</div>
+        <h3>The Passionate Fan</h3>
+        <p>You live for matchdays and fight nights. You want to be the most informed person in the room — the one who saw the stat, spotted the angle, called the result before anyone else.</p>
+        <span class="tier-rec creator">Creator — £15/month</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="compare-section">
+  <div class="compare-header">
+    <h2>Side by Side</h2>
+  </div>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th class="fan-col">⚽ Fan — £8/mo</th>
+        <th class="creator-col">🎬 Creator — £15/mo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="section-row"><td colspan="3">Tips</td></tr>
+      <tr><td>Bet of the Day</td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
+      <tr><td>Full daily tips with reasoning</td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
+      <tr><td>Accumulator of the day</td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
+      <tr><td>Outside bet</td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
+      <tr class="section-row"><td colspan="3">Data</td></tr>
+      <tr><td>Fixtures, tables, standings</td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
+      <tr><td>Fighter records & rankings</td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
+      <tr><td>Live match stats (xG, possession)</td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td></tr>
+      <tr><td>Live odds from 40+ bookmakers</td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td></tr>
+      <tr><td>Exportable CSV data</td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td></tr>
+      <tr class="section-row"><td colspan="3">Content Tools</td></tr>
+      <tr><td>Weekly content data pack</td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td></tr>
+      <tr><td>YouTube script bullet points</td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td></tr>
+      <tr><td>X thread starters</td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td></tr>
+      <tr><td>TikTok 60-second scripts</td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td></tr>
+      <tr class="section-row"><td colspan="3">Community</td></tr>
+      <tr><td>Full community access</td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
+      <tr><td>Predictions leaderboard</td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
+      <tr><td>Creator-only channel</td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td></tr>
+      <tr><td>Monthly creator Q&A</td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="faq-header">
+    <h2>Common Questions</h2>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Is the free trial really free? <span class="arrow">+</span></div>
+    <div class="faq-a">Yes. 7 days completely free on both tiers. No card needed to start — we only ask for payment details when your trial ends. Cancel before then and you pay nothing.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">How live is the live data? <span class="arrow">+</span></div>
+    <div class="faq-a">Football match stats update every 60 seconds during games. Odds update every few minutes. News feeds update throughout the day. Boxing live round stats update at the end of each round. This is professional API data — the same feeds used by major sports platforms.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Can I use the content kits for my own channel without crediting F&F? <span class="arrow">+</span></div>
+    <div class="faq-a">The data is yours to use however you like. We do ask that Creator members give us a mention when using our content kits — a tag or a shoutout goes a long way and helps both of us grow. But it's not a condition of membership.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What leagues and sports are covered? <span class="arrow">+</span></div>
+    <div class="faq-a">Football: Premier League, La Liga, Bundesliga, Serie A, Ligue 1, Champions League, Europa League. Boxing: all major world title fights plus domestic UK cards. We cover everything we analyse and tip on — so if it's on the site, the data is available.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Can I switch between Fan and Creator? <span class="arrow">+</span></div>
+    <div class="faq-a">Yes. Upgrade or downgrade at any time. Upgrades take effect immediately. Downgrades take effect at the end of your current billing period — you keep Creator access until then.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What happens if I cancel? <span class="arrow">+</span></div>
+    <div class="faq-a">Cancel anytime with one click. You keep access until the end of your paid period. No questions asked, no awkward emails. We'd rather you come back when the time is right than feel trapped.</div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+  <h2>Pick Your Tier.<br/>Start <span class="red">Winning.</span></h2>
+  <p>7 days free on both. No card needed. Cancel anytime.</p>
+  <div class="final-cta-btns">
+    <a href="#" class="fan-btn">⚽ Fan — £8/mo</a>
+    <a href="#" class="creator-btn">🎬 Creator — £15/mo</a>
+  </div>
+  <div class="final-note">Not sure? Start with Fan and upgrade to Creator whenever you're ready.</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">Football <span style="color:var(--red)">&</span> Fighting</div>
+      <p>Serious sports analysis, transparent tips and a community built around football and boxing. No noise. Just knowledge.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Football</h4>
+      <a href="#">Premier League</a>
+      <a href="#">La Liga</a>
+      <a href="#">Bundesliga</a>
+      <a href="#">Serie A</a>
+      <a href="#">Champions League</a>
+    </div>
+    <div class="footer-col">
+      <h4>Fighting</h4>
+      <a href="#">Heavyweight</a>
+      <a href="#">Super Middleweight</a>
+      <a href="#">Fight Schedule</a>
+      <a href="#">Fighter Profiles</a>
+    </div>
+    <div class="footer-col">
+      <h4>More</h4>
+      <a href="#">Tips Tracker</a>
+      <a href="community.html">Community</a>
+      <a href="#">Membership</a>
+      <a href="#">About</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>18+ only. Please gamble responsibly. Tips are for entertainment purposes only. <a href="#" style="color:var(--red);">BeGambleAware.org</a></div>
+    <div class="gambling-aware">18+ | BeGambleAware</div>
+  </div>
+</footer>
+
+<script>
+  let isAnnual = false;
+
+  function toggleBilling() {
+    isAnnual = !isAnnual;
+    const toggle = document.getElementById('toggle');
+    const monthlyLabel = document.getElementById('monthly-label');
+    const annualLabel = document.getElementById('annual-label');
+    toggle.classList.toggle('annual', isAnnual);
+    monthlyLabel.classList.toggle('active', !isAnnual);
+    annualLabel.classList.toggle('active', isAnnual);
+    document.getElementById('fan-price').textContent = isAnnual ? '£77' : '£8';
+    document.getElementById('creator-price').textContent = isAnnual ? '£144' : '£15';
+    document.getElementById('fan-annual').innerHTML = isAnnual ? '<span class="saving">Save £19 vs monthly</span>' : '&nbsp;';
+    document.getElementById('creator-annual').innerHTML = isAnnual ? '<span class="saving">Save £36 vs monthly</span>' : '&nbsp;';
+  }
+
+  function toggleFaq(el) {
+    el.classList.toggle('open');
+    el.nextElementSibling.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
