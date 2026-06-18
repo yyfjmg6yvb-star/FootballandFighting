@@ -2,177 +2,184 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="description" content="Football & Fighting terms of service. Rules, disclaimers and your rights as a user or member."/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Terms & Conditions | Football & Fighting</title>
+  <title>Terms of Use | Football &amp; Fighting</title>
+  <meta name="description" content="Terms of use for Football &amp; Fighting — a free, independent sports site covering football, UFC and boxing."/>
+  <link rel="canonical" href="https://footballandfighting.com/terms.html"/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --red: #e50000; --dark: #0a0a0a; --card: #1e1e1e; --border: #333; --text: #f0f0f0; --muted: #888; --gold: #f59e0b; }
-    body { background: var(--dark); color: var(--text); font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.7; }
-    a { color: var(--red); }
-    header { background: #0a0a0a; border-bottom: 3px solid var(--red); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 70px; }
-    .logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.05em; color: var(--text); text-decoration: none; }
-    .logo span { color: var(--red); }
-    nav { display: flex; gap: 4px; }
-    nav a { padding: 8px 14px; font-size: 13px; font-weight: 600; text-transform: uppercase; border-radius: 3px; color: var(--text); text-decoration: none; }
-    nav a:hover { background: #222; }
-    .nav-join { background: var(--red) !important; color: #fff !important; padding: 8px 18px !important; border-radius: 3px; }
-
-    .page-hero { padding: 56px 20px 40px; border-bottom: 1px solid var(--border); }
-    .page-hero-inner { max-width: 800px; margin: 0 auto; }
-    .page-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 56px; letter-spacing: 0.04em; margin-bottom: 8px; }
-    .page-hero .updated { font-size: 13px; color: var(--muted); }
-
-    .content { max-width: 800px; margin: 0 auto; padding: 48px 20px 80px; }
-    .content h2 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.04em; margin: 40px 0 12px; color: var(--red); }
-    .content h2:first-child { margin-top: 0; }
-    .content h3 { font-size: 16px; font-weight: 700; margin: 24px 0 8px; }
-    .content p { color: #bbb; margin-bottom: 14px; }
-    .content ul { color: #bbb; padding-left: 20px; margin-bottom: 14px; }
-    .content ul li { margin-bottom: 6px; }
-    .content .highlight-box { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 4px; padding: 20px 24px; margin: 24px 0; }
-    .content .highlight-box p { margin: 0; font-size: 14px; }
-    .content .warning-box { background: #1a1200; border: 1px solid #4a3000; border-left: 4px solid var(--gold); border-radius: 4px; padding: 20px 24px; margin: 24px 0; }
-    .content .warning-box p { margin: 0; font-size: 14px; color: #ddb; }
-    .content .warning-box strong { color: var(--gold); }
-
-    footer { background: #080808; border-top: 2px solid var(--border); padding: 32px 24px; }
-    .footer-bottom { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
-    .gambling-aware { background: var(--card); border: 1px solid var(--border); border-radius: 3px; padding: 6px 12px; font-size: 11px; font-weight: 700; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--red:#e50000;--dark:#0a0a0a;--card:#1e1e1e;--card2:#272727;--border:#333;--text:#f0f0f0;--muted:#888;--gold:#f5a623;--green:#2ecc71}
+    body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.5}
+    a{color:inherit;text-decoration:none}
+    .ticker{background:var(--red);padding:8px 0;overflow:hidden;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:0.04em}
+    .ticker-inner{display:inline-block;animation:ticker 60s linear infinite}
+    .ticker-inner span{margin-right:60px}
+    @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    header{background:#0a0a0a;border-bottom:3px solid var(--red);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:70px;position:sticky;top:0;z-index:200}
+    .logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.05em}
+    .logo span{color:var(--red)}
+    nav{display:flex;gap:4px}
+    nav a{padding:8px 14px;font-size:13px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;border-radius:3px;transition:background 0.15s}
+    nav a:hover{background:#222}
+    nav a.active{color:var(--red)}
+    .nav-join{background:var(--red)!important;color:#fff!important;padding:8px 18px!important;border-radius:3px}
+    .wrap{max-width:900px;margin:0 auto;padding:0 24px}
+    .page-hero{background:linear-gradient(135deg,#111 0%,#1a1a1a 100%);border-bottom:1px solid var(--border);padding:56px 0}
+    .page-hero h1{font-family:'Bebas Neue',sans-serif;font-size:56px;letter-spacing:0.04em;margin-bottom:12px}
+    .page-hero .meta{font-size:13px;color:var(--muted)}
+    .page-hero p{font-size:16px;color:#bbb;max-width:600px;line-height:1.7;margin-top:12px}
+    .prose{padding:48px 0}
+    .prose h2{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;margin:40px 0 14px;color:var(--text);padding-top:8px;border-top:1px solid var(--border)}
+    .prose h2:first-child{margin-top:0;border-top:none}
+    .prose h3{font-size:16px;font-weight:700;margin:24px 0 10px}
+    .prose p{color:#ccc;line-height:1.85;margin-bottom:16px}
+    .prose ul{margin:12px 0 20px 20px;color:#ccc;line-height:1.85}
+    .prose ul li{margin-bottom:8px}
+    .prose strong{color:var(--text)}
+    .prose a{color:var(--red)}
+    .plain-english{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:4px;padding:20px 24px;margin:32px 0}
+    .plain-english .pe-label{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
+    .plain-english p{color:#ccc;margin:0;font-size:14px;line-height:1.7}
+    .toc{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:20px 24px;margin-bottom:40px}
+    .toc h3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:12px}
+    .toc a{display:block;font-size:13px;color:#ccc;padding:5px 0;border-bottom:1px solid #2a2a2a;transition:color 0.15s}
+    .toc a:last-child{border-bottom:none}
+    .toc a:hover{color:var(--red)}
+    .gambling-block{background:linear-gradient(135deg,#1a0a0a,#1e1e1e);border:1px solid var(--red);border-radius:4px;padding:24px;margin:32px 0}
+    .gambling-block h3{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.04em;color:var(--red);margin-bottom:12px}
+    .gambling-block p{color:#ccc;font-size:14px;line-height:1.7;margin-bottom:10px}
+    .gambling-block p:last-child{margin-bottom:0}
+    .gambling-block a{color:var(--gold)}
+    footer{background:#080808;border-top:2px solid var(--border);padding:40px 24px 24px;margin-top:48px}
+    .footer-grid{max-width:900px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px}
+    .footer-brand p{font-size:13px;color:var(--muted);line-height:1.6}
+    .footer-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:12px}
+    .footer-col a{display:block;font-size:13px;color:#aaa;margin-bottom:8px;transition:color 0.15s}
+    .footer-col a:hover{color:var(--red)}
+    .footer-bottom{max-width:900px;margin:0 auto;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+    .gambling-aware{background:var(--card);border:1px solid var(--border);border-radius:3px;padding:6px 12px;font-size:11px;font-weight:700}
   </style>
 </head>
 <body>
-
+<div class="ticker"><div class="ticker-inner">
+  <span>Football &amp; Fighting - Live scores, tables, UFC &amp; boxing</span>
+  <span>World Cup 2026 - 48 teams, full coverage at footballandfighting.com</span>
+  <span>18+ Only - Please gamble responsibly</span>
+  <span>Football &amp; Fighting - Live scores, tables, UFC &amp; boxing</span>
+  <span>World Cup 2026 - 48 teams, full coverage at footballandfighting.com</span>
+  <span>18+ Only - Please gamble responsibly</span>
+</div></div>
 <header>
-  <a href="index.html" class="logo">Football <span>&</span> Fighting</a>
+  <div class="logo">Football <span>&amp;</span> Fighting</div>
   <nav>
     <a href="index.html">Home</a>
     <a href="football.html">Football</a>
-    <a href="fighting.html">Fighting</a>
     <a href="worldcup.html">World Cup</a>
+    <a href="fighting.html">Fighting</a>
     <a href="tips.html">Tips</a>
+    <a href="articles.html">Articles</a>
+    <a href="community.html">Community</a>
     <a href="membership.html" class="nav-join">Join Now</a>
   </nav>
 </header>
-
-<div class="page-hero">
-  <div class="page-hero-inner">
-    <h1>Terms &amp; Conditions</h1>
-    <div class="updated">Last updated: June 2025 · Applies to footballandfighting.com</div>
+<div class="page-hero"><div class="wrap">
+  <h1>Terms of Use</h1>
+  <div class="meta">Last updated: June 2026</div>
+  <p>By using this site you agree to these terms. Written in plain language - no legal tricks, no surprise clauses.</p>
+</div></div>
+<div class="wrap"><div class="prose">
+  <div class="plain-english">
+    <div class="pe-label">Plain English Summary</div>
+    <p>Use the site, enjoy the content, don't scrape it commercially or claim our writing as your own. Betting tips are opinion, not guarantees. The community is for sports fans - be decent. That's basically it.</p>
   </div>
-</div>
-
-<div class="content">
-
-  <div class="highlight-box">
-    <p>Please read these Terms &amp; Conditions carefully before using Football &amp; Fighting. By accessing our website or purchasing a membership, you agree to be bound by these terms. If you do not agree, please do not use our services.</p>
+  <div class="toc">
+    <h3>Contents</h3>
+    <a href="#about-the-site">1. About the Site</a>
+    <a href="#acceptable-use">2. Acceptable Use</a>
+    <a href="#content-and-ip">3. Content &amp; Intellectual Property</a>
+    <a href="#sports-data">4. Sports Data &amp; Accuracy</a>
+    <a href="#betting-tips">5. Betting Tips &amp; Gambling</a>
+    <a href="#community">6. Community Rules</a>
+    <a href="#membership">7. Membership &amp; Payments</a>
+    <a href="#liability">8. Limitation of Liability</a>
+    <a href="#links">9. External Links</a>
+    <a href="#changes">10. Changes to These Terms</a>
+    <a href="#contact">11. Contact</a>
   </div>
-
-  <h2>1. About Us</h2>
-  <p>Football &amp; Fighting ("we", "us", "our") is a sports media and analysis service operated as a sole trader business in the United Kingdom. We publish football and boxing content, tips and data analysis at footballandfighting.com.</p>
-  <p>Contact: <a href="mailto:hello@footballandfighting.com">hello@footballandfighting.com</a></p>
-
-  <h2>2. Age Requirement</h2>
-  <div class="warning-box">
-    <p><strong>You must be 18 or over to use this website and purchase a membership.</strong> Football &amp; Fighting contains betting tips and analysis of gambling markets. It is illegal in the UK and many other jurisdictions for anyone under 18 to gamble or access gambling-related content. By using this site you confirm you are at least 18 years of age. We reserve the right to request proof of age and to suspend accounts where we have reason to believe a user is under 18.</p>
-  </div>
-
-  <h2>3. Betting Disclaimer</h2>
-  <div class="warning-box">
-    <p><strong>All tips, predictions and betting analysis published on Football &amp; Fighting are for informational and entertainment purposes only. They do not constitute financial advice.</strong></p>
-    <p style="margin-top:12px;">Gambling involves risk and you may lose money. Past results (including our published season record) are not a guarantee of future performance. We are not responsible for any losses incurred as a result of following tips or predictions published on this site. You should only bet what you can afford to lose. If you are concerned about your gambling, contact <a href="https://www.begambleaware.org" target="_blank">BeGambleAware</a> (0808 8020 133) or <a href="https://www.gamcare.org.uk" target="_blank">GamCare</a> (0808 802 0133).</p>
-  </div>
-  <p>Football &amp; Fighting is not licensed by the Gambling Commission. We do not accept bets, operate a betting exchange or hold client funds. We are a media and analysis service only.</p>
-
-  <h2>4. Membership</h2>
-  <h3>4.1 Tiers</h3>
-  <p>We offer two paid membership tiers: Fan (£8/month) and Creator (£15/month). Annual pricing is also available at a discount. Each tier is described in full on our <a href="membership.html">Membership page</a>. We reserve the right to change membership features with reasonable notice.</p>
-
-  <h3>4.2 Payment</h3>
-  <p>Membership payments are processed securely by Stripe. By purchasing a membership, you authorise us to charge the applicable fee on a recurring monthly or annual basis. All prices include VAT where applicable. You will receive a receipt by email after each payment.</p>
-
-  <h3>4.3 Cancellation</h3>
-  <p>You may cancel your membership at any time from your account settings. Cancellation takes effect at the end of your current billing period — you will retain access to premium content until that date. We do not offer partial refunds for unused time within a billing period except as required by law.</p>
-  <p>You have the right to cancel your membership within 14 days of purchase under UK consumer law (the "cooling-off period") and receive a full refund, provided you have not accessed substantial premium content during that period. To request a refund, email <a href="mailto:hello@footballandfighting.com">hello@footballandfighting.com</a>.</p>
-
-  <h3>4.4 Free Content</h3>
-  <p>Certain content on this site is available without a membership. We reserve the right to change what content is free or premium at any time.</p>
-
-  <h2>5. Creator Tier — Content Rights</h2>
-  <p>The Creator tier is designed for content creators who wish to use our data, analysis frameworks and research tools to produce their own original content (YouTube videos, social media posts, podcasts and similar). The following conditions apply:</p>
+  <h2 id="about-the-site">1. About the Site</h2>
+  <p>Football &amp; Fighting (footballandfighting.com) is an independent sports website operated from the United Kingdom. It is not affiliated with the Premier League, FIFA, the UFC, the BBC, ESPN, or any other rights-holder, broadcaster or governing body. We use publicly available data feeds (ESPN API, Guardian RSS) to display live sports information.</p>
+  <h2 id="acceptable-use">2. Acceptable Use</h2>
+  <p>You may use this site for personal, non-commercial purposes. By accessing the site you agree not to:</p>
   <ul>
-    <li>You may reference and use data and analysis from Football &amp; Fighting as the basis for your own original content, provided you add substantial value beyond simply reproducing our work</li>
-    <li>You must credit Football &amp; Fighting when directly referencing our published analysis or data</li>
-    <li>You may not republish, resell, repackage or redistribute Football &amp; Fighting content as your own without material transformation</li>
-    <li>You may not use our branding, logo or name in a way that implies an official partnership or endorsement without our written consent</li>
-    <li>Raw data exports and dashboard outputs are for your personal use only; redistributing raw data files is not permitted</li>
+    <li>Systematically scrape or crawl the site for commercial purposes without written permission</li>
+    <li>Use automated tools to create accounts or submit content in bulk</li>
+    <li>Attempt to reverse-engineer, hack or interfere with the site or its infrastructure</li>
+    <li>Use the site in any way that violates applicable law</li>
+    <li>Impersonate Football &amp; Fighting, its staff, or any other person or organisation</li>
+    <li>Post, transmit or promote illegal content of any kind</li>
   </ul>
-  <p>Creator tier membership does not grant you any ownership of Football &amp; Fighting's intellectual property. All content, data structures, branding and analysis frameworks remain the property of Football &amp; Fighting.</p>
-
-  <h2>6. Intellectual Property</h2>
-  <p>All content on this website — including articles, analysis, data visualisations, graphics, logos and site design — is the property of Football &amp; Fighting or its licensors and is protected by UK and international copyright law.</p>
-  <p>You may share links to our content and quote brief excerpts (no more than 50 words) with attribution and a link back to the original article. Reproducing full articles, systematically scraping the site or using our content for commercial purposes without permission is prohibited.</p>
-
-  <h2>7. Affiliate Links &amp; Commercial Relationships</h2>
-  <p>Football &amp; Fighting participates in affiliate programmes with bookmakers and other services. Links to these services may generate a commission for us when you sign up or make a purchase. This is disclosed clearly where affiliate links appear.</p>
-  <p>Affiliate relationships do not influence our editorial content, tips or analysis. We are not paid by any bookmaker or brand to recommend specific bets or endorse specific products. Our tips are based solely on our own analysis.</p>
-
-  <h2>8. Data APIs and Service Availability</h2>
-  <p>Live data on this site is sourced from third-party data providers including API-Football, API-Sports and The Odds API. While we take every reasonable step to ensure accuracy, we cannot guarantee that live data is error-free, complete or available at all times. Third-party service outages, API changes or data errors are beyond our control.</p>
-  <p>Where a data service outage lasts more than 24 continuous hours and materially affects premium content, we will provide affected members with a pro-rata service credit. This is at our discretion and subject to the outage being confirmed.</p>
-  <p>Football &amp; Fighting does not guarantee any specific level of service availability. We aim for high availability but accept no liability for losses arising from downtime.</p>
-
-  <h2>9. User Conduct</h2>
-  <p>When using any interactive features of this site (community forum, comments, predictions), you agree not to:</p>
+  <h2 id="content-and-ip">3. Content &amp; Intellectual Property</h2>
+  <h3>Our original content</h3>
+  <p>The articles, analysis, written tips, design and branding on this site are the intellectual property of Football &amp; Fighting. You may share links freely. You may quote short excerpts (up to 50 words) with attribution and a link back. You may not reproduce articles in full or present our writing as your own.</p>
+  <h3>Sports data</h3>
+  <p>Live scores, fixtures, standings and player statistics are sourced from ESPN's publicly available API and are the property of ESPN and/or the relevant leagues. We display this data for informational purposes only and do not claim ownership of any sports data.</p>
+  <h3>News feeds</h3>
+  <p>News headlines are sourced from The Guardian's RSS feed. All articles belong to The Guardian and their authors. Clicking a news link opens the original article on The Guardian's website.</p>
+  <h2 id="sports-data">4. Sports Data &amp; Accuracy</h2>
+  <p>All live data is fetched in real-time from third-party APIs. While we strive for accuracy, we cannot guarantee data is always correct, current or complete. <strong>Do not use this site as the sole basis for any time-sensitive or financially significant decision.</strong> For official results, refer to the relevant league or governing body.</p>
+  <h2 id="betting-tips">5. Betting Tips &amp; Gambling</h2>
+  <div class="gambling-block">
+    <h3>Important - Please Read</h3>
+    <p><strong>You must be 18 or over to gamble.</strong> Betting tips published on this site are editorial opinion based on publicly available statistics and form data. They are not financial advice, are not guaranteed to be correct, and are provided for entertainment purposes only.</p>
+    <p>Past performance is not a reliable indicator of future results. We display our historical record transparently, but a positive track record does not mean future tips will win.</p>
+    <p><strong>Gamble responsibly.</strong> Set a budget and stick to it. Never bet more than you can afford to lose. If gambling is causing problems, get help from <a href="https://www.begambleaware.org" target="_blank">BeGambleAware</a> or <a href="https://www.gamcare.org.uk" target="_blank">GamCare</a>. National Gambling Helpline: 0808 8020 133.</p>
+    <p>We are not licensed gambling operators and do not accept bets. Any affiliate links to bookmakers will be clearly disclosed.</p>
+  </div>
+  <h2 id="community">6. Community Rules</h2>
+  <p>The community forum is for sports discussion. Users must:</p>
   <ul>
-    <li>Post content that is abusive, threatening, harassing, discriminatory or illegal</li>
-    <li>Share personal information about other users without their consent</li>
-    <li>Attempt to gain unauthorised access to any part of the site or another user's account</li>
-    <li>Use automated tools to scrape, copy or republish site content</li>
-    <li>Post spam, promotional content or affiliate links without our permission</li>
-    <li>Impersonate Football &amp; Fighting or any of its staff</li>
+    <li>Be respectful — no abuse, harassment or hate speech</li>
+    <li>Keep discussions relevant to football, fighting and related sports</li>
+    <li>Not post spam, promotional content or links to piracy sites</li>
+    <li>Not share personal information about other people without their consent</li>
+    <li>Not impersonate other users or claim false credentials</li>
   </ul>
-  <p>We reserve the right to remove content and suspend or terminate accounts that breach these terms without refund.</p>
-
-  <h2>10. Accuracy of Information</h2>
-  <p>We take care to ensure that content published on this site is accurate and up to date. However, sports information — including team news, odds, fixtures and results — can change rapidly. Always verify odds and information independently before making any betting decisions. Football &amp; Fighting accepts no liability for errors or omissions in published content.</p>
-
-  <h2>11. Third-Party Links</h2>
-  <p>This site contains links to third-party websites including bookmakers, news sources and data providers. These links are provided for your convenience. We have no control over the content of those sites and accept no responsibility for them. Visiting third-party sites is at your own risk.</p>
-
-  <h2>12. Limitation of Liability</h2>
-  <p>To the maximum extent permitted by law, Football &amp; Fighting shall not be liable for any direct, indirect, incidental or consequential loss arising from your use of this website, including but not limited to betting losses, missed opportunities or reliance on data or tips published on this site.</p>
-  <p>Nothing in these terms limits our liability for death or personal injury caused by our negligence, fraud or fraudulent misrepresentation, or any other liability that cannot be excluded under UK law.</p>
-
-  <h2>13. Responsible Gambling</h2>
-  <p>We are committed to promoting responsible gambling. If you or someone you know is struggling with gambling:</p>
+  <p>We reserve the right to remove content or suspend accounts that violate these rules without prior warning in serious cases.</p>
+  <h2 id="membership">7. Membership &amp; Payments</h2>
   <ul>
-    <li><strong>BeGambleAware</strong> — <a href="https://www.begambleaware.org" target="_blank">begambleaware.org</a> · 0808 8020 133 (free, 24/7)</li>
-    <li><strong>GamCare</strong> — <a href="https://www.gamcare.org.uk" target="_blank">gamcare.org.uk</a> · 0808 802 0133 (free, 24/7)</li>
-    <li><strong>Gamblers Anonymous</strong> — <a href="https://www.gamblersanonymous.org.uk" target="_blank">gamblersanonymous.org.uk</a></li>
-    <li><strong>National Gambling Helpline</strong> — 0808 8020 133</li>
+    <li>You authorise us to charge your payment method on the stated recurring basis (monthly or annual)</li>
+    <li>Payments are processed by Stripe - we do not store your card details</li>
+    <li>You may cancel at any time; access continues until the end of the billing period</li>
+    <li>Refunds are not provided for unused portions of a billing period, except where required by law</li>
+    <li>We reserve the right to change pricing with 30 days notice to existing subscribers</li>
   </ul>
-  <p>You can also use <a href="https://www.gamstop.co.uk" target="_blank">GAMSTOP</a> to self-exclude from UK-licensed gambling websites.</p>
-
-  <h2>14. Changes to These Terms</h2>
-  <p>We may update these Terms &amp; Conditions from time to time. Changes will be posted on this page with an updated date. For significant changes, we will notify registered members by email. Continued use of the site after changes are posted constitutes your acceptance of the updated terms.</p>
-
-  <h2>15. Governing Law</h2>
-  <p>These Terms &amp; Conditions are governed by and construed in accordance with the laws of England and Wales. Any disputes shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
-
-  <h2>16. Contact</h2>
-  <p>For any questions about these Terms &amp; Conditions, contact us at:</p>
-  <p><a href="mailto:hello@footballandfighting.com">hello@footballandfighting.com</a><br/>Football &amp; Fighting, United Kingdom</p>
-
-</div>
-
+  <p>Free features (live scores, tables, fight cards, news) remain free regardless of membership status and always will.</p>
+  <h2 id="liability">8. Limitation of Liability</h2>
+  <p>This site is provided "as is" without warranties. To the fullest extent permitted by law, Football &amp; Fighting is not liable for losses from reliance on betting tips, inaccuracies in third-party data, interruptions to site availability, or content posted by community members.</p>
+  <p>Nothing in these terms limits liability for death or personal injury caused by negligence, or any other liability that cannot be excluded by law.</p>
+  <h2 id="links">9. External Links</h2>
+  <p>This site contains links to third-party websites including The Guardian, ESPN and betting operators. We are not responsible for the content or privacy practices of those sites. Affiliate links will be clearly identified.</p>
+  <h2 id="changes">10. Changes to These Terms</h2>
+  <p>We may update these terms at any time. Changes will be reflected by an updated date at the top. Continued use constitutes acceptance. We will not make changes that retroactively disadvantage paid members without their consent.</p>
+  <h2 id="contact">11. Contact</h2>
+  <p>Questions? Email <a href="mailto:hello@footballandfighting.com">hello@footballandfighting.com</a> or visit the <a href="community.html">community forum</a>.</p>
+  <p>Football &amp; Fighting is operated as an independent fan site from the United Kingdom. These terms are governed by the laws of England and Wales.</p>
+</div></div>
 <footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo" style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.05em;margin-bottom:10px">Football <span style="color:var(--red)">&amp;</span> Fighting</div>
+      <p>Live football data, World Cup 2026 coverage and UFC/boxing news - updating all day. No ads. No tracking.</p>
+    </div>
+    <div class="footer-col"><h4>Football</h4><a href="football.html">Tables &amp; Stats</a><a href="worldcup.html">World Cup 2026</a><a href="tips.html">Betting Tips</a></div>
+    <div class="footer-col"><h4>Fighting</h4><a href="fighting.html">UFC &amp; Boxing</a><a href="articles.html">Fight Previews</a></div>
+    <div class="footer-col"><h4>Site</h4><a href="about.html">About</a><a href="community.html">Community</a><a href="membership.html">Membership</a><a href="privacy.html">Privacy</a><a href="terms.html" style="color:var(--red)">Terms</a></div>
+  </div>
   <div class="footer-bottom">
-    <div>© 2025 Football & Fighting. All rights reserved. <a href="terms.html">Terms & Conditions</a> · <a href="privacy.html">Privacy Policy</a></div>
-    <div class="gambling-aware">18+ | BeGambleAware</div>
+    <span>© 2026 Football &amp; Fighting. Data via ESPN &amp; The Guardian. Not affiliated with any league or broadcaster.</span>
+    <span class="gambling-aware">18+ | Gamble Aware</span>
   </div>
 </footer>
-
 </body>
 </html>
