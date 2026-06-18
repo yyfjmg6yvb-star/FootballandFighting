@@ -20,6 +20,7 @@ pages_build_output_dir = "."
 binding = "DB"
 database_name = "FF_DB"
 database_id = "PASTE_YOUR_D1_DATABASE_ID_HERE"
+# account_id = "306b459fe91a4a722621852a8e494dbb"  # your CF account ID (for reference)
 
 [vars]
 STRIPE_PRICE_ID = "PASTE_YOUR_STRIPE_PRICE_ID_HERE"

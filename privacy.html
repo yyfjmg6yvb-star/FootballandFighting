@@ -61,6 +61,26 @@
     .footer-col a:hover{color:var(--red)}
     .footer-bottom{max-width:900px;margin:0 auto;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
     .gambling-aware{background:var(--card);border:1px solid var(--border);border-radius:3px;padding:6px 12px;font-size:11px;font-weight:700}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px}
+    .mobile-nav{display:none;position:fixed;top:70px;left:0;right:0;background:#111;border-bottom:1px solid #333;z-index:299;padding:10px 16px 16px;flex-direction:column;gap:2px}
+    .mobile-nav.open{display:flex}
+    .mobile-nav a{padding:11px 14px;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;border-radius:4px;display:block}
+    .mobile-nav a:hover{background:#1e1e1e;color:var(--red)}
+    .mobile-nav .nav-join{background:var(--red)!important;color:#fff!important;margin-top:6px;text-align:center}
+    @media(max-width:768px){
+      nav{display:none}.hamburger{display:flex}
+      .page-hero h1{font-size:38px}
+      .summary-grid{grid-template-columns:1fr 1fr}
+      .footer-grid{grid-template-columns:1fr 1fr;gap:20px}
+      .footer-bottom{flex-direction:column;gap:8px;text-align:center}
+      header{padding:0 14px}.wrap{padding:0 14px}
+    }
+    @media(max-width:480px){
+      .page-hero h1{font-size:30px}
+      .summary-grid{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
@@ -83,11 +103,24 @@
     <a href="ufc.html">UFC</a>
     <a href="fighting.html">Boxing</a>
     <a href="tips.html">Tips</a>
-    <a href="articles.html">Articles</a>
     <a href="community.html">Community</a>
     <a href="membership.html" class="nav-join">Join Now</a>
   </nav>
+  <button class="hamburger" onclick="document.getElementById('mnav').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </header>
+<div class="mobile-nav" id="mnav">
+  <a href="index.html">🏠 Home</a>
+  <a href="football.html">⚽ Football</a>
+  <a href="worldcup.html">🌍 World Cup</a>
+  <a href="ufc.html">🥊 UFC</a>
+  <a href="fighting.html">🥊 Boxing</a>
+  <a href="bkfc.html">✊ BKFC</a>
+  <a href="tips.html">💰 Tips</a>
+  <a href="community.html">💬 Community</a>
+  <a href="membership.html" class="nav-join">Join for £1</a>
+</div>
 
 <div class="page-hero">
   <div class="wrap">
