@@ -381,74 +381,15 @@
         </div>
       </section>
 
-      <!-- NEWS SECTION -->
+      <!-- NEWS SECTION - Live RSS -->
       <section style="margin-top: 32px;">
         <div class="section-label">
-          <h2>News</h2>
-          <span class="pill" style="background:#333; color:#aaa;">RSS</span>
-          <a href="#">All News →</a>
+          <h2>Latest News</h2>
+          <span class="pill" style="background:#333; color:#aaa;">LIVE</span>
+          <a href="articles.html">Our Articles →</a>
         </div>
-        <div class="article-list">
-          <div class="article-list-item">
-            <div class="thumb">
-              <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=200&q=80" alt=""/>
-            </div>
-            <div class="info">
-              <div class="tag">Transfers · Premier League</div>
-              <h4>Chelsea Complete £65m Signing of Bundesliga Midfielder</h4>
-              <div class="meta">2 hours ago</div>
-            </div>
-          </div>
-          <div class="article-list-item">
-            <div class="thumb">
-              <img src="https://images.unsplash.com/photo-1459865264687-595d652de67e?w=200&q=80" alt=""/>
-            </div>
-            <div class="info">
-              <div class="tag">Injury · Premier League</div>
-              <h4>Rodri Ruled Out for Three Weeks Ahead of Title Decider</h4>
-              <div class="meta">4 hours ago</div>
-            </div>
-          </div>
-          <div class="article-list-item">
-            <div class="thumb">
-              <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=200&q=80" alt=""/>
-            </div>
-            <div class="info">
-              <div class="tag">Result · Bundesliga</div>
-              <h4>Leverkusen Stay Unbeaten After 2-0 Win Over Dortmund</h4>
-              <div class="meta">Yesterday</div>
-            </div>
-          </div>
-          <div class="article-list-item">
-            <div class="thumb">
-              <img src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?w=200&q=80" alt=""/>
-            </div>
-            <div class="info">
-              <div class="tag">Team News · Champions League</div>
-              <h4>Arteta Confirms Saka Fit for Inter Semi-Final First Leg</h4>
-              <div class="meta">Yesterday</div>
-            </div>
-          </div>
-          <div class="article-list-item">
-            <div class="thumb">
-              <img src="https://images.unsplash.com/photo-1508098682722-e99c643e7f0b?w=200&q=80" alt=""/>
-            </div>
-            <div class="info">
-              <div class="tag">Transfer Rumour · La Liga</div>
-              <h4>Barcelona Pushing to Sign Liverpool Midfielder This Summer</h4>
-              <div class="meta">2 days ago</div>
-            </div>
-          </div>
-          <div class="article-list-item">
-            <div class="thumb">
-              <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=200&q=80" alt=""/>
-            </div>
-            <div class="info">
-              <div class="tag">Press Conference · Premier League</div>
-              <h4>Guardiola: "This Is the Biggest Game of Our Season — No Question"</h4>
-              <div class="meta">2 days ago</div>
-            </div>
-          </div>
+        <div class="article-list" id="football-rss-list">
+          <div style="padding:20px; color:var(--muted); font-size:13px;">Loading latest football news...</div>
         </div>
       </section>
     </div>
@@ -747,5 +688,45 @@
     })
     .catch(() => {});
 </script>
+
+<script>
+  // Live RSS news feed via rss2json
+  const RSS_PROXY = 'https://api.rss2json.com/v1/api.json?rss_url=';
+  const FOOTBALL_RSS = 'https://feeds.bbci.co.uk/sport/football/rss.xml';
+
+  function timeAgo(dateStr) {
+    const diff = (Date.now() - new Date(dateStr)) / 1000;
+    if (diff < 3600) return Math.floor(diff/60) + ' mins ago';
+    if (diff < 86400) return Math.floor(diff/3600) + ' hours ago';
+    if (diff < 172800) return 'Yesterday';
+    return Math.floor(diff/86400) + ' days ago';
+  }
+
+  fetch(RSS_PROXY + encodeURIComponent(FOOTBALL_RSS))
+    .then(r => r.json())
+    .then(data => {
+      const list = document.getElementById('football-rss-list');
+      if (!list || !data.items) return;
+      const items = data.items.slice(0, 8);
+      list.innerHTML = items.map(item => `
+        <a href="${item.link}" target="_blank" rel="noopener" class="article-list-item" style="text-decoration:none;">
+          <div class="thumb">
+            <img src="${item.thumbnail || item.enclosure?.link || 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=200&q=80'}" 
+                 alt="" onerror="this.src='https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=200&q=80'"/>
+          </div>
+          <div class="info">
+            <div class="tag">⚽ BBC Sport</div>
+            <h4>${item.title}</h4>
+            <div class="meta">${timeAgo(item.pubDate)}</div>
+          </div>
+        </a>
+      `).join('');
+    })
+    .catch(() => {
+      const list = document.getElementById('football-rss-list');
+      if (list) list.innerHTML = '<div style="padding:16px;color:var(--muted);font-size:13px;">News feed temporarily unavailable.</div>';
+    });
+</script>
+
 </body>
 </html>

@@ -339,74 +339,15 @@
         </div>
       </section>
 
-      <!-- NEWS SECTION -->
+            <!-- NEWS SECTION - Live RSS -->
       <section style="margin-top: 32px;">
         <div class="section-label">
-          <h2>News</h2>
-          <span class="pill grey">RSS</span>
-          <a href="#">All News →</a>
+          <h2>Latest News</h2>
+          <span class="pill" style="background:#333; color:#aaa;">LIVE</span>
+          <a href="articles.html">Our Articles →</a>
         </div>
-        <div class="article-list">
-          <div class="article-list-item">
-            <div class="thumb">
-              <img src="https://images.unsplash.com/photo-1549701428-dc8b9e4b9bab?w=200&q=80" alt=""/>
-            </div>
-            <div class="info">
-              <div class="tag">Official · Heavyweight</div>
-              <h4>Anthony Joshua Confirms September Return — Opponent TBA</h4>
-              <div class="meta">1 hour ago</div>
-            </div>
-          </div>
-          <div class="article-list-item">
-            <div class="thumb">
-              <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&q=80" alt=""/>
-            </div>
-            <div class="info">
-              <div class="tag">Retirement · Heavyweight</div>
-              <h4>Fury's Promoter: "He Is Retired — There's No Fight Being Planned"</h4>
-              <div class="meta">3 hours ago</div>
-            </div>
-          </div>
-          <div class="article-list-item">
-            <div class="thumb">
-              <img src="https://images.unsplash.com/photo-1617347454431-f49d7ff5c3b1?w=200&q=80" alt=""/>
-            </div>
-            <div class="info">
-              <div class="tag">Negotiations · Lightweight</div>
-              <h4>Garcia vs Davis 2 Talks at "Advanced Stage" — Summer Date Possible</h4>
-              <div class="meta">Yesterday</div>
-            </div>
-          </div>
-          <div class="article-list-item">
-            <div class="thumb">
-              <img src="https://images.unsplash.com/photo-1547941126-3d5322b218b0?w=200&q=80" alt=""/>
-            </div>
-            <div class="info">
-              <div class="tag">Weigh-In · Super Middleweight</div>
-              <h4>Canelo Comes in at 167.5lbs — Benavidez Heavy at 168lbs</h4>
-              <div class="meta">Yesterday</div>
-            </div>
-          </div>
-          <div class="article-list-item">
-            <div class="thumb">
-              <img src="https://images.unsplash.com/photo-1549701428-dc8b9e4b9bab?w=200&q=80" alt=""/>
-            </div>
-            <div class="info">
-              <div class="tag">Result · Cruiserweight</div>
-              <h4>Okolie Retains Title with Dominant Points Win — Calls Out Top 5</h4>
-              <div class="meta">2 days ago</div>
-            </div>
-          </div>
-          <div class="article-list-item">
-            <div class="thumb">
-              <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&q=80" alt=""/>
-            </div>
-            <div class="info">
-              <div class="tag">Undisputed · Heavyweight</div>
-              <h4>Usyk vs Dubois 2 — Purse Bid Set for October Rematch</h4>
-              <div class="meta">3 days ago</div>
-            </div>
-          </div>
+        <div class="article-list" id="boxing-rss-list">
+          <div style="padding:20px; color:var(--muted); font-size:13px;">Loading latest boxing news...</div>
         </div>
       </section>
     </div>
@@ -670,5 +611,44 @@
     })
     .catch(() => {});
 </script>
+
+<script>
+  const RSS_PROXY_F = 'https://api.rss2json.com/v1/api.json?rss_url=';
+  const BOXING_RSS = 'https://feeds.bbci.co.uk/sport/boxing/rss.xml';
+
+  function timeAgoF(dateStr) {
+    const diff = (Date.now() - new Date(dateStr)) / 1000;
+    if (diff < 3600) return Math.floor(diff/60) + ' mins ago';
+    if (diff < 86400) return Math.floor(diff/3600) + ' hours ago';
+    if (diff < 172800) return 'Yesterday';
+    return Math.floor(diff/86400) + ' days ago';
+  }
+
+  fetch(RSS_PROXY_F + encodeURIComponent(BOXING_RSS))
+    .then(r => r.json())
+    .then(data => {
+      const list = document.getElementById('boxing-rss-list');
+      if (!list || !data.items) return;
+      const items = data.items.slice(0, 8);
+      list.innerHTML = items.map(item => `
+        <a href="${item.link}" target="_blank" rel="noopener" class="article-list-item" style="text-decoration:none;">
+          <div class="thumb">
+            <img src="${item.thumbnail || item.enclosure?.link || 'https://images.unsplash.com/photo-1549701428-dc8b9e4b9bab?w=200&q=80'}" 
+                 alt="" onerror="this.src='https://images.unsplash.com/photo-1549701428-dc8b9e4b9bab?w=200&q=80'"/>
+          </div>
+          <div class="info">
+            <div class="tag">🥊 BBC Sport</div>
+            <h4>${item.title}</h4>
+            <div class="meta">${timeAgoF(item.pubDate)}</div>
+          </div>
+        </a>
+      `).join('');
+    })
+    .catch(() => {
+      const list = document.getElementById('boxing-rss-list');
+      if (list) list.innerHTML = '<div style="padding:16px;color:var(--muted);font-size:13px;">News feed temporarily unavailable.</div>';
+    });
+</script>
+
 </body>
 </html>

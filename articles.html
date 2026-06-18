@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Articles & Analysis | Football & Fighting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --red: #e50000; --dark: #0a0a0a; --card: #1e1e1e; --card2: #272727; --border: #333; --text: #f0f0f0; --muted: #888; }
+    body { background: var(--dark); color: var(--text); font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.7; }
+    a { color: inherit; text-decoration: none; }
+
+    header { background: #0a0a0a; border-bottom: 3px solid var(--red); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 70px; position: sticky; top: 0; z-index: 100; }
+    .logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.05em; color: var(--text); }
+    .logo span { color: var(--red); }
+    nav { display: flex; gap: 4px; }
+    nav a { padding: 8px 14px; font-size: 13px; font-weight: 600; text-transform: uppercase; border-radius: 3px; color: var(--text); }
+    nav a:hover { background: #222; }
+    nav a.active { color: var(--red); }
+    .nav-join { background: var(--red) !important; color: #fff !important; padding: 8px 18px !important; border-radius: 3px; }
+
+    .page-hero { padding: 48px 24px 32px; border-bottom: 1px solid var(--border); }
+    .page-hero-inner { max-width: 1200px; margin: 0 auto; }
+    .page-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 56px; letter-spacing: 0.04em; }
+    .page-hero p { color: var(--muted); margin-top: 6px; }
+
+    .filter-bar { max-width: 1200px; margin: 0 auto; padding: 24px 24px 0; display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn { padding: 8px 18px; border-radius: 3px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--card); color: var(--muted); transition: all 0.15s; }
+    .filter-btn.active { background: var(--red); border-color: var(--red); color: #fff; }
+    .filter-btn:hover:not(.active) { border-color: #555; color: var(--text); }
+
+    .articles-wrap { max-width: 1200px; margin: 0 auto; padding: 32px 24px 80px; }
+    .articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+    .article-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; transition: border-color 0.2s; display: flex; flex-direction: column; }
+    .article-card:hover { border-color: var(--red); }
+    .article-card .img-wrap { height: 200px; overflow: hidden; background: #222; }
+    .article-card .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .article-card:hover .img-wrap img { transform: scale(1.04); }
+    .article-card .body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+    .article-card .tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--red); margin-bottom: 8px; }
+    .article-card h3 { font-size: 16px; font-weight: 700; line-height: 1.35; margin-bottom: 8px; }
+    .article-card p { font-size: 13px; color: #999; line-height: 1.55; flex: 1; }
+    .article-card .meta { font-size: 12px; color: var(--muted); margin-top: 12px; display: flex; gap: 12px; }
+
+    .no-articles { color: var(--muted); padding: 40px 0; font-size: 14px; }
+
+    footer { background: #080808; border-top: 2px solid var(--border); padding: 32px 24px; }
+    .footer-bottom { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+    .gambling-aware { background: var(--card); border: 1px solid var(--border); border-radius: 3px; padding: 6px 12px; font-size: 11px; font-weight: 700; }
+
+    @media (max-width: 900px) { .articles-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .articles-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">Football <span>&</span> Fighting</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="football.html">Football</a>
+    <a href="fighting.html">Fighting</a>
+    <a href="tips.html">Tips</a>
+    <a href="articles.html" class="active">Articles</a>
+    <a href="community.html">Community</a>
+    <a href="membership.html" class="nav-join">Join Now</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <h1>Articles & Analysis</h1>
+    <p>In-depth previews, tactical breakdowns and data analysis from Football & Fighting</p>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterArticles('all')">All</button>
+  <button class="filter-btn" onclick="filterArticles('football')">⚽ Football</button>
+  <button class="filter-btn" onclick="filterArticles('fighting')">🥊 Fighting</button>
+</div>
+
+<div class="articles-wrap">
+  <div class="articles-grid" id="articles-grid">
+    <!-- Loaded from posts/manifest.json -->
+  </div>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <div>© 2025 Football & Fighting. All rights reserved. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · Tips for entertainment only. 18+</div>
+    <div class="gambling-aware">18+ | BeGambleAware</div>
+  </div>
+</footer>
+
+<script>
+  let allPosts = [];
+
+  fetch('posts/manifest.json')
+    .then(r => r.json())
+    .then(posts => {
+      allPosts = posts;
+      renderArticles('all');
+    })
+    .catch(() => {
+      document.getElementById('articles-grid').innerHTML = '<p class="no-articles">Articles loading...</p>';
+    });
+
+  function renderArticles(filter) {
+    const grid = document.getElementById('articles-grid');
+    const filtered = filter === 'all' ? allPosts : allPosts.filter(p => p.sport === filter);
+
+    if (filtered.length === 0) {
+      grid.innerHTML = '<p class="no-articles">No articles yet.</p>';
+      return;
+    }
+
+    grid.innerHTML = filtered.map(post => `
+      <a href="posts/${post.slug}.html" class="article-card">
+        <div class="img-wrap">
+          <img src="${post.image}" alt="${post.title}" loading="lazy"/>
+        </div>
+        <div class="body">
+          <div class="tag">${post.tag}</div>
+          <h3>${post.title}</h3>
+          <p>${post.excerpt}</p>
+          <div class="meta">
+            <span>${post.dateLabel}</span>
+            <span>${post.readTime}</span>
+          </div>
+        </div>
+      </a>
+    `).join('');
+  }
+
+  function filterArticles(filter) {
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    renderArticles(filter);
+  }
+</script>
+
+</body>
+</html>
